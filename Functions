@@ -1,6 +1,4 @@
-
 Date: 24/08/2023 
------------------
 
 
 Request::get(), Request::segment(2)

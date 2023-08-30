@@ -1,0 +1,28 @@
+Installation:
+PHP VERSION: 8.1 minimum
+Compser, NPM.
+
+CMD:- composer create-project laravel/laravel="5.1.*" myProject
+TO RUN: php artisan serve
+
+BREEZ AUTHNTICATION:
+--------------------
+composer require laravel/breeze --dev
+php artisan breeze:install
+php artisan migrate
+npm install
+npm run dev
+
+
+EXCELL IMPORT(matwebsite excel):
+--------------------------------
+composer require maatwebsite/excel
+Open Folder: 
+config/app.php
+ADD:
+'providers' => [
+    Maatwebsite\Excel\ExcelServiceProvider::class,
+]
+'aliases' => [
+    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+]

@@ -5,7 +5,7 @@ Installation:
 PHP VERSION: 8.1 minimum
 Composer, NPM.
 
-CMD:- composer create-project laravel/laravel="5.1.*" myProject
+CMD:- composer create-project laravel/laravel="10.10.*" Project_Folder_Name
 TO RUN: php artisan serve
 
 DEBUGGING TOOL:

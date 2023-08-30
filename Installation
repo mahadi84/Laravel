@@ -3,7 +3,7 @@ Date: 10/08/2023
 
 Installation:
 PHP VERSION: 8.1 minimum
-Compser, NPM.
+Composer, NPM.
 
 CMD:- composer create-project laravel/laravel="5.1.*" myProject
 TO RUN: php artisan serve
@@ -11,6 +11,9 @@ TO RUN: php artisan serve
 DEBUGGING TOOL:
 ---------------
 composer require barryvdh/laravel-debugbar --dev
+
+Open Folder and ADD:- 
+config/app.php
 
 'providers' => [
 	Barryvdh\Debugbar\ServiceProvider::class,
@@ -34,12 +37,16 @@ npm run dev
 EXCELL IMPORT(matwebsite excel):
 --------------------------------
 composer require maatwebsite/excel
-Open Folder: 
+
+Open Folder and ADD:- 
 config/app.php
-ADD:
+
 'providers' => [
     Maatwebsite\Excel\ExcelServiceProvider::class,
 ]
 'aliases' => [
     'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 ]
+
+
+

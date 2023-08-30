@@ -8,7 +8,21 @@ Compser, NPM.
 CMD:- composer create-project laravel/laravel="5.1.*" myProject
 TO RUN: php artisan serve
 
-BREEZ AUTHNTICATION:
+DEBUGGING TOOL:
+---------------
+composer require barryvdh/laravel-debugbar --dev
+
+'providers' => [
+	Barryvdh\Debugbar\ServiceProvider::class,
+],
+'aliases' => [
+	'Debugbar' => Barryvdh\Debugbar\Facade::class,
+]
+
+php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
+
+
+BREEZ AUTHENTICATION:
 --------------------
 composer require laravel/breeze --dev
 php artisan breeze:install

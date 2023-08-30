@@ -34,3 +34,4 @@ Route::controller(ControllerName::class)->group(function(){
        Route::get('about', 'about')
 });
 
+Route::group(['middleware' => 'admin'], function(){}

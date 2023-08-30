@@ -30,5 +30,7 @@ $errors->first('name')
 @endforelse
 
 
-
+Route::controller(ControllerName::class)->group(function(){
+       Route::get('about', 'about')
+});
 

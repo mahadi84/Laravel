@@ -1,0 +1,36 @@
+
+Date: 24/08/2023 
+-----------------
+
+
+Request::get(), Request::segment(2)
+request()->validate()
+$request->name
+
+
+find($id), get(), all(), first()
+
+csrf_token(), reponse()->json();
+
+file(), hasfile(), exists(), move()
+
+save(), delete(), where()
+orderBy(), paginate(), belongsTo()
+
+redirect(), back(), intended(), with(), to(),
+
+Hash::make(123);
+Str::random(50);
+
+Auth::user(), attempt(), check(), logout()
+
+session('error')
+$errors->first('name')
+
+@forelse()
+@empty
+@endforelse
+
+
+
+

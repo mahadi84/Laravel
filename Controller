@@ -1,6 +1,8 @@
 Date: 31/08/2023
 
 
+
+============================== CRUD  and Excell download ==========================
 <?php
 
 namespace App\Http\Controllers\Backend;
@@ -106,7 +108,7 @@ class JobController extends Controller
 
 }
 
-============================ My Profile Image Controller ==============================================
+============================ My Profile IMAGE Controller ==============================================
 <?php
 
 namespace App\Http\Controllers\Backend;
@@ -124,16 +126,15 @@ class MyProfileImageController extends Controller
             $this->userModel = new  \App\Models\User;
         }
 
-
         public function my_profile_image(){
-        $data['title'] = 'Profile image';
-        $data['me'] = $this->userModel->find(Auth::user()->id);   
-        return view('Backend.MyProfileImage.ProfileImageShow.profile_image_show', $data);
+         $data['title'] = 'Profile image';
+         $data['me'] = $this->userModel->find(Auth::user()->id);   
+         return view('Backend.MyProfileImage.ProfileImageShow.profile_image_show', $data);
     	}
 
         public function myprofile_image_edit(){
-        $data['title'] = 'Edit my profile image';
-        $data['me'] = $this->userModel->find(Auth::user()->id);
+         $data['title'] = 'Edit my profile image';
+         $data['me'] = $this->userModel->find(Auth::user()->id);
          return view('Backend.MyProfileImage.ProfileImageEdit.profile_image_edit', $data);
         }
 
@@ -167,6 +168,136 @@ class MyProfileImageController extends Controller
 }
 
 
+=================================================== LGOIN CONTROLLER ===========================================
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+use Auth;
+use Hash;
+use Str;
+
+
+class LoginController extends Controller
+{
+
+        private $model;
+
+        public function __construct(){
+            $this->model = new  \App\Models\User;
+        }
+
+    public function login(){
+
+        if (empty(Auth::User()->id)) {
+            $data['title'] = 'Login';
+             return view('Login.login', $data);
+        }
+        else {
+            return redirect('admin/dashboard');
+        }
+    }
+
+    public function login_post(Request $request){
+
+        if (Auth::attempt([
+            'email'=>$request->email,
+            'password'=>$request->password], true)) 
+        {
+            if (!empty(Auth::User()->status)) {
+               
+                    if (Auth::User()->is_role == '1') {
+                        return redirect()->intended('admin/dashboard');
+                    }else {
+                        return redirect()->back()->with('error', 'You are not a HRM');
+                    }
+               
+            } else {
+                $user_id=Auth::user()->id;
+                Auth::logout();
+                $user=$this->model->find($user_id);
+                return redirect()->back()->with('error', 'Your account is Inactive');
+
+            }
+                    
+        } else {
+            return redirect()->back()->with('error', 'Please enter the correct credentials');
+        }
+
+    }
+
+    public function logout(){
+            Auth::logout();                
+            return redirect('/')->with('success', 'You are logged out!!');
+
+    }
+
+    public function register(){
+          $data['title'] = 'Register';
+        return view('Login.register', $data);
+    }
+
+    public function register_post(Request $request){
+         $user= $request->validate([
+           'name'                   => "required|min:3",
+           'email'                  => "required|unique:users|max:100",
+           'password'               => 'required',
+           'confirm_password'       => 'required_with:password|same:password',
+           'phone'                  => 'required|unique:users|string|digits:11',
+           'hire_date'              => 'required',
+           'job_title'              => 'required',
+           'manager_name'           => 'required',
+           'dept'                   => 'required'
+        ]);
+
+        $user                   = $this->model;
+        $user->name             = $request->name;
+        $user->email            = $request->email;
+        $user->password         = $request->password;
+        $user->phone            = $request->phone;
+        $user->hire_date        = $request->hire_date;
+        $user->job_title        = $request->job_title;
+        $user->manager_name     = $request->manager_name;
+        $user->dept             = $request->dept;
+        $user->remember_token   = Str::random(50);
+
+            if($user->save()) {
+                return redirect()->back()
+                                 ->with('success', "User: {$user->name} - registered successfull.");           
+            }else {
+                 return redirect()->back()
+                                 ->with('error', 'Faild !! Something went wrong.');
+            }     
+    }
+
+
+    public function CheckEmail(Request $request){
+        $email= $request->email;
+        $isExists= $this->model->where('email', $email)->first();
+        if ($isExists) {
+            return response()->json(array("exists" => true));
+        } else {
+            return response()->json(array("exists" => false));
+        }
+    }
+    
+    public function edit_user(){
+          $data['title'] = 'Edit user';
+        return view('Login.register', $data);
+    }
+
+
+    public function forgot_password(){
+        $data['title'] = 'Fortgot password';
+        return view('Login.forgot_password', $data);
+    }
+
+
+
+}
 
 
 

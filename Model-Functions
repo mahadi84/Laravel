@@ -1,0 +1,38 @@
+Date: 31/08/2023
+
+
+
+public function getJobsHistory($request){
+        $return  = self::select('job_history.*')
+                                ->join('users', 'users.id', '=', 'job_history.employee_id')
+                                ->join('job', 'job.id', '=', 'job_history.job_id')
+                                ->orderBy('job_history.id', 'desc');
+
+        if (!empty(Request::get('id'))) {
+            $return  = $return->where('job_history.id', '=',  Request::get('id'));
+        }
+
+        if (!empty(Request::get('name'))) {
+            $return  = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
+        }
+        
+        if (!empty(Request::get('start_date')) && !empty(Request::get('end_date'))) {
+            $return  = $return->where('job_history.start_date', '>=', Request::get('start_date'))->where('job_history.end_date', '<=', Request::get('end_date'));
+        }
+        $return  = $return->paginate(5);
+        return $return;
+    }
+
+
+
+    public function getEmployeeName(){
+        return $this->belongsTo(User::class, "employee_id");
+    }
+
+    public function ydm($date){
+        return date('d-m-Y', strtotime($date));
+    }
+    
+    public function textDate($date){
+        return \Carbon\Carbon::parse($date)->diffForHumans();
+    }

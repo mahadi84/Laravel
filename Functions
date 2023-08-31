@@ -10,9 +10,19 @@ Employee::create($request->except('_token'));
 @yield('content')
 
  @method('delete')
+ @method('put') --update
 
 {!! $products->links() !!}
 
+
+Route::controller(ControllerName::class)->group(function(){
+       Route::get('about', 'about')
+});
+
+Route::group(['middleware' => 'admin'], function(){}
+
+
+----------------------------
 
 Request::get(), Request::segment(2)
 request()->validate()
@@ -43,11 +53,6 @@ $errors->first('name')
 @endforelse
 
 
-Route::controller(ControllerName::class)->group(function(){
-       Route::get('about', 'about')
-});
-
-Route::group(['middleware' => 'admin'], function(){}
 
 
 

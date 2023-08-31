@@ -1,0 +1,134 @@
+Date: 31/08/2023
+
+
+ 
+==================== SHOW ALL =======================
+
+ <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Created Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+        @forelse($jobsHistory as $job)
+              <tr>                
+                <td>@if($job->dept_id == 1) 
+                        Software Division 
+                    @else
+                        Human Resource Division
+                    @endif
+                </td>
+                <td>{{ $job->created_at ? $job->ydm($job->created_at) : '' }} </td>
+                <td>
+                    <a  class="btn btn-outline-primary" href="{{ url('admin/edit-job-history/'.$job->id)  }}"> <i class="far fa-edit nav-icon"> Edit</i> </a>           
+                    <a class="btn btn-outline-danger" href="{{ url()  }}"> <i class='fas fa-trash-alt'></i> Delete </a>
+                </td>
+              </tr>
+        @empty
+              <tr><td colspan="12" class="text-center">Data Not Found..!</td></tr>      
+        @endforelse
+              </tbody>
+            </table>
+
+
+============================== ADD FORM ========================
+
+
+<form action="{{ url('admin/add-job-history-post') }}" method="POST" class="form-horizontal">
+                @csrf
+
+                 <div class="form-group row">
+                    <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
+                     <div class="col-sm-10">
+                    <input name="start_date" type="date" class="form-control" id="start_date" placeholder="Enter start date"  value="{{ old('start_date') }}">
+                        <span class="text-danger">{{ $errors->first('start_date') }}</span>
+                      </div>
+                 </div>
+
+                 
+                 <div class="form-group row">
+                    <label for="emp_name" class="col-sm-2 col-form-label">Employee Name</label>
+                     <div class="col-sm-10">
+                      <select class="form-control" name="employee_id" >
+                        <option value="">Select employee name</option>
+                              @forelse($users as $user)
+                                  @if (old('employee_id') == $user->id)
+                                  <option value="{{$user->id}}" selected>{{ $user->name }}</option>
+                                  @else
+                                  <option value="{{$user->id}}">{{ $user->name }}</option>
+                                  @endif
+                              @empty
+                                <option >'No Users available in Database'</option>                              
+                              @endforelse                         
+                        </select>
+                        <span class="text-danger">{{ $errors->first('employee_id') }}</span>                 
+                      </div>                       
+                 </div>
+
+
+                <div class="form-group row">
+                  <div class="col-sm-2"></div>
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <a href="{{url('admin/jobs-history')}}" class="btn btn-dark">Job History List</a>
+                  </div>
+                </div>
+              
+</form>
+
+
+======================== EDIT FORM ===================
+
+                  <div class="form-group row">
+                    <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
+                     <div class="col-sm-10">
+                    <input name="start_date" type="date" class="form-control" id="start_date" value="{{ old('start_date', $jobHistory->start_date) }}">
+                        <span class="text-danger">{{ $errors->first('start_date') }}</span>
+                      </div>
+                  </div>
+
+                 <div class="form-group row">
+                    <label for="emp_name" class="col-sm-2 col-form-label">Employee Name</label>
+                     <div class="col-sm-10">
+                      <select class="form-control" name="employee_id" >
+                        <option value="">Select employee name</option>
+                              @forelse($users as $user)
+                                  @if ($jobHistory->employee_id == $user->id)
+                                  <option value="{{$user->id}}" selected>{{ $user->name }}</option>
+                                  @else
+                                  <option value="{{$user->id}}">{{ $user->name }}</option>
+                                  @endif
+                              @empty
+                                <option >'No Users available in Database'</option>                              
+                              @endforelse                         
+                        </select>
+                        <span class="text-danger">{{ $errors->first('employee_id') }}</span>                 
+                      </div>                       
+                 </div>
+
+
+====================== DELETE FORM ==================
+
+                <br>
+          <p>Do you want to delete <br> {{ $jobHis->getEmployeeName->name }} ?</p>
+              
+          <form action="{{ url('admin/delete-job-history/'.$jobHis->id) }}"  method="POST"> 
+          @csrf             
+          <button class="btn btn-sm btn-outline-danger"> OK</button>
+          <a class="btn btn-sm btn-outline-success"  href="{{url('admin/jobs-history') }}"> Cancel </a>                          
+          </form> 
+
+
+
+
+
+
+
+
+
+
+
+                

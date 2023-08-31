@@ -10,7 +10,7 @@ find($id), get(), all(), first()
 
 csrf_token(), reponse()->json();
 
-file(), hasfile(), exists(), move()
+file(), hasFile(), exists(), move()
 
 save(), delete(), where()
 orderBy(), paginate(), belongsTo()

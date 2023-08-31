@@ -168,7 +168,7 @@ class MyProfileImageController extends Controller
 }
 
 
-=================================================== LGOIN CONTROLLER ===========================================
+=================================================== LOGIN CONTROLLER ===========================================
 <?php
 
 namespace App\Http\Controllers;

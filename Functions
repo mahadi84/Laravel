@@ -1,6 +1,19 @@
 Date: 24/08/2023 
 
 
+Employee::create($request->except('_token'));
+ ->withSuccess('Employee has been delete successfully.');
+
+@extends('layouts.app')
+@section('content')
+@endsection()
+@yield('content')
+
+ @method('delete')
+
+{!! $products->links() !!}
+
+
 Request::get(), Request::segment(2)
 request()->validate()
 $request->name

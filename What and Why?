@@ -3,19 +3,17 @@ Date: 31/08/2023
 
 01. What are NPM, and Composer?
 02. Is the same a package.json and a composer.json?
-
-
-
+03. What is node.js?
 
 
 
 
 01. What are Composer and NPM?
 -------------------------------
-doing php/symphony? try composer:----
+Doing php/symphony? try composer:----
 Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them
 
-doing node? you do npm:-------
+Doing node? you do npm:-------
 npm is the world's largest Software Registry. The registry contains over 800,000 code packages. Open-source developers use npm to share software.
 So, it's very useful to grab some packages from it.
 
@@ -25,3 +23,14 @@ So, it's very useful to grab some packages from it.
 They are not the same:
 package.json is a npm file to keep track of npm packages.
 composer.json is a composer file to keep track of php packages.  the "json" files describe basic package information and dependencies.
+
+03. What is node.js?
+--------------------
+Node.js is an open-source, cross-platform JavaScript runtime environment and library for running web applications outside the client's browser. 
+Ryan Dahl developed it in 2009, and its latest iteration, version 15.14, 
+was released in April 2021. Developers use Node.js to create server-side web applications, 
+and it is perfect for data-intensive applications since it uses an asynchronous, event-driven model.
+
+
+
+

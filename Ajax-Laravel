@@ -1,7 +1,18 @@
+CONTROLLER FUNCTION:
+====================
+public function CheckEmail(Request $request){
+        $email= $request->email;
+        $isExists= $this->model->where('email', $email)->first();
+        if ($isExists) {
+            return response()->json(array("exists" => true));
+        } else {
+            return response()->json(array("exists" => false));
+        }
+}
+
 
 Register Blade:
-
-
+=================
 <form action='' methode='POST'>
 
 <div class="input-group mb-3">

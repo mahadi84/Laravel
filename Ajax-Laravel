@@ -1,0 +1,47 @@
+
+Register Blade:
+
+
+<form action='' methode='POST'>
+
+<div class="input-group mb-3">
+          <input name="email" type="email" value="{{ old('email')}}" class="form-control" placeholder="Email" onblur="duplicateEmail(this)">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>            
+          </div>
+          <span class="input-group text-danger" id="duplicate_message"> {{$errors->first('email') }}</span>
+        </div>
+
+</form>
+
+
+
+
+<script type="text/javascript">
+
+function duplicateEmail(element) {
+  var email= $(element).val();
+  // alert(email);
+  $.ajax({
+    type :"POST",
+    url:'{{url('checkemail')}}',
+    data : {
+      email: email,
+      _token: "{{csrf_token()}}"
+    },
+    dataType: "json",
+    success: function (res) {
+      if (res.exists) {
+        $('#duplicate_message').html("This email is already registered.");
+      } else {
+         $('#duplicate_message').html("");
+      }
+    },
+      error:function(jqXHR, exception){
+      }
+  });
+}
+
+</script>

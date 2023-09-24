@@ -3,6 +3,7 @@ Date: 24/08/2023
 
 
 {{ Str::limit($news->description, 100) }}
+{!! $products->links() !!}
 
 
 
@@ -16,8 +17,6 @@ Employee::create($request->except('_token'));
 
  @method('delete')
  @method('put') --update
-
-{!! $products->links() !!}
 
 
 Route::controller(ControllerName::class)->group(function(){

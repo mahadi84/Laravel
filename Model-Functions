@@ -1,6 +1,7 @@
 Date: 31/08/2023
 
-
+protected $table = '';
+protected $guarded = [];
 
 public function getJobsHistory($request){
         $return  = self::select('job_history.*')

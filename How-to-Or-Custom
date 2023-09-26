@@ -1,0 +1,20 @@
+
+01.  How to take control over the redirect if the validation fails?
+
+
+
+------------------------------------------
+
+01._Ans:  How to take control over the redirect if the validation fails?
+    use Illuminate\Support\Facades\Validator;
+    public function submit(Request $request){
+            $validator = Validator::make($request->all(),[
+                'name' => 'required|min:2',
+                'phonenumber' => 'required|min:10|max:10'
+            ]);
+            if ($validator->fails()) {
+                return redirect(url()->previous() .'#contact')
+                        ->withErrors($validator)
+                        ->withInput();
+            }
+

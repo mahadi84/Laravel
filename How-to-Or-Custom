@@ -1,5 +1,6 @@
 
 01.  How to take control over the redirect if the validation fails?
+02.  How to Laravel Pagination is showing weird arrows?
 
 
 
@@ -17,4 +18,10 @@
                         ->withErrors($validator)
                         ->withInput();
             }
+----------------------
+
+02._Ans:  How to fix Laravel Pagination is showing weird arrows?
+$posts->links('pagination::bootstrap-4')
+
+---------------------------
 

@@ -1,10 +1,20 @@
 
+00. CMD: For: Migration, Rollback, Create_Model, Create_Controller
 01.  How to take control over the redirect if the validation fails?
 02.  How to Laravel Pagination is showing weird arrows?
 
 
 
 ------------------------------------------
+00._Ans: CMD:  
+Migration: php artisan migrate, 
+Rollback: php artisan migrate:rollback, 
+Create_Model:, 
+Create_Controller:
+
+
+
+-------------------
 
 01._Ans:  How to take control over the redirect if the validation fails?
     use Illuminate\Support\Facades\Validator;

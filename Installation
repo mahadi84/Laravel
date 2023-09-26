@@ -20,7 +20,7 @@ TO RUN: php artisan serve
 --------------
 
 01_Ans: How to get the LIST of all installed packages along with the version in composer?
-For Limited Pack: php artisan package:discover --ansi
+My-Install-Pack: php artisan package:discover --ansi
 For All Pack: composer show
 
 -------------

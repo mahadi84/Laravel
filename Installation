@@ -11,6 +11,7 @@ Date: 10/08/2023
 05. How to install Image Intervention?
 
 ---------------------------- Answer ---------------------
+
 00_Ans:  How to install Laravel 10 to any directory
 Prerequisites: PHP VERSION: 8.1 (minimum) and INSTALL: Composer, NPM.
 CMD:- composer create-project laravel/laravel="10.10.*" Project_Folder_Name

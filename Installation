@@ -5,6 +5,16 @@ Installation:
 PHP VERSION: 8.1 minimum
 Composer, NPM.
 
+---------------------
+UNINSTALL A PACKAGE:
+--------------------
+composer remove realrashid/sweet-alert
+
+-------------------------
+CHECK INSTALLED PACKAGE:
+-------------------------
+
+
 CMD:- composer create-project laravel/laravel="10.10.*" Project_Folder_Name
 TO RUN: php artisan serve
 

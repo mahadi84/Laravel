@@ -1,7 +1,6 @@
 Date: 10/08/2023
 
 
-
 --------------
 00. How to install Laravel 10 to any directory?
 01. How to get the LIST of all installed packages along with the version in composer?
@@ -12,7 +11,7 @@ Date: 10/08/2023
 
 ---------------------------- Answer ---------------------
 00_Ans:  How to install Laravel 10 to any directory
-Prerequits: PHP VERSION: 8.1 (minimum) and INSTALL:Composer, NPM.
+Prerequisites: PHP VERSION: 8.1 (minimum) and INSTALL: Composer, NPM.
 CMD:- composer create-project laravel/laravel="10.10.*" Project_Folder_Name
 TO RUN: php artisan serve
 
@@ -29,36 +28,18 @@ composer remove realrashid/sweet-alert
 
 -------------
 
-DEBUGGING TOOL:
----------------
-composer require barryvdh/laravel-debugbar --dev
-
-Open Folder and ADD:- 
-config/app.php
-
-'providers' => [
-	Barryvdh\Debugbar\ServiceProvider::class,
-],
-'aliases' => [
-	'Debugbar' => Barryvdh\Debugbar\Facade::class,
-]
-
-php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
-
----------------
-
 03._Ans:  How to install Breez Authentication?
 composer require laravel/breeze --dev
 php artisan breeze:install
 php artisan migrate
 npm install
 npm run dev
+
 -----------------------
+
 04._Ans: How to install Matwebsite Excel?
 composer require maatwebsite/excel
-
 Open Folder and ADD:- config/app.php
-
 'providers' => [
     Maatwebsite\Excel\ExcelServiceProvider::class,
 ]

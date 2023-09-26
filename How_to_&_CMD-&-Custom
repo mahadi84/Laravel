@@ -1,5 +1,5 @@
 
-00. CMD: For: Clear_Cache, Migration, Rollback, Create_Model, Create_Controller
+00. CMD: For: Clear_Cache, Create_Model, Create_Controller, Migration, Rollback, 
 01.  How to take control over the redirect if the validation fails?
 02.  How to Laravel Pagination is showing weird arrows?
 
@@ -8,10 +8,11 @@
 ------------------------------------------
 00._Ans: CMD: 
 Clear_Cache: php artisan cache:clear
+Create_Model: php artisan make:model Todo -mcr,   *m=migration, *c=controller, *r=resource type controller
+OR : php artisan make:model -mc Todo
+Create_Controller:
 Migration: php artisan migrate, 
 Rollback: php artisan migrate:rollback, 
-Create_Model:, 
-Create_Controller:
 
 
 

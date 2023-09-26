@@ -8,6 +8,7 @@ Date: 10/08/2023
 
 03. How to install Breez Authentication?
 04. How to install Matwebsite Excel?
+05. How to install Image Intervention?
 
 ---------------------------- Answer ---------------------
 00_Ans:  How to install Laravel 10 to any directory
@@ -29,16 +30,16 @@ composer remove realrashid/sweet-alert
 -------------
 
 03._Ans:  How to install Breez Authentication?
-composer require laravel/breeze --dev
-php artisan breeze:install
-php artisan migrate
-npm install
-npm run dev
+CMD: composer require laravel/breeze --dev
+     php artisan breeze:install
+     php artisan migrate
+     npm install
+     npm run dev
 
 -----------------------
 
 04._Ans: How to install Matwebsite Excel?
-composer require maatwebsite/excel
+CMD: composer require maatwebsite/excel
 Open Folder and ADD:- config/app.php
 'providers' => [
     Maatwebsite\Excel\ExcelServiceProvider::class,
@@ -46,6 +47,16 @@ Open Folder and ADD:- config/app.php
 'aliases' => [
     'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 ]
+
+----------------
+
+05._Ans: How to install Image Intervention?
+CMD: composer require intervention/image
+Go to : config/app.php
+'providers' => [ Intervention\Image\ImageServiceProvider::class ]
+'aliases' => ['Image' => Intervention\Image\Facades\Image::class ]
+
+--------------
 
 
 

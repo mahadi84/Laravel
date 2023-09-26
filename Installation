@@ -1,22 +1,33 @@
 Date: 10/08/2023
 
 
-Installation:
-PHP VERSION: 8.1 minimum
-Composer, NPM.
 
----------------------
-UNINSTALL A PACKAGE:
---------------------
-composer remove realrashid/sweet-alert
+--------------
+00. How to install Laravel 10 to any directory?
+01. How to get the LIST of all installed packages along with the version in composer?
+02. How can I REMOVE/UNINSTALL a package from Laravel using PHP Composer?
 
--------------------------
-CHECK INSTALLED PACKAGE:
--------------------------
+03. How to install Breez Authentication?
+04. How to install Matwebsite Excel?
 
-
+---------------------------- Answer ---------------------
+00_Ans:  How to install Laravel 10 to any directory
+Prerequits: PHP VERSION: 8.1 (minimum) and INSTALL:Composer, NPM.
 CMD:- composer create-project laravel/laravel="10.10.*" Project_Folder_Name
 TO RUN: php artisan serve
+
+--------------
+
+01_Ans: How to get the LIST of all installed packages along with the version in composer?
+For Limited Pack: php artisan package:discover --ansi
+For All Pack: composer show
+
+-------------
+
+02._Ans: How can I REMOVE/UNINSTALL a package from Laravel using PHP Composer?
+composer remove realrashid/sweet-alert
+
+-------------
 
 DEBUGGING TOOL:
 ---------------
@@ -34,22 +45,19 @@ config/app.php
 
 php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
 
+---------------
 
-BREEZ AUTHENTICATION:
---------------------
+03._Ans:  How to install Breez Authentication?
 composer require laravel/breeze --dev
 php artisan breeze:install
 php artisan migrate
 npm install
 npm run dev
-
-
-EXCELL IMPORT(matwebsite excel):
---------------------------------
+-----------------------
+04._Ans: How to install Matwebsite Excel?
 composer require maatwebsite/excel
 
-Open Folder and ADD:- 
-config/app.php
+Open Folder and ADD:- config/app.php
 
 'providers' => [
     Maatwebsite\Excel\ExcelServiceProvider::class,
@@ -57,6 +65,10 @@ config/app.php
 'aliases' => [
     'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 ]
+
+
+
+
 
 
 

@@ -1,14 +1,17 @@
 DATE: 20/09/2023
 
+Ajax-Laravel:
+---------------
+
 01: How to check if the Email is a duplicate in the db table?
 02. How to preview an image before inserting it in html form?
+03. How to insert data into the table showing the validation message?
 
 
--------------------------------------- Answer ------------------------------
+=========================== Answer ===============================
 01_Ans: How to check if the Email is a duplicate in the db table?
 
-CONTROLLER FUNCTION:
-====================
+CONTROLLER FUNCTION:------
 public function CheckEmail(Request $request){
         $email= $request->email;
         $isExists= $this->model->where('email', $email)->first();
@@ -19,8 +22,7 @@ public function CheckEmail(Request $request){
         }
 }
 
-Register Blade:
-=================
+HTML:--------
 <form action='' methode='POST'>
 <div class="input-group mb-3">
           <input name="email" type="email" value="{{ old('email')}}" class="form-control" placeholder="Email" onblur="duplicateEmail(this)">
@@ -33,8 +35,9 @@ Register Blade:
         </div>
 </form>
 
+
+SCRIPT:-------
 <script type="text/javascript">
-==================================
 function duplicateEmail(element) {
   var email= $(element).val();
   // alert(email);
@@ -58,8 +61,8 @@ function duplicateEmail(element) {
   });
 }
 </script>
--------------------------------------------------------------------------------------
 
+========================================================
 02._Ans: How to preview an image before inserting it in html form?
 
 HTML:-----
@@ -82,7 +85,10 @@ SCRIPT:-----
 </script>
 @endsection   
 
-------------------------------------------------------------------------------
+========================================================
+03. How to insert data into the table showing the validation message?
+
+
 
 
 

@@ -1,5 +1,11 @@
 DATE: 20/09/2023
 
+01: How to check if the Email is a duplicate in the db table?
+02. How to preview an image before inserting it in html form?
+
+
+-------------------------------------- Answer ------------------------------
+01_Ans: How to check if the Email is a duplicate in the db table?
 
 CONTROLLER FUNCTION:
 ====================
@@ -52,7 +58,31 @@ function duplicateEmail(element) {
   });
 }
 </script>
+-------------------------------------------------------------------------------------
 
+02._Ans: How to preview an image before inserting it in html form?
+
+HTML:-----
+<input name="image" type="file" class="form-control"   id="image">
+<image id="show_image"  class="rounded avater-lg" src="{{ url('public/upload/default_image.jpg') }}" style="width: 80px; height: 80px;"  alt="Profile Image"> 
+
+
+SCRIPT:-----
+@section('script')
+<script type="text/javascript">   
+   $(document).ready(function(){
+        $('#image').change(function(e){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#show_image').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+    });      
+</script>
+@endsection   
+
+------------------------------------------------------------------------------
 
 
 

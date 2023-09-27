@@ -46,12 +46,8 @@ CMD: composer require laravel/breeze --dev
 Website: https://docs.laravel-excel.com/3.1/getting-started/installation.html
 CMD: composer require maatwebsite/excel
 Open Folder and ADD:- config/app.php
-'providers' => [
-    Maatwebsite\Excel\ExcelServiceProvider::class,
-]
-'aliases' => [
-    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-]
+'providers' => [Maatwebsite\Excel\ExcelServiceProvider::class,]
+'aliases' => ['Excel' => Maatwebsite\Excel\Facades\Excel::class,]
 
 ----------------
 

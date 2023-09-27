@@ -87,6 +87,7 @@ SCRIPT:-----
 
 ========================================================
 03. How to insert data into the table showing the validation message?
+Web: https://www.teknowize.com/articles/web-articles/laravel-ajax-crud-operation
 
 CONTROLLER FUNCTION:--------
    function employee_add(Request $request){

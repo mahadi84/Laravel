@@ -88,6 +88,64 @@ SCRIPT:-----
 ========================================================
 03. How to insert data into the table showing the validation message?
 
+CONTROLLER FUNCTION:--------
+        public function ajaxRequestPost(Request $request)    {
+                \DB::table('posts')->insert([
+                    'title' => $request->Code, //This Code coming from ajax request
+                    'details' => $request->Chief, //This Chief coming from ajax request
+                ]);
+        
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => 'Data inserted successfully'
+                    ]
+                );
+    }
+
+HTML:------
+<form action="" class="btn-submit" method="POST">
+           <div class="form-group">
+                <label>Title:</label>
+                <input type="text" name="title" class="form-control" placeholder="title" required="">
+            </div>
+
+            <div class="form-group">
+                <label>Details:</label>
+                <input type="text" name="details" class="form-control" placeholder="details" required="">
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-success">Submit</button>
+            </div>
+ </form>
+
+
+SCRIPT:-----
+$(".btn-submit").click(function(e){
+        e.preventDefault();
+
+        var data = $(this).serialize();
+        console.log(data);
+        var url = '{{ url('postinsert') }}';
+
+        $.ajax({
+           url:url,
+           method:'POST',
+           data:data,
+           success:function(response){
+              if(response.success){
+                  alert(response.message) //Message come from controller
+              }else{
+                  alert("Error")
+              }
+           },
+           error:function(error){
+              console.log(error)
+           }
+        });
+});
+
 
 
 

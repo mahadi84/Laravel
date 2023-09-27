@@ -116,37 +116,31 @@ HTML:------
         <form class="mt-3" id="form-data">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" id="name" class="form-control">
+                    <input type="text" id="name_input" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" name="email" id="email" class="form-control">
+                    <input type="text"  id="email_input" class="form-control">
                 </div>
-                <button type="button" class="btn btn-success submit-form">Submit</button>
+                <button type="button" class="btn btn-success">Submit</button>
         </form>
 
 
 SCRIPT:-----
    $(".submit-form").click(function(e){
         e.preventDefault();
-        var name = $('.add_epmployee #name_input').val();
-            var email = $('.add_epmployee #email_input').val();
-            var phone = $('.add_epmployee #phone_input').val();
-            var address = $('.add_epmployee #address_input').val();
+            var name = $('#name_input').val();
+            var email = $('#email_input').val();
 
             $.ajax({
                 type: 'post',
                 data: {
                     name: name,
                     email: email,
-                    phone: phone,
-                    address: address,
                     _token: "{{ csrf_token() }}"
                 },
                 url: "{{ url('employee-add') }}",
                 success: function(response) {
-                    $('#addEmployeeModal').modal('hide');
-                    employeeList();
                     alert(response.message);
                 }
 

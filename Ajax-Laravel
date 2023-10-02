@@ -137,13 +137,11 @@ HTML:------
 
 
 SCRIPT:-----
-   <script type="text/javascript">   
+<script type="text/javascript">   
 $("#submit_form").click(function(e){
         e.preventDefault();
 
         var name = $("input[name=name]").val(); 
-        var email = $("input[name=email]").val();
-        var subject = $("input[name=subject]").val();
         var message = $("textarea[name=message]").val();
 // alert (message);
 
@@ -151,8 +149,6 @@ $("#submit_form").click(function(e){
           type : "POST",
           data : {
             name: name,
-            email: email,
-            subject: subject,
             message: message,
             _token: "{{csrf_token()}}"
           },

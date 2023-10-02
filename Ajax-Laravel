@@ -91,23 +91,27 @@ Web: https://www.teknowize.com/articles/web-articles/laravel-ajax-crud-operation
 
 CONTROLLER FUNCTION:--------
    function employee_add(Request $request){
-        $insert = [
-            'name' => $request->name,
-            'email'=> $request->email
-        ];
-        $add = Employee::create($insert);
-        if($add){
+         $request->validate([
+                        'name' => 'required|min:2',
+                        'message' => 'required|min:10'                     
+                    ]);
+
+    $contact_form= $this->contact_formModel;
+        $contact_form->name    = trim($request->name);
+        $contact_form->message = trim($request->message);
+
+        if($contact_form->save()){
             $response = [
                 'status'=>'ok',
                 'success'=>true,
-                'message'=>'Record created succesfully!'
+                'message'=>'Thanks! We will get back to you.'
             ];
             return $response;
         }else{
             $response = [
                 'status'=>'ok',
                 'success'=>false,
-                'message'=>'Record created failed!'
+                'message'=>'Error .!! Record created failed!'
             ];
             return $response;
         }
@@ -115,46 +119,63 @@ CONTROLLER FUNCTION:--------
 
 HTML:------
 
-<div id='validation-errors'> </div>
-        <form class="mt-3" id="form-data">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name_input" class="form-control">
+<span id="success-message"></span>
+<span id="error-message"></span>
+            <form id="contact_form" class='php-email-form'>          
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name">
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text"  id="email_input" class="form-control">
-                </div>
-                <button type="button" class="btn btn-success">Submit</button>
-        </form>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
+              </div>        
+             
+              <div class="text-center"><button id="submit_form" type="submit">Send Message</button></div>
+            </form>
+
+
 
 
 SCRIPT:-----
-   $(".submit-form").click(function(e){
+   <script type="text/javascript">   
+$("#submit_form").click(function(e){
         e.preventDefault();
-            var name = $('#name_input').val();
-            var email = $('#email_input').val();
 
-            $.ajax({
-                type: 'post',
-                data: {
-                    name: name,
-                    email: email,
-                    _token: "{{ csrf_token() }}"
-                },
-                url: "{{ url('employee-add') }}",
-                success: function(response) {
-                    alert(response.message);
-                },
-                error: function (xhr) {
-                   $('#validation-errors').html('');
-                   $.each(xhr.responseJSON.errors, function(key,value) {
-                     $('#validation-errors').append('<div class="alert alert-danger">'+value+'</div');
-                 }); 
-                },
+        var name = $("input[name=name]").val(); 
+        var email = $("input[name=email]").val();
+        var subject = $("input[name=subject]").val();
+        var message = $("textarea[name=message]").val();
+// alert (message);
 
-            })
-  });
+        $.ajax({
+          type : "POST",
+          data : {
+            name: name,
+            email: email,
+            subject: subject,
+            message: message,
+            _token: "{{csrf_token()}}"
+          },
+          url  : "{{ url('page/contact_form-add-post') }}",
+          
+          success: function(response) {
+           $('#error-message').html('');
+           $('#success-message').append('<div class="alert alert-success">'+response.message+'</div');
+           // $('#success-message').html(response.message);
+           $("#contact_form")[0].reset();
+          },
+          error: function (xhr) {
+           $('#success-message').html('');
+           $('#error-message').html('');
+           $.each(xhr.responseJSON.errors, function(key,value) {
+           $('#error-message').append('<div class="text-center text-danger">'+value+'</div');
+          }); 
+          },                    
+    });
+     
+});
+
+</script>
 
 
 

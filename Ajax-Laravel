@@ -4,7 +4,7 @@ Ajax-Laravel:
 ---------------
 
 00. Common syntax for JQUERY and AJAX 
-    ex: a) Click to response specific div/id/class, 
+    ex: a) Click to respond to specific div/id/class, 
         b) Prevent page load, 
         c) Get form data, 
         d) show data through ID/Class with append function
@@ -21,6 +21,7 @@ Ajax-Laravel:
 
 
 type="text/javascript"
+$(document).ready(function(){ });
 $("#submit_form").click(function(e){  });
 $.ajax({ });
 e.preventDefault();

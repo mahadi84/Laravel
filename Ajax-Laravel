@@ -3,7 +3,14 @@ DATE: 20/09/2023
 Ajax-Laravel:
 ---------------
 
-00. Common syntax for JQUERY and AJAX;
+00. Common syntax for JQUERY and AJAX 
+    ex: a) Click to response specific div/id/class, 
+        b) Prevent page load, 
+        c) Get form data, 
+        d) show data through ID/Class with append function
+        e) Reset form data,
+        f) Success and Error function to show data
+        g) For loop to show multiple error message
 
 01: How to check if the Email is a duplicate in the db table?
 02. How to preview an image before inserting it in html form?
@@ -16,6 +23,7 @@ Ajax-Laravel:
 type="text/javascript"
 $("#submit_form").click(function(e){  });
 $.ajax({ });
+e.preventDefault();
 success:function(response){};
 error:function(xhr){};
 $.each(xhr.responseJSON.errors, function(key,value) { });

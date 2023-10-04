@@ -3,13 +3,32 @@ DATE: 20/09/2023
 Ajax-Laravel:
 ---------------
 
+00. Common syntax for JQUERY and AJAX;
+
 01: How to check if the Email is a duplicate in the db table?
 02. How to preview an image before inserting it in html form?
 03. How to insert data into the table showing the validation message?
 
 
-=========================== Answer ===============================
-01_Ans: How to check if the Email is a duplicate in the db table?
+=========================== 00. Common syntax for JQUERY and AJAX; ===============================
+
+
+type="text/javascript"
+$("#submit_form").click(function(e){  });
+$.ajax({ });
+success:function(response){};
+error:function(xhr){};
+$.each(xhr.responseJSON.errors, function(key,value) { });
+
+var name = $("input[name=name]").val();
+type : '', data:'', url: ''
+$('#error-message').html('');
+$('#success-message').append('<div class="alert alert-success">'+response.message+'</div');
+$("#contact_form")[0].reset();
+
+
+==============================01_Ans: How to check if the Email is a duplicate in the db table?================
+
 
 CONTROLLER FUNCTION:------
 public function CheckEmail(Request $request){
@@ -62,8 +81,8 @@ function duplicateEmail(element) {
 }
 </script>
 
-========================================================
-02._Ans: How to preview an image before inserting it in html form?
+======================= 02._Ans: How to preview an image before inserting it in html form? =================================
+
 
 HTML:-----
 <input name="image" type="file" class="form-control"   id="image">
@@ -85,8 +104,8 @@ SCRIPT:-----
 </script>
 @endsection   
 
-========================================================
-03. How to insert data into the table showing the validation message?
+======================= 03. How to insert data into the table showing the validation message? =================================
+
 Web: https://www.teknowize.com/articles/web-articles/laravel-ajax-crud-operation
 
 CONTROLLER FUNCTION:--------
@@ -132,8 +151,6 @@ HTML:------
              
               <div class="text-center"><button id="submit_form" type="submit">Send Message</button></div>
             </form>
-
-
 
 
 SCRIPT:-----

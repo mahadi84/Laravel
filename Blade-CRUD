@@ -1,6 +1,9 @@
 Date: 31/08/2023
 
 
+wysiwyg(Text Editor on HTML):
+-----------------------------
+<textarea id="elm1" name="description" class="form-control"   id="description">{{ $about->description }}</textarea>
  
 ==================== SHOW ALL =======================
 

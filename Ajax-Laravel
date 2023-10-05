@@ -16,6 +16,8 @@ Ajax-Laravel:
 02. How to preview an image before inserting it in html form?
 03. How to insert data into the table showing the validation message?
 
+04. How to validate form data with jquery?
+
 
 =========================== 00. Common syntax for JQUERY and AJAX; ===============================
 
@@ -198,6 +200,39 @@ $("#submit_form").click(function(e){
 });
 
 </script>
+
+
+=================================== 04. How to validate form data with jquery? ===================================
+
+
+$(document).ready(function(){
+    $('#myForm').validate({
+    rules: {
+      designation: {
+        required: true,
+      },
+    },
+
+    messages :{
+      designation:{
+        required: 'Please Enter designation',
+      },  
+    }, I
+
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.desig').append(error);   //.desig is input field class name
+        },
+
+        highlight function (element, errorClass, validClass){ 
+          $(element).addClass('is-invalid');
+        },
+        unhighlight : function (element, errorClass, validClass){ 
+          $(element).removeClass('is-invalid');
+        },
+    });
+});
 
 
 

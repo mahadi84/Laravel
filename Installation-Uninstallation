@@ -3,7 +3,7 @@ Date: 10/08/2023
 
 --------------
 00. How to install Laravel 10 to any directory?
-01. How to get the LIST of all installed packages along with the version in composer?
+01. How to get the LIST of all installed packages along with the version in composer And CHECK WHY IT IS USED?
 02. How can I REMOVE/UNINSTALL a package from Laravel using PHP Composer?
 
 03. How to install Breez Authentication?
@@ -21,9 +21,10 @@ TO RUN: php artisan serve
 
 --------------
 
-01_Ans: How to get the LIST of all installed packages along with the version in composer?
+01_Ans: How to get the LIST of all installed packages along with the version in composer And CHECK WHY IT IS USED?
 My-Install-Pack: php artisan package:discover --ansi
 For All Pack: composer show
+Check why it is used: composer why barryvdh/laravel-debugbar
 
 -------------
 

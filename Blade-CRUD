@@ -1,9 +1,9 @@
 Date: 31/08/2023
 
 
-==============  SELECT OPTION:  ===================
+==============  SELECT OPTION (ADD+EDIT):  ===================
 
---------- ADD+EDIT----------
+01.:----
 <label for="emp_name" class="form-label">Employee Name</label>
       <select class="form-control" name="employee_id" >
         <option value="">Select employee name</option>
@@ -19,6 +19,16 @@ Date: 31/08/2023
         </select>
 <span class="text-danger">{{ $errors->first('employee_id') }}</span>
 
+02:----
+<label for="dept_id" class="form-label">Dept Name</label>                    
+    <select class="form-control" name="dept_id">
+      <option value="">Select Dept</option> 
+      <option {{ (old('dept_id') == 1) ? 'selected': ''}} value="1">Software Division </option>
+      <option {{ (old('dept_id') == 2) ? 'selected': ''}} value="2">Human Resource Division </option>
+    </select>
+<span class="text-danger">{{ $errors->first('dept_id') }}</span>
+
+------------------
 
 
 

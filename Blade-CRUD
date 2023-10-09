@@ -3,28 +3,12 @@ Date: 31/08/2023
 
 ==============  SELECT OPTION:  ===================
 
---------- ADD:----------
+--------- ADD+EDIT----------
 <label for="emp_name" class="form-label">Employee Name</label>
       <select class="form-control" name="employee_id" >
         <option value="">Select employee name</option>
               @forelse($users as $user)
-                  @if (old('employee_id') == $user->id)
-                  <option value="{{$user->id}}" selected>{{ $user->name }}</option>
-                  @else
-                  <option value="{{$user->id}}">{{ $user->name }}</option>
-                  @endif
-              @empty
-                <option >'No Users available in Database'</option>                              
-              @endforelse                         
-        </select>
-<span class="text-danger">{{ $errors->first('employee_id') }}</span>
-
---------- EDIT:----------
- <label for="emp_name" class="form-label">Employee Name</label>
-      <select class="form-control" name="employee_id" >
-        <option value="">Select employee name</option>
-              @forelse($users as $user)
-                  @if ($jobHistory->employee_id == $user->id)
+                  @if (old('employee_id') == $user->id)   //  Replace old('employee_id')=$jobHistory->employee_id While Editing
                   <option value="{{$user->id}}" selected>{{ $user->name }}</option>
                   @else
                   <option value="{{$user->id}}">{{ $user->name }}</option>
@@ -33,9 +17,7 @@ Date: 31/08/2023
                 <option> 'No Users available in Database' </option>                              
               @endforelse                         
         </select>
-<span class="text-danger">{{ $errors->first('employee_id') }}</span>                 
-  
-
+<span class="text-danger">{{ $errors->first('employee_id') }}</span>
 
 
 

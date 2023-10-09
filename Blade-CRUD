@@ -3,6 +3,20 @@ Date: 31/08/2023
 
 ==============  SELECT OPTION (ADD+EDIT):  ===================
 
+00.:----
+<label for="emp_name" class="form-label">Employee Name</label>
+    <select class="form-control" name="employee_id" >
+        <option value="">Select employee name</option>
+        @forelse($users as $user)
+           <option value="{{ $user->id }}" {{ ( old('employee_id') == $user->id ) ? ' selected' : '' }}>{{ $user->name }}</option>
+                    //  Replace old('employee_id')=$jobHistory->employee_id While Editing
+        @empty
+          <option> 'No Users available in Database' </option>                              
+        @endforelse                         
+    </select>
+<span class="text-danger">{{ $errors->first('employee_id') }}</span>
+
+
 01.:----
 <label for="emp_name" class="form-label">Employee Name</label>
       <select class="form-control" name="employee_id" >
@@ -18,6 +32,7 @@ Date: 31/08/2023
               @endforelse                         
         </select>
 <span class="text-danger">{{ $errors->first('employee_id') }}</span>
+
 
 02:----
 <label for="dept_id" class="form-label">Dept Name</label>                    

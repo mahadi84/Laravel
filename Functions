@@ -1,6 +1,7 @@
 Date: 24/08/2023 
 
 
+mt_rand(100,999);
 
 {{ Str::limit($news->description, 100) }}
 {!! $products->links() !!}

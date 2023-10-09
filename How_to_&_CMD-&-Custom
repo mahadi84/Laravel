@@ -3,10 +3,12 @@
 01.  How to take control over the redirect if the validation fails and CUSTOMIZE VALIDATION MESSAGE?
 02.  How to Laravel Pagination is showing weird arrows?
 
+03.  How to generate RANDDOM NUMBER with RANDOM CHARECTER?
 
 
-------------------------------------------
-00._Ans: CMD: 
+
+-----------------00._Ans: CMD: -------------------------
+
 Clear_Cache: php artisan cache:clear
 Create_Model: php artisan make:model Todo -mcr,   *m=migration, *c=controller, *r=resource type controller
 OR : php artisan make:model -mc Todo
@@ -15,29 +17,42 @@ Migration: php artisan migrate,
 Rollback: php artisan migrate:rollback, 
 
 
+---------------01._Ans:  How to take control over the redirect if the validation fails?---------------
 
--------------------
-
-01._Ans:  How to take control over the redirect if the validation fails?
     use Illuminate\Support\Facades\Validator;
     public function submit(Request $request){
             $validator = Validator::make($request->all(),[
                 'name' => 'required|min:2',
                 'phonenumber' => 'required|min:10|max:10'
             ],
-            [
-                'name.required' => 'Put your custom message here'
-            ]);
-            
-            if ($validator->fails()) {
-                return redirect(url()->previous() .'#contact')
-                        ->withErrors($validator)
-                        ->withInput();
-            }
-----------------------
+            [ 'name.required' => 'Put your custom message here' ]);            
+                if ($validator->fails()) {
+                    return redirect(url()->previous() .'#contact')
+                            ->withErrors($validator)
+                            ->withInput();
+                }
 
-02._Ans:  How to fix Laravel Pagination is showing weird arrows?
+----------------02._Ans:  How to fix Laravel Pagination is showing weird arrows?----------------------
+
 $posts->links('pagination::bootstrap-4')
 
----------------------------
+----------------03. How to generate RANDOM NUMBER with RANDOM CHARACTER?-----------------------
+
+// Available alpha caracters
+$characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+// generate a pin based on 2 * 7 digits + a random character
+$pin = mt_rand(1000000, 9999999)
+    . mt_rand(1000000, 9999999)
+    . $characters[rand(0, strlen($characters) - 1)];
+
+// shuffle the result
+$string = str_shuffle($pin);
+
+------------------------------------------------------------------------------------------------
+
+
+
+
+
 

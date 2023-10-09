@@ -6,7 +6,7 @@ Ajax-Laravel:
 00. Common syntax for JQUERY and AJAX 
     ex: a) Click to respond to specific div/id/class, 
         b) Prevent page load, 
-        c) Get form data, 
+    ***c) Get form data and Serialize it and add extra data and check those data, 
         d) show data through ID/Class with append function
         e) Reset form data,
         f) Success and Error function to show data
@@ -36,6 +36,19 @@ type : '', data:'', url: ''
 $('#error-message').html('');
 $('#success-message').append('<div class="alert alert-success">'+response.message+'</div');
 $("#contact_form")[0].reset();
+
+***C) Get form data and Serialize it and add extra data and check those data?
+Test here:https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_serialize
+        $("#form_submit").click(function(){
+            var data = $("#MyForm").serialize()+'&_token: "{{csrf_token()}}"';
+            alert (data);
+            OR
+            $.ajax({
+            url: '',
+            type: 'post',
+            data = $("#MyForm").serialize()+'&_token: "{{csrf_token()}}"',
+            );
+        });
 
 
 ==============================01_Ans: How to check if the Email is a duplicate in the db table?================

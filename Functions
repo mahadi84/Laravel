@@ -1,6 +1,7 @@
-Date: 24/08/2023 
+Date: 24-Aug-2023 
 
 
+Employee::get(['emp_id','name']);
 mt_rand(100,999);
 
 {{ Str::limit($news->description, 100) }}

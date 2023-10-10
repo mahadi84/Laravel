@@ -11,9 +11,6 @@ Date: 10-Aug-2023
 05. How to install Intervention Image?
 
 06. How to install Harun IdGenerator?
-
-
-
 07. How to install Laravel Permission Package?
 
 ---------------------------- Answer ---------------------
@@ -64,6 +61,26 @@ Go to : config/app.php
 'aliases' => ['Image' => Intervention\Image\Facades\Image::class ]
 
 ---------06. How to install Harun IdGenerator?------------------
+Web: https://stackoverflow.com/questions/49446329/laravel-generate-unique-order-number/58704860#58704860
+
+INSTALL:
+---------
+composer require haruncpi/laravel-id-generator
+
+TO USE in Controller for customized filed:
+--------------------
+use Haruncpi\LaravelIdGenerator\IdGenerator;
+$prefix = date('Y');  
+$emp_id = IdGenerator::generate(['table' => 'employees', 'field' => 'emp_id', 'length' => 8, 'prefix' =>$prefix]);
+
+To Use in MODEL for  id:
+------------------------
+public static function boot(){
+        parent::boot();
+        self::creating(function ($model) {
+            $model->order_number = IdGenerator::generate(['table' => 'orders', 'length' => 6, 'prefix' => date('y')]);
+        });
+    }
 
 --------------07._Ans: How to install Laravel Permission Package? ------------
 Website: https://spatie.be/docs/laravel-permission/v5/installation-laravel

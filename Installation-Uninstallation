@@ -1,4 +1,4 @@
-Date: 10/08/2023
+Date: 10-Aug-2023
 
 
 --------------
@@ -10,7 +10,11 @@ Date: 10/08/2023
 04. How to install Matwebsite Excel?
 05. How to install Intervention Image?
 
-06. How to install Laravel Permission Package?
+06. How to install Harun IdGenerator?
+
+
+
+07. How to install Laravel Permission Package?
 
 ---------------------------- Answer ---------------------
 
@@ -59,9 +63,9 @@ Go to : config/app.php
 'providers' => [ Intervention\Image\ImageServiceProvider::class ]
 'aliases' => ['Image' => Intervention\Image\Facades\Image::class ]
 
---------------
+---------06. How to install Harun IdGenerator?------------------
 
-06._Ans: How to install Laravel Permission Package?
+--------------07._Ans: How to install Laravel Permission Package? ------------
 Website: https://spatie.be/docs/laravel-permission/v5/installation-laravel
 
 -------------

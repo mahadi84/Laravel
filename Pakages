@@ -4,8 +4,8 @@ Date: 11-Oct-2023
 
 -------Controller:-----------
 use Maatwebsite\Excel\Facades\Excel;
-use App\Excell\Employees\Export\ExportEmployees;
-use App\Excell\Employees\Import\ImportEmployees;
+use App\Excel\Employees\Export\ExportEmployees;
+use App\Excel\Employees\Import\ImportEmployees;
 
 public function employee_import(Request $request){
     $data['title'] = 'Import';
@@ -47,7 +47,7 @@ public function employee_export(){
 
 ----------------Import Controller:---------------
 <?php
-namespace App\Excell\Employees\Import;
+namespace App\Excel\Employees\Import;
 use App\Models\Employee;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -62,7 +62,7 @@ class ImportEmployees implements ToModel, WithHeadingRow{
 
 ----------------Export-Page-Controller:-------
 <?php
-namespace App\Excell\Employees\Export;
+namespace App\Excel\Employees\Export;
 use App\Models\Employee;
 use Maatwebsite\Excel\Concerns\FromCollection;
 

@@ -1,6 +1,15 @@
 Date: 24-Aug-2023 
 
 
+
+public function getEmployeeName(){
+        return $this->belongsTo(User::class, "employee_id");
+    }
+
+date('d-m-Y', strtotime($date)); OUTPUT: 24-Aug-2023
+->diffForHumans();               OUTPUT:  10 Minutes Ago
+
+
 Employee::get(['emp_id','name']);
 
 mt_rand(100,999);

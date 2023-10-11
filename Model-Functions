@@ -3,6 +3,22 @@ Date: 31-Aug-2023
 protected $table = '';
 protected $guarded = [];
 
+
+CONTROLLER: $data['jobs'] = $this->model->getJobs($request);
+-----------
+
+use Request;
+public function getJobs($request){
+        $return  = self::select('job.*');
+                if (!empty(Request::get('id'))) {
+                    $return  = $return->where('id', '=',  Request::get('id'));
+                }
+        $return  = $return->orderBy('id', 'desc')->paginate(5);
+        return $return;
+    }
+
+
+
 public function getJobsHistory($request){
         $return  = self::select('job_history.*')
                                 ->join('users', 'users.id', '=', 'job_history.employee_id')

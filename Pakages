@@ -1,0 +1,76 @@
+Date: 11-Oct-2023
+
+===================01. How to use Matlab Excell?====================
+
+-------Controller:-----------
+use Maatwebsite\Excel\Facades\Excel;
+use App\Excell\Employees\Export\ExportEmployees;
+use App\Excell\Employees\Import\ImportEmployees;
+
+public function employee_import(Request $request){
+    $data['title'] = 'Import';
+    return view('Pages.Employee.Import.employee_import', $data);
+}
+
+public function employee_import_post(Request $request){
+   Excel::import(new ImportEmployees, request()->file('file'));            
+return redirect()->back()->with('success', 'Bulk Data Upload successfull.'); 
+}
+
+public function employee_export(){
+  return Excel::download(new ExportEmployees, 'employee.xlsx');
+}
+
+--------------Route:--------------------
+    Route::get('employee-import', 'employee_import'); 
+    Route::post('employee-import-post', 'employee_import_post'); 
+    Route::get('employee-export', 'employee_export'); 
+
+------------Import Page Blade:--------
+<br>
+<h4 class="card-title">Import Bulk Employee</h4><br>
+  @include('_message')<br>                                 
+<form action="{{ url('employee-import-post') }}" method="POST"  enctype="multipart/form-data">
+        @csrf
+        <div class="form-group">
+            <label for="file">File:</label>
+            <input  name="file" type="file"  id="file" class="form-control">
+        </div><br>
+    <button class="btn btn-rounded btn-success btn-md waves-effect waves-light">Import File</button>
+    <a href="{{  url('employee')}}" class="btn btn-outline-primary btn-md waves-effect waves-light" type="button">Back</a>
+</form> 
+
+----------------Import Controller:---------------
+<?php
+namespace App\Excell\Employees\Import;
+use App\Models\Employee;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+class ImportEmployees implements ToModel, WithHeadingRow{
+    public function model(array $row){
+        return new Employee([
+            'emp_id'            => $row['emp_id'],
+            'name'              => $row['name'],
+        ]);
+    }
+}
+
+----------------Export-Page-Controller:-------
+<?php
+namespace App\Excell\Employees\Export;
+use App\Models\Employee;
+use Maatwebsite\Excel\Concerns\FromCollection;
+
+class ExportEmployees implements FromCollection{ 
+    public function collection(){
+        // return Employee::get(['emp_id','name']);
+        return Employee::all();        
+    }
+}
+
+
+
+
+
+
+

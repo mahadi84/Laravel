@@ -26,7 +26,9 @@ public function employee_export(){
     Route::post('employee-import-post', 'employee_import_post'); 
     Route::get('employee-export', 'employee_export'); 
 
-------------Import Page Blade:--------
+------------Import Page and Button Blade:--------
+<a href="{{url('employee-import')}}" class="btn btn-rounded  btn-primary btn-md"> Import</a>
+<a href="{{url('employee-export')}}" class="btn btn-rounded btn-success btn-md"> Export</a>
 <br>
 <h4 class="card-title">Import Bulk Employee</h4><br>
   @include('_message')<br>                                 

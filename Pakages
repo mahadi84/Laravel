@@ -12,9 +12,12 @@ public function employee_import(Request $request){
     return view('Pages.Employee.Import.employee_import', $data);
 }
 
-public function employee_import_post(Request $request){
-   Excel::import(new ImportEmployees, request()->file('file'));            
-return redirect()->back()->with('success', 'Bulk Data Upload successfull.'); 
+public function emp_salary_import_post(Request $request){
+    if ($request->hasFile('file')){
+                $request->validate(['file'  => ['required','mimes:xlsx']]);
+        }
+    Excel::import(new ImportEmpSalary, $request->file);            
+    return redirect()->back()->with('success', 'Bulk Data Upload successfull.'); 
 }
 
 public function employee_export(){

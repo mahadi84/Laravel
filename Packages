@@ -79,11 +79,19 @@ class ExportEmployees implements FromCollection{
 }
 
 ======================  02. Auto UNIQUE ID Generator =========================
-
+Controller:-------
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 $prefix = date('Y');  
 $emp_id = IdGenerator::generate(['table' => 'employees', 'field' => 'emp_id', 'length' => 8, 'prefix' =>$prefix]);
+
+To Use in MODEL when id is used a primary key:-------
+public static function boot(){
+        parent::boot();
+        self::creating(function ($model) {
+            $model->order_number = IdGenerator::generate(['table' => 'orders', 'length' => 6, 'prefix' => date('y')]);
+        });
+    }
 
 
 ==========================03. PDF with DOM PDF===================================

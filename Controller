@@ -2,29 +2,6 @@ Date: 31-Aug-2023
 
 
 
-======================= Harun UNIQUE ID Generator ===========================
-use Haruncpi\LaravelIdGenerator\IdGenerator;
-$prefix = date('Y');  
-$emp_id = IdGenerator::generate(['table' => 'employees', 'field' => 'emp_id', 'length' => 8, 'prefix' =>$prefix]);
-
-
-
-========================= DOM PDF: =============================================
-use PDF;
-public function employee_pdf_create(Request $request, $id){
-     $data['emp'] = $this->employeeModel->find($id);                 
-        $pdf = PDF::loadView('Pages.Employee.PDF.employee_pdf', $data)
-                            ->setPaper('a4')
-                            ->setOption([
-                                'enable_remote' => true,
-                                'tempDir' => public_path(),
-                                'chroot' => public_path(),
-                                    ]);     
-        // return $pdf->download('employee.pdf');
-        return $pdf->stream($data['emp']->emp_id.'.pdf');
-}
-**** In Blade use tag <img> NOT <image>
-
 
 ============================== CRUD  and Excell download ==========================
 <?php

@@ -17,24 +17,7 @@ Date: 31-Aug-2023
 <span class="text-danger">{{ $errors->first('employee_id') }}</span>
 
 
-01.:----
-<label for="emp_name" class="form-label">Employee Name</label>
-      <select class="form-control" name="employee_id" >
-        <option value="">Select employee name</option>
-              @forelse($users as $user)
-                  @if (old('employee_id') == $user->id)   //  Replace old('employee_id')=$jobHistory->employee_id While Editing
-                  <option value="{{$user->id}}" selected>{{ $user->name }}</option>
-                  @else
-                  <option value="{{$user->id}}">{{ $user->name }}</option>
-                  @endif
-              @empty
-                <option> 'No Users available in Database' </option>                              
-              @endforelse                         
-        </select>
-<span class="text-danger">{{ $errors->first('employee_id') }}</span>
-
-
-02:----
+01:----
 <label for="dept_id" class="form-label">Dept Name</label>                    
     <select class="form-control" name="dept_id">
       <option value="">Select Dept</option> 

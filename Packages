@@ -87,28 +87,24 @@ $emp_id = IdGenerator::generate(['table' => 'employees', 'field' => 'emp_id', 'l
 
 
 ==========================03. PDF with DOM PDF===================================
-
+Controller:-------
 use PDF;
 
 public function employee_pdf_create(Request $request, $id){
-
-     $data['emp'] = $this->employeeModel->find($id);
-                 
+     $data['emp'] = $this->employeeModel->find($id);                 
         $pdf = PDF::loadView('Pages.Employee.PDF.employee_pdf', $data)
                             ->setPaper('a4')
                             ->setOption([
                                 'enable_remote' => true,
                                 'tempDir' => public_path(),
                                 'chroot' => public_path(),
-                                    ]);
-     
+                                    ]);     
         // return $pdf->download('employee.pdf');
         return $pdf->stream('EMPID-'.$data['emp']->emp_id.'.pdf');
-
-
     }
 
-
+Blade:-------
+Use <img> NOT <image>
 
 
 

@@ -1,6 +1,11 @@
 Date: 11-Oct-2023
 
-===================01. How to use Matlab Excell?====================
+01. EXPORT & IMPORT with Matlab Excell.
+02. Auto Unique ID Generator.
+03. Create PDF with DOMpdf
+
+
+=================== 01. EXPORT & IMPORT with Matlab Excell ====================
 
 -------Controller:-----------
 use Maatwebsite\Excel\Facades\Excel;
@@ -73,7 +78,35 @@ class ExportEmployees implements FromCollection{
     }
 }
 
+======================  02. Auto UNIQUE ID Generator =========================
 
+use Haruncpi\LaravelIdGenerator\IdGenerator;
+
+$prefix = date('Y');  
+$emp_id = IdGenerator::generate(['table' => 'employees', 'field' => 'emp_id', 'length' => 8, 'prefix' =>$prefix]);
+
+
+==========================03. PDF with DOM PDF===================================
+
+use PDF;
+
+public function employee_pdf_create(Request $request, $id){
+
+     $data['emp'] = $this->employeeModel->find($id);
+                 
+        $pdf = PDF::loadView('Pages.Employee.PDF.employee_pdf', $data)
+                            ->setPaper('a4')
+                            ->setOption([
+                                'enable_remote' => true,
+                                'tempDir' => public_path(),
+                                'chroot' => public_path(),
+                                    ]);
+     
+        // return $pdf->download('employee.pdf');
+        return $pdf->stream('EMPID-'.$data['emp']->emp_id.'.pdf');
+
+
+    }
 
 
 

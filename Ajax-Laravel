@@ -20,7 +20,8 @@ Ajax-Laravel:
 
 
 =========================== 00. Common syntax for JQUERY and AJAX; ===============================
-
+var name = $("input[name=name]").val();
+ if(name.length > 2){ }
 
 type="text/javascript"
 $(document).ready(function(){ });

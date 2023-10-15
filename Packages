@@ -25,7 +25,7 @@ public function emp_salary_import_post(Request $request){
     return redirect()->back()->with('success', 'Bulk Data Upload successfull.'); 
 }
 
-public function employee_export(){
+public function employee_export(Request $request){
   return Excel::download(new ExportEmployees, 'employee.xlsx');
 }
 
@@ -66,6 +66,111 @@ class ImportEmployees implements ToModel, WithHeadingRow{
 }
 
 ----------------Export-Page-Controller:-------
+<?php
+
+namespace App\Excell\Emp_Salary\Export;
+
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Sheet;
+
+use Request;
+
+
+class ExportEmpSalary implements FromCollection, ShouldAutoSize, WithMapping, WithHeadings, WithEvents{
+
+     private $model;
+        public function __construct(){
+            $this->model = new  \App\Models\EmpSalary;
+        }
+
+ public function registerEvents(): array {
+        return [
+            AfterSheet::class => [self::class, 'afterSheet'],
+        ];
+    }
+
+    public static function afterSheet(AfterSheet $event){
+        Sheet::macro('styleCells', function (Sheet $sheet, string $cellRange, array $style) {
+            $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($style);
+        });
+
+        $event->sheet->styleCells(
+                    'A1:E1',
+                    [
+                        //Set border Style
+                        // 'borders' => [ 
+                        //     'outline' => [
+                        //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                        //         'color' => ['argb' => 'EB2B02'],
+                        //     ],
+                           
+                        // ],
+
+                        //Set font style
+                        'font' => [
+                            'name'      =>  'Calibri',
+                            'size'      =>  13,
+                            'bold'      =>  true,
+                            'color' => ['argb' => 'FFFFFF'],
+                        ],
+
+                        //Set background style
+                        'fill' => [
+                            'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                            'startColor' => [
+                                'rgb' => 'C0BDBC',
+                             ]           
+                        ],
+
+                        'alignment' => [
+                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, //_LEFT, _RIGHT
+                    ],
+
+                    ]
+                );
+    }
+
+        public function collection(){           
+        $request = Request::all();
+        return $this->model->getSalary($request);
+        }
+
+        protected $index = 0;
+
+        public function map($emp):array{
+            // $createdAtFormat= date('d-m-Y', strtotime($job->created_at));
+            return[
+                ++$this->index,
+                $emp->Employee->emp_id,
+                $emp->Employee->name,
+                $emp->salary,
+                $emp->created_at->format('d-m-Y')
+                // $createdAtFormat
+            ];
+        }
+
+        public function headings():array{
+            return [
+                'S.No',
+                'Emp ID',
+                'Name',
+                'Max Salary',
+                'Created Date'
+            ];
+        }
+}
+
+
+ ?>
+
+
+02:-----------
 <?php
 namespace App\Excel\Employees\Export;
 use App\Models\Employee;

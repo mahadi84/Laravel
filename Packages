@@ -67,74 +67,29 @@ class ImportEmployees implements ToModel, WithHeadingRow{
 
 ----------------Export-Page-Controller:-------
 <?php
-
 namespace App\Excell\Emp_Salary\Export;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Sheet;
 
 use Request;
 
-
 class ExportEmpSalary implements FromCollection, ShouldAutoSize, WithMapping, WithHeadings, WithEvents{
 
-     private $model;
-        public function __construct(){
-            $this->model = new  \App\Models\EmpSalary;
-        }
-
- public function registerEvents(): array {
-        return [
-            AfterSheet::class => [self::class, 'afterSheet'],
-        ];
+    private $model;
+    public function __construct(){
+        $this->model = new  \App\Models\EmpSalary;
     }
 
-    public static function afterSheet(AfterSheet $event){
-        Sheet::macro('styleCells', function (Sheet $sheet, string $cellRange, array $style) {
-            $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($style);
-        });
 
-        $event->sheet->styleCells(
-                    'A1:E1',
-                    [
-                        //Set border Style
-                        // 'borders' => [ 
-                        //     'outline' => [
-                        //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
-                        //         'color' => ['argb' => 'EB2B02'],
-                        //     ],
-                           
-                        // ],
-
-                        //Set font style
-                        'font' => [
-                            'name'      =>  'Calibri',
-                            'size'      =>  13,
-                            'bold'      =>  true,
-                            'color' => ['argb' => 'FFFFFF'],
-                        ],
-
-                        //Set background style
-                        'fill' => [
-                            'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                            'startColor' => [
-                                'rgb' => 'C0BDBC',
-                             ]           
-                        ],
-
-                        'alignment' => [
-                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, //_LEFT, _RIGHT
-                    ],
-
-                    ]
-                );
-    }
+public function registerEvents(): array {
+        return [ AfterSheet::class => [self::class, 'afterSheet']];
+}
 
         public function collection(){           
         $request = Request::all();
@@ -156,15 +111,34 @@ class ExportEmpSalary implements FromCollection, ShouldAutoSize, WithMapping, Wi
         }
 
         public function headings():array{
-            return [
-                'S.No',
-                'Emp ID',
-                'Name',
-                'Max Salary',
-                'Created Date'
-            ];
+            return ['S.No', 'Emp ID', 'Name','Salary', 'Created Date'];
         }
+
+// ----------------------------For Style--------------------------
+
+public static function afterSheet(AfterSheet $event){
+    Sheet::macro('styleCells', function (Sheet $sheet, string $cellRange, array $style) {
+        $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($style);
+    });
+
+    $event->sheet->styleCells(
+                'A1:E1',[
+                    //Set font style
+                    'font' => ['name'=>'Calibri','size'=>13,'bold'=>  true,'color'=>['argb'=>'000000'],],
+                    //Set background style
+                    'fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                        'startColor' => ['rgb' => 'C0BDBC']           
+                    ],
+                    //Set allignment
+                    'alignment' => [
+                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, //_LEFT, _RIGHT
+                    ],
+                ]
+            );
 }
+
+
+} //End-of-Class
 
 
  ?>

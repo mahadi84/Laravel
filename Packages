@@ -67,7 +67,7 @@ class ImportEmployees implements ToModel, WithHeadingRow{
 
 ----------------Export-Page-Controller:-------
 <?php
-namespace App\Excell\Emp_Salary\Export;
+namespace App\Excel\Emp_Salary\Export;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;

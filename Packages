@@ -65,6 +65,8 @@ class ImportEmployees implements ToModel, WithHeadingRow{
     }
 }
 
+------------Export Button-------------
+<a href="{{ url('emp_salary-export?emp_id='.Request::get('emp_id'))}}" class="btn btn-rounded btn-success btn-md"> Export</a>
 ----------------Export-Page-Controller:-------
 <?php
 namespace App\Excel\Emp_Salary\Export;
@@ -114,7 +116,7 @@ public function registerEvents(): array {
             return ['S.No', 'Emp ID', 'Name','Salary', 'Created Date'];
         }
 
-// ----------------------------For Style--------------------------
+// -----For Style-------
 
 public static function afterSheet(AfterSheet $event){
     Sheet::macro('styleCells', function (Sheet $sheet, string $cellRange, array $style) {
@@ -144,18 +146,6 @@ public static function afterSheet(AfterSheet $event){
  ?>
 
 
-02:-----------
-<?php
-namespace App\Excel\Employees\Export;
-use App\Models\Employee;
-use Maatwebsite\Excel\Concerns\FromCollection;
-
-class ExportEmployees implements FromCollection{ 
-    public function collection(){
-        // return Employee::get(['emp_id','name']);
-        return Employee::all();        
-    }
-}
 
 ======================  02. Auto UNIQUE ID Generator =========================
 Controller:-------

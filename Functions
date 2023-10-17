@@ -2,6 +2,11 @@ Date: 24-Aug-2023
 
 
 
+Current Month:  date('F') =Ex: October
+Next Month:  date('F', strtotime('+1month'))  Ex: November
+Previous Month:  date('F', strtotime('-1month'))  Ex: Semptember
+
+
 public function getEmployeeName(){
         return $this->belongsTo(User::class, "employee_id");
     }

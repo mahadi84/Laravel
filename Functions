@@ -6,6 +6,8 @@ Current Month:  date('F') =Ex: October
 Next Month:  date('F', strtotime('+1month'))  Ex: November
 Previous Month:  date('F', strtotime('-1month'))  Ex: Semptember
 
+Current Year: date('Y')
+Next Year: date('Y')+1
 
 public function getEmployeeName(){
         return $this->belongsTo(User::class, "employee_id");

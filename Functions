@@ -5,6 +5,7 @@ php artisan key:generate
 
 number_format(10000) = 10,000
 
+Current Month:  date('M') =Ex: Oct
 Current Month:  date('F') =Ex: October
 Next Month:  date('F', strtotime('+1month'))  Ex: November
 Previous Month:  date('F', strtotime('-1month'))  Ex: Semptember

@@ -6,7 +6,7 @@ Date: 31-Aug-2023
 00.:----
 <label for="emp_name" class="form-label">Employee Name</label>
     <select class="form-control" name="employee_id" >
-        <option value="">Select employee name</option>
+        <option selected disabled>Select employee name</option>
         @forelse($users as $user)
            <option value="{{ $user->id }}" {{ ( old('employee_id') == $user->id ) ? ' selected' : '' }}>{{ $user->name }}</option>
                     //  Replace old('employee_id')=$jobHistory->employee_id While Editing
@@ -20,7 +20,7 @@ Date: 31-Aug-2023
 01:----
 <label for="dept_id" class="form-label">Dept Name</label>                    
     <select class="form-control" name="dept_id">
-      <option value="">Select Dept</option> 
+      <option selected disabled>Select Dept</option> 
       <option {{ (old('dept_id') == 1) ? 'selected': ''}} value="1">Software Division </option>
       <option {{ (old('dept_id') == 2) ? 'selected': ''}} value="2">Human Resource Division </option>
     </select>

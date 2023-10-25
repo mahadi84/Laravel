@@ -194,7 +194,9 @@ INSTALL: composer require spatie/laravel-permission
 ADD IN config/app.php: 'providers' => [    Spatie\Permission\PermissionServiceProvider::class,];
 PUBLISH: php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
 RUN:  php artisan config:clear
-MIGRATE:  php artisan migrate
+MIGRATE:  php artisan migrate  (will create 5 package table)
+**ADD field group_name to permission table
+** GUARD_NAME will be WEB default for both role and permission table.
 ADD TO USER MODEL: 
         use Spatie\Permission\Traits\HasRoles;
         class User extends Authenticatable{

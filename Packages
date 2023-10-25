@@ -4,6 +4,9 @@ Date: 11-Oct-2023
 02. Auto Unique ID Generator.
 03. Create PDF with DOMpdf
 
+04. Spatie Permission.
+05. Spatie Backup Database
+
 
 =================== 01. EXPORT & IMPORT with Matlab Excell ====================
 
@@ -182,6 +185,84 @@ public function employee_pdf_create(Request $request, $id){
 
 Blade:-------
 Use <img> NOT <image>
+
+
+========================== 04. Spatie Permission. ===============================
+
+
+
+///////////////////////////////// 05. Spatie Backup Database ////////////////////////////////////
+Web-link: https://spatie.be/docs/laravel-backup/v8/installation-and-setup
+
+01. INSTALLATION: composer require spatie/laravel-backup
+02. PUBLIC: php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider"
+
+03. config/backup.php: 
+'files' => [
+                'include' => [
+                    // base_path(), ********** Inactive this line
+                ],
+04. IN config/database.php: Add line in mysql array after 'engine' => null, 
+'mysql' =>
+            'dump' => [
+               'dump_binary_path' => 'D:/xampp8.2/mysql/bin', // ********Change the link as per project
+               'use_single_transaction',
+               'timeout' => 60 * 5, // 5 minute timeout
+            ],
+
+
+05. CONTROLLER:
+    public function DatabaseBackup_All(){
+        $data['title'] = 'Database Backup';
+        return view('Admin.DatabaseBackup.All.databasebackup_all', $data)->with('files', File::allFiles(storage_path('/app/PAYROLE')));
+    }
+    public function DatabaseBackup_Now(){
+        \Artisan::call('backup:run');
+        return redirect()->back()->with('success', 'Back up file created successfull.');
+    }
+
+    public function DatabaseBackup_Download($getFilename){
+        $path= storage_path('app\PAYROLE/'.$getFilename);
+        return response()->download($path);       
+        
+    }
+
+    public function DatabaseBackup_Delete($getFilename){
+        $delete=Storage::delete('PAYROLE/'.$getFilename);
+        if ($delete) {
+            return redirect()->back()->with('success', 'File delete successfull.');
+        }else{
+            return redirect()->back()->with('error', 'Faild...!!');
+        } 
+    }
+
+06. BLADE:
+     @forelse($files as $key =>$file)
+      <tr>
+        <td>{{ ++$key }}</td>          
+        <td>{{ $file->getFilename() }}</td>
+        <td>{{ substr($file->getSize()/1024, 0, 4) }} KB</td>
+        <td>{{ $file->getPath() }}</td>
+        <td> <a href="{{url('DatabaseBackup_download/'.$file->getFilename())}}" class="btn btn-outline-primary btn-sm waves-effect waves-light" type="button">Download</a> 
+          | <a href="{{url('DatabaseBackup_delete/'.$file->getFilename())}}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-outline-danger btn-sm waves-effect waves-light" type="button">Delete</a>
+          | <a href="{{url('DatabaseBackup_now')}}" class="btn btn-success btn-sm waves-effect waves-light" type="button">Backup Now</a>        
+        </td>
+     </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

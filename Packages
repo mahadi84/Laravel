@@ -201,10 +201,10 @@ ADD TO USER MODEL:
             use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
 CONTROLLER (To CREATE ROLE, PERMISSION AND ASSIGN PERMISSIONS TO ROLE):
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use App\Models\User;
-use DB;
+  use Spatie\Permission\Models\Role;
+  use Spatie\Permission\Models\Permission;
+  use App\Models\User;
+  use DB;
 
 ROLE:
   $data['Role'] =  Role::all();

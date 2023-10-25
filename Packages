@@ -187,7 +187,7 @@ Blade:-------
 Use <img> NOT <image>
 
 
-========================== 04. Spatie Permission. ===============================
+========================== 04. Spatie Permission (To assign role to user) ===============================
 Web-link: https://spatie.be/docs/laravel-permission/v5/introduction
 
 INSTALL: composer require spatie/laravel-permission

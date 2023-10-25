@@ -188,7 +188,45 @@ Use <img> NOT <image>
 
 
 ========================== 04. Spatie Permission. ===============================
+Web-link: https://spatie.be/docs/laravel-permission/v5/introduction
 
+INSTALL: composer require spatie/laravel-permission
+ADD IN config/app.php: 'providers' => [    Spatie\Permission\PermissionServiceProvider::class,];
+PUBLISH: php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+RUN:  php artisan config:clear
+MIGRATE:  php artisan migrate
+ADD TO USER MODEL: 
+        use Spatie\Permission\Traits\HasRoles;
+        class User extends Authenticatable{
+            use HasApiTokens, HasFactory, Notifiable, HasRoles;
+
+CREATE CONTROLLER AND CREATE ROLE AND PERMISSION AND ASSIGN PERMSIION TO ROLE:
+
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Models\User;
+use DB;
+
+ROLE:
+  $data['Role'] =  Role::all();
+  $data['Role'] =  Role::select('id','name')->get();
+  $role = Role::create(['name' => $name]);
+  $data['rol'] = Role::select('id','name')->find($id);
+  $role = Role::where('id', $id)->update(['name' => $name]);
+
+PERMISSION:
+  $data['permission'] = Permission::select('id','name','group_name')->get();
+  $permission = Permission::create(['name' => $name]);
+  $data['per'] = Permission::select('id','name')->find($id);
+  $permission = Permission::where('id', $id)->update(['name' => $name]);
+
+ASSIGN PERMISSION TO ROLE:
+    $data['Permission_group'] = Permission::select('group_name')->groupby('group_name')->get();
+       $permission_id = $request->permission_id;
+       $role_id = $request->role_id;
+        foreach($permission_id as $p_id){
+         $RoleWithPermission= DB::table('role_has_permissions')->insert(['permission_id'=>$p_id,'role_id'=>$role_id]);
+        }
 
 
 ========================== 05. Spatie Backup Database ===========================

@@ -222,6 +222,15 @@ PERMISSION:
 
 ASSIGN PERMISSION TO ROLE:
     $data['Permission_group'] = Permission::select('group_name')->groupby('group_name')->get();
+    ****Add function in user model to get all permission name
+    public static function permissionNameByGroup($group_name){
+            return  DB::table('permissions')
+                ->select(['id','name'])
+                ->where('group_name', $group_name)
+                ->get();
+        }
+
+        --
        $permission_id = $request->permission_id;
        $role_id = $request->role_id;
         foreach($permission_id as $p_id){

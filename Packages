@@ -203,7 +203,7 @@ Web-link: https://spatie.be/docs/laravel-backup/v8/installation-and-setup
                 'include' => [
                     // base_path(), ********** Inactive this line
                 ],
-04. IN config/database.php: Add line in mysql array after 'engine' => null, 
+04. IN config/database.php: Add below array line in mysql array after 'engine' => null, 
 'mysql' =>
             'dump' => [
                'dump_binary_path' => 'D:/xampp8.2/mysql/bin', // ********Change the link as per project
@@ -213,9 +213,14 @@ Web-link: https://spatie.be/docs/laravel-backup/v8/installation-and-setup
 
 
 05. CONTROLLER:
+
+use File;
+use Illuminate\Support\Facades\Storage;
+
     public function DatabaseBackup_All(){
         $data['title'] = 'Database Backup';
         return view('Admin.DatabaseBackup.All.databasebackup_all', $data)->with('files', File::allFiles(storage_path('/app/PAYROLE')));
+        **** Backup-Database-File(s) store in storage/app/APP_NAME folder
     }
     public function DatabaseBackup_Now(){
         \Artisan::call('backup:run');

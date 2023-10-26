@@ -251,7 +251,20 @@ $(document).ready(function(){
     });
 });
 
+======================================05. Select Multiple checkboxes ===================================
+@foreach()
+<input name="permission_id[]" value="{{$p_nam->id}}" class="form-check-input" type="checkbox" id="formCheck{{ $p_nam->id}}" >
+endforeach
 
+<script type="text/javascript">
+    $('#formCheckAll').click(function(){
+        if ($(this).is(':checked')) {
+            $('input[type=checkbox]').prop('checked',true);
+        } else {
+            $('input[type=checkbox]').prop('checked',false);
+        }
+    });
+</script>
 
 
 

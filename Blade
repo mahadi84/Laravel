@@ -26,8 +26,16 @@ Date: 31-Aug-2023
     </select>
 <span class="text-danger">{{ $errors->first('dept_id') }}</span>
 
-------------------
 
+
+============================ ARRAY INPUT CHECK-BOX =====================
+
+@foreach($p_name as $key => $p_nam)
+    <div class="form-check">
+        <input name="permission_id[]" value="{{$p_nam->id}}" class="form-check-input" type="checkbox" id="formCheck{{ $p_nam->id}}" >
+        <label class="form-check-label" for="formCheck{{$p_nam->id}}">{{ ucfirst($p_nam->name)}}</label>
+    </div>
+@endforeach
 
 
 ==================== WYSIWYG (Text Editor on HTML): ====================

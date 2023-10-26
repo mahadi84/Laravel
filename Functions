@@ -1,6 +1,9 @@
 Date: 24-Aug-2023 
 
 
+@if(Auth::user()->can('permission.menu'))
+@endif
+
 php artisan key:generate
 
 number_format(10000) = 10,000

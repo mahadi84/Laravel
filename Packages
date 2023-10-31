@@ -210,6 +210,7 @@ CONTROLLER (To CREATE ROLE, PERMISSION AND ASSIGN PERMISSIONS TO ROLE):
 
 USER:
   $User->assignRole($request->role_id);
+  *Role will be removed automatically from user Once the user is deleted. 
 
 ROLE:
   $data['Role'] = Role::all();

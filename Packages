@@ -208,21 +208,28 @@ CONTROLLER (To CREATE ROLE, PERMISSION AND ASSIGN PERMISSIONS TO ROLE):
   use App\Models\User;
   use DB;
 
+USER:
+  $User->assignRole($request->role_id);
+
 ROLE:
-  $data['Role'] =  Role::all();
-  $data['Role'] =  Role::select('id','name')->get();
+  $data['Role'] = Role::all();
+  $data['Role'] = Role::find($id);
+  $data['Role'] = Role::get(['id','name']);
   $role = Role::create(['name' => $name]);
-  $data['rol'] = Role::select('id','name')->find($id);
-  $role = Role::where('id', $id)->update(['name' => $name]);
+  $role = Role::find($id)->update(['name' => $name]);
+
+  $role = Role::find($id);
+  $role->syncPermissions($permission_id);
+  $role->delete();
 
 PERMISSION:
-  $data['permission'] = Permission::select('id','name','group_name')->get();
+  $data['permission'] = Permission::get();
   $permission = Permission::create(['name' => $name]);
-  $data['per'] = Permission::select('id','name')->find($id);
-  $permission = Permission::where('id', $id)->update(['name' => $name]);
+  $data['per'] = Permission::find($id);
+  $permission = Permission::find($id)->update(['name' => $name]);
 
-ASSIGN PERMISSION TO ROLE:
-    $data['Permission_group'] = Permission::select('group_name')->groupby('group_name')->get();
+BLADE:
+    $data['Permission_group'] = Permission::select('group_name')->groupBy('group_name')->get();
     ****Add function in user model to get all permission name
     public static function permissionNameByGroup($group_name){
             return  DB::table('permissions')
@@ -232,10 +239,11 @@ ASSIGN PERMISSION TO ROLE:
         }
 
         --
+INSERT Multiple data to Table:-------------
        $permission_id = $request->permission_id;
        $role_id = $request->role_id;
         foreach($permission_id as $p_id){
-         $RoleWithPermission= DB::table('role_has_permissions')->insert(['permission_id'=>$p_id,'role_id'=>$role_id]);
+         DB::table()->create(['permission_id'=>$p_id,'role_id'=>$role_id]);
         }
 
 

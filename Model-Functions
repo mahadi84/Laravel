@@ -42,10 +42,10 @@ public function getJobsHistory($request){
 
 
 
-    public function categoryName(){
+    public function categoryTable(){
         return $this->belongsTo(Product::class, 'categories_tbl_id', 'id');
     }
-**{{!empty($pro->categories_tbl_id) ? $pro->categoryName->name : '' }}
+**{{!empty($pro->categories_tbl_id) ? $pro->categoryTable->name : '' }}
 
     public function ydm($date){
         return date('d-m-Y', strtotime($date));

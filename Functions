@@ -1,5 +1,39 @@
 Date: 24-Aug-2023 
 
+
+
+01. How to Minus Multiple Data from a table?
+
+$OrderDetails = $this->OrderDetailsModel->where('order_tbl_id', $id)->get();
+             foreach($OrderDetails as $det){
+                $update  = $this->ProductModel
+                            ->where('id', $det->product_tbl_id)
+                            ->update(['quantity' => DB::raw('quantity -'.$det->product_qty)]);
+                //**Below query not working in this case
+                // $product = $this->ProductModel->where('id', $det->product_tbl_id)->get();
+                // $product->quantity = ($product->quantity-$det->product_qty);
+                // $update  = $product->save();
+             }
+------------------------------
+
+02. Insert data into second table collecting table last inserted ID from others table?
+
+$order=$this->OrderModel; 
+        $order->total           = $request->total;
+        $order->paid_ammount    = $request->paid_ammount;
+        $order->due             = $due;
+        
+        if ($order->save()) {
+            $contents= Cart::content();
+                foreach($contents as $content){                   
+                    $orderDetails= new OrderDetails(); //must have to create 'new model' inside the loop
+                        $orderDetails->order_tbl_id   = $order->id; 
+                        $orderDetails->product_tbl_id = $content->id;
+                        $orderDetails->product_qty    = $content->qty;
+                    $insert= $orderDetails->save();
+                }
+-----------------------------------------
+
 where('email', 'like',  '%'.Request::get('email').'%')
 
 @if(Auth::user()->can('permission.menu'))

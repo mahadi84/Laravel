@@ -2,7 +2,7 @@ Date: 24-Aug-2023
 
 
 
-01. How to Minus Multiple Data from a table?
+01. How to Minus Multiple Data from a Table?
 
 $OrderDetails = $this->OrderDetailsModel->where('order_tbl_id', $id)->get();
              foreach($OrderDetails as $det){
@@ -16,7 +16,7 @@ $OrderDetails = $this->OrderDetailsModel->where('order_tbl_id', $id)->get();
              }
 ------------------------------
 
-02. Insert data into second table collecting table last inserted ID from others table?
+02. Insert data into the second table collecting from  the other table's last inserted ID.
 
 $order=$this->OrderModel; 
         $order->total           = $request->total;

@@ -16,7 +16,9 @@ Ajax-Laravel:
 02. How to preview an image before inserting it in html form?
 03. How to insert data into the table showing the validation message?
 
-04. How to validate form data with jquery?
+04. How to get data from the database and show it in the input field?
+
+05. How to validate form data with jquery?
 
 
 =========================== 00. Common syntax for JQUERY and AJAX; ===============================
@@ -219,7 +221,45 @@ $("#submit_form").click(function(e){
 </script>
 
 
-=================================== 04. How to validate form data with jquery? ===================================
+============================ 04. ============================
+
+
+Route:------- Route::get('Order-show-due/{id}', 'Order_Show_Due');
+Controller:------------
+public function Order_Show_Due($id){
+        $data['title'] = 'Order';
+        $order = $this->OrderModel->find($id);
+         return response()->json($order);
+}
+Blade:------- 
+<button  onclick="orderDue('{{$pen->id}}')" type="button" > <i class="fas fa-check"></i> </button>
+<input name="order_id" id="order_id"  type="text">
+<input name="total" id="total"  type="text">
+
+Script:---
+@section('script')
+<script type="text/javascript">   
+function orderDue(id){
+        $.ajax({
+            type: "GET",
+            url: "Order-show-due/"+id,
+            dataType: "json",
+            success: function (order){
+            // console.log(order);               
+                $('#order_id').val(order.id);
+                $('#total').val(order.total);
+            }
+            });
+      };
+</script>
+@endsection   
+
+
+
+
+
+
+=================================== 05. How to validate form data with jquery? ===================================
 
 
 $(document).ready(function(){

@@ -17,8 +17,9 @@ Ajax-Laravel:
 03. How to insert data into the table showing the validation message?
 
 04. How to get data from the database and show it in the input field?
+05. How to select Multiple checkboxes?
 
-05. How to validate form data with jquery?
+06. How to validate form data with jquery?
 
 
 =========================== 00. Common syntax for JQUERY and AJAX; ===============================
@@ -221,8 +222,7 @@ $("#submit_form").click(function(e){
 </script>
 
 
-============================ 04. ============================
-
+============================ 04. How to get data from the database and show it in the input field?============================
 
 Route:------- Route::get('Order-show-due/{id}', 'Order_Show_Due');
 Controller:------------
@@ -239,10 +239,10 @@ Blade:-------
 Script:---
 @section('script')
 <script type="text/javascript">   
-function orderDue(id){
+    function orderDue(id){
         $.ajax({
-            type: "GET",
-            url: "Order-show-due/"+id,
+            type : "GET",
+            url:"{{ url('Order-show-due')}}/"+id,
             dataType: "json",
             success: function (order){
             // console.log(order);               
@@ -250,16 +250,31 @@ function orderDue(id){
                 $('#total').val(order.total);
             }
             });
-      };
+    };
 </script>
 @endsection   
 
 
 
+======================================05. Select Multiple checkboxes ===================================
+@foreach()
+<input name="permission_id[]" value="{{$p_nam->id}}" class="form-check-input" type="checkbox" id="formCheck{{ $p_nam->id}}" >
+endforeach
+
+<script type="text/javascript">
+    $('#formCheckAll').click(function(){
+        if ($(this).is(':checked')) {
+            $('input[type=checkbox]').prop('checked',true);
+        } else {
+            $('input[type=checkbox]').prop('checked',false);
+        }
+    });
+</script>
 
 
 
-=================================== 05. How to validate form data with jquery? ===================================
+
+=================================== 06. How to validate form data with jquery? ===================================
 
 
 $(document).ready(function(){
@@ -291,20 +306,7 @@ $(document).ready(function(){
     });
 });
 
-======================================05. Select Multiple checkboxes ===================================
-@foreach()
-<input name="permission_id[]" value="{{$p_nam->id}}" class="form-check-input" type="checkbox" id="formCheck{{ $p_nam->id}}" >
-endforeach
 
-<script type="text/javascript">
-    $('#formCheckAll').click(function(){
-        if ($(this).is(':checked')) {
-            $('input[type=checkbox]').prop('checked',true);
-        } else {
-            $('input[type=checkbox]').prop('checked',false);
-        }
-    });
-</script>
 
 
 

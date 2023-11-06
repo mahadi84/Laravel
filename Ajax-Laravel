@@ -224,19 +224,22 @@ $("#submit_form").click(function(e){
 
 ============================ 04. How to get data from the database and show it in the input field?============================
 
-Route:------- Route::get('Order-show-due/{id}', 'Order_Show_Due');
+Route:------- 
+Route::get('Order-show-due/{id}', 'Order_Show_Due');
+
 Controller:------------
 public function Order_Show_Due($id){
         $data['title'] = 'Order';
         $order = $this->OrderModel->find($id);
          return response()->json($order);
 }
+
 Blade:------- 
 <button  onclick="orderDue('{{$pen->id}}')" type="button" > <i class="fas fa-check"></i> </button>
 <input name="order_id" id="order_id"  type="text">
 <input name="total" id="total"  type="text">
 
-Script:---
+Script:-----
 @section('script')
 <script type="text/javascript">   
     function orderDue(id){

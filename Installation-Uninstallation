@@ -12,7 +12,10 @@ Date: 10-Aug-2023
 
 06. How to install Harun IdGenerator?
 07. How to install Laravel Permission Package?
-08. How to install Shopping Cart (anayarojo/shoppingcart)?
+08. How to install spatie/laravel-backup Package?
+
+
+09. How to install Shopping Cart (anayarojo/shoppingcart) Package?
 
 ---------------------------- Answer ---------------------
 
@@ -52,9 +55,12 @@ Open Folder and ADD:- config/app.php
 ======================05._Ans: How to install Image Intervention?====================
 Website: https://image.intervention.io/v2/introduction/installation
 CMD: composer require intervention/image
+
 Go to : config/app.php
 'providers' => [ Intervention\Image\ImageServiceProvider::class ]
 'aliases' => ['Image' => Intervention\Image\Facades\Image::class ]
+
+CMD2: php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
 
 
 ===================06. How to install Harun IdGenerator?========================
@@ -67,8 +73,26 @@ composer require haruncpi/laravel-id-generator
 ===========================07._Ans: How to install Laravel Permission Package? =================
 Website: https://spatie.be/docs/laravel-permission/v5/installation-laravel
 
+CMD:
+>  composer require spatie/laravel-permission
 
-========================== 08. Shopping Cart====================================
+Config/app.php:
+'providers' => [  Spatie\Permission\PermissionServiceProvider::class, ];
+
+CMD2:
+>php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+
+=========================08. How to install spatie/laravel-backup Package?==============
+Website: https://spatie.be/docs/laravel-backup/v8/installation-and-setup
+
+CMD:
+> composer require spatie/laravel-backup
+> php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider"
+
+
+
+========================== 09. Shopping Cart====================================
 Website:https://packagist.org/packages/anayarojo/shoppingcart
 
 INSTALL:-- 
@@ -76,6 +100,8 @@ INSTALL:--
 >php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="config"
 
 That's it.
+
+
 
 ------------------------------
 

@@ -19,7 +19,7 @@ Date: 10-Aug-2023
 
 ---------------------------- Answer ---------------------
 
-=========================== 00_Ans:  How to install Laravel 10 to any directory===================
+=========================== 00 Ans:  How to install Laravel 10 to any directory===================
 Prerequisites: PHP VERSION: 8.1 (minimum) and INSTALL: Composer, NPM.
 
 CMD:- composer create-project laravel/laravel="10.10.*" Project_Folder_Name
@@ -27,17 +27,17 @@ TO RUN: php artisan serve
 
 ***Copy index.php and .htaccess files to First Folder
 
-=================== 01_Ans: How to get the LIST of all installed packages along with the version in composer And CHECK WHY IT IS USED?=====================
+=================== 01 Ans: How to get the LIST of all installed packages along with the version in composer And CHECK WHY IT IS USED?=====================
 My-Install-Pack: php artisan package:discover --ansi
 For All Pack: composer show
 Check why it is used: composer why barryvdh/laravel-debugbar
 
 
-================= 02._Ans: How can I REMOVE/UNINSTALL a package from Laravel using PHP Composer?=================
+================= 02. Ans: How can I REMOVE/UNINSTALL a package from Laravel using PHP Composer?=================
 composer remove realrashid/sweet-alert
 
 
-=================== 03._Ans:  How to install Breez Authentication?========================
+=================== 03. Ans:  How to install Breez Authentication?========================
 Website: https://www.educative.io/answers/how-to-install-a-breeze-laravel-authentication-package
 
 CMD: > composer require laravel/breeze --dev
@@ -47,7 +47,7 @@ CMD: > composer require laravel/breeze --dev
      > npm run dev
 
 
-========================== 04._Ans: How to install Matwebsite Excel?========================
+========================== 04. Ans: How to install Matwebsite Excel?========================
 Website: https://docs.laravel-excel.com/3.1/getting-started/installation.html
 
 CMD: composer require maatwebsite/excel
@@ -56,7 +56,7 @@ Open Folder and ADD:- config/app.php
 'aliases' => ['Excel' => Maatwebsite\Excel\Facades\Excel::class,]
 
 
-====================== 05._Ans: How to install Image Intervention?====================
+====================== 05. Ans: How to install Image Intervention?====================
 Website: https://image.intervention.io/v2/introduction/installation
 
 CMD1: > composer require intervention/image
@@ -72,7 +72,7 @@ Web: https://stackoverflow.com/questions/49446329/laravel-generate-unique-order-
 CMD: > composer require haruncpi/laravel-id-generator
 
 
-=========================== 07._Ans: How to install Laravel Permission Package? =================
+=========================== 07. Ans: How to install Laravel Permission Package? =================
 Website: https://spatie.be/docs/laravel-permission/v5/installation-laravel
 
 CMD1: > composer require spatie/laravel-permission

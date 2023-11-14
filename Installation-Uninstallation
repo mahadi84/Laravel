@@ -25,6 +25,8 @@ Prerequisites: PHP VERSION: 8.1 (minimum) and INSTALL: Composer, NPM.
 CMD:- composer create-project laravel/laravel="10.10.*" Project_Folder_Name
 TO RUN: php artisan serve
 
+***Copy index.php and .htaccess files to First Folder
+
 ===================01_Ans: How to get the LIST of all installed packages along with the version in composer And CHECK WHY IT IS USED?=====================
 My-Install-Pack: php artisan package:discover --ansi
 For All Pack: composer show

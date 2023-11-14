@@ -12,6 +12,7 @@ Date: 10-Aug-2023
 
 06. How to install Harun IdGenerator?
 07. How to install Laravel Permission Package?
+08. How to install Shopping Cart (anayarojo/shoppingcart)?
 
 ---------------------------- Answer ---------------------
 
@@ -66,6 +67,17 @@ composer require haruncpi/laravel-id-generator
 ===========================07._Ans: How to install Laravel Permission Package? =================
 Website: https://spatie.be/docs/laravel-permission/v5/installation-laravel
 
--------------
+
+========================== 08. Shopping Cart====================================
+Website:https://packagist.org/packages/anayarojo/shoppingcart
+
+INSTALL:-- 
+>composer require anayarojo/shoppingcart
+>php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="config"
+
+That's it.
+
+------------------------------
+
 
 

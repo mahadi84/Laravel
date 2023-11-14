@@ -15,15 +15,15 @@ Date: 10-Aug-2023
 08. How to install spatie/laravel-backup Package?
 
 09. How to install Shopping Cart (anayarojo/shoppingcart) Package?
-10. How to install DOMPDF package?
+10. How to install DOMpdf package?
 
 ---------------------------- Answer ---------------------
 
 ===========================00_Ans:  How to install Laravel 10 to any directory===================
 Prerequisites: PHP VERSION: 8.1 (minimum) and INSTALL: Composer, NPM.
+
 CMD:- composer create-project laravel/laravel="10.10.*" Project_Folder_Name
 TO RUN: php artisan serve
-
 
 ===================01_Ans: How to get the LIST of all installed packages along with the version in composer And CHECK WHY IT IS USED?=====================
 My-Install-Pack: php artisan package:discover --ansi
@@ -37,6 +37,7 @@ composer remove realrashid/sweet-alert
 
 ===================03._Ans:  How to install Breez Authentication?========================
 Website: https://www.educative.io/answers/how-to-install-a-breeze-laravel-authentication-package
+
 CMD: composer require laravel/breeze --dev
      php artisan breeze:install
      php artisan migrate
@@ -46,6 +47,7 @@ CMD: composer require laravel/breeze --dev
 
 ==========================04._Ans: How to install Matwebsite Excel?========================
 Website: https://docs.laravel-excel.com/3.1/getting-started/installation.html
+
 CMD: composer require maatwebsite/excel
 Open Folder and ADD:- config/app.php
 'providers' => [Maatwebsite\Excel\ExcelServiceProvider::class,]
@@ -54,30 +56,25 @@ Open Folder and ADD:- config/app.php
 
 ======================05._Ans: How to install Image Intervention?====================
 Website: https://image.intervention.io/v2/introduction/installation
-CMD1: > composer require intervention/image
 
-Go to : config/app.php
+CMD1: > composer require intervention/image
+App/config/app.php:
 'providers' => [ Intervention\Image\ImageServiceProvider::class ]
 'aliases' => ['Image' => Intervention\Image\Facades\Image::class ]
-
 CMD2: > php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
 
 
 ===================06. How to install Harun IdGenerator?========================
 Web: https://stackoverflow.com/questions/49446329/laravel-generate-unique-order-number/58704860#58704860
 
-INSTALL:---------
-composer require haruncpi/laravel-id-generator
+CMD: > composer require haruncpi/laravel-id-generator
 
 
 ===========================07._Ans: How to install Laravel Permission Package? =================
 Website: https://spatie.be/docs/laravel-permission/v5/installation-laravel
 
 CMD1: > composer require spatie/laravel-permission
-
-Config/app.php:
-'providers' => [  Spatie\Permission\PermissionServiceProvider::class, ];
-
+App/config/app.php:--- 'providers' => [  Spatie\Permission\PermissionServiceProvider::class, ];
 CMD2: > php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
 
 
@@ -97,12 +94,14 @@ INSTALL:--
 >composer require anayarojo/shoppingcart
 >php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="config"
 
-That's it.
+
 
 ========================== 10. DOMpdf====================================
 Website: composer require barryvdh/laravel-dompdf
 
 CMD: > composer require barryvdh/laravel-dompdf
+
+
 
 ------------------------------
 

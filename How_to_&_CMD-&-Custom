@@ -9,12 +9,23 @@
 
 -----------------00._Ans: CMD: -------------------------
 
-Clear_Cache: php artisan cache:clear
-Create_Model: php artisan make:model Todo -mcr,   *m=migration, *c=controller, *r=resource type controller
-OR : php artisan make:model -mc Todo
-Create_Controller:
-Migration: php artisan migrate, 
-Rollback: php artisan migrate:rollback, 
+CLEAR_CACHE:-------- 
+ > php artisan cache:clear
+
+CONTROLLER:-----
+ > php artisan make:controller controllerName
+
+MODEL With CONTROLLER:------ 
+ > php artisan make:model Todo -mcr  ( *m=migration, *c=controller, *r=resource type controller)
+OR : 
+ > php artisan make:model -mc Todo
+
+MIGRATION: -------
+ > php artisan migrate
+
+ROLBACK:-------
+ > php artisan migrate:rollback (Rolback Last One migration)
+ > php artisan migrate:refresh  (Rolback All migration)
 
 
 ---------------01._Ans:  How to take control over the redirect if the validation fails?---------------

@@ -1,5 +1,13 @@
 
-00. CMD: For: Clear_Cache, Create_Model, Create_Controller, Migration, Rollback, 
+00. CMD: For: ->Clear_Cache, 
+              ->Create_Model, 
+              ->Create_Controller, 
+              ->Migration, 
+              ->Rollback,
+              ->Seeder
+              ->Steps to Insert data into table using seeder?
+
+
 01.  How to take control over the redirect if the validation fails and CUSTOMIZE VALIDATION MESSAGE?
 02.  How to Laravel Pagination is showing weird arrows?
 
@@ -12,20 +20,31 @@
 CLEAR_CACHE:-------- 
  > php artisan cache:clear
 
-CONTROLLER:-----
+CONTROLLER:----
  > php artisan make:controller controllerName
 
-MODEL With CONTROLLER:------ 
+MODEL With CONTROLLER:----
  > php artisan make:model Todo -mcr  ( *m=migration, *c=controller, *r=resource type controller)
 OR : 
  > php artisan make:model -mc Todo
 
-MIGRATION: -------
+MIGRATION:----
  > php artisan migrate
 
-ROLBACK:-------
+ROLBACK:-----
  > php artisan migrate:rollback (Rolback Last One migration)
  > php artisan migrate:refresh  (Rolback All migration)
+
+
+  ->Steps to Insert data into table using seeder?
+
+Website: https://laravel.com/docs/10.x/seeding
+SEEDER-CREATE:-----
+ > php artisan make:seeder UserSeeder
+
+DB-SEEDER-MIGRATE:-----
+ > php artisan db:seed
+
 
 
 ---------------01._Ans:  How to take control over the redirect if the validation fails?---------------

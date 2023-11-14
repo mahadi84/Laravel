@@ -27,9 +27,9 @@ TO RUN: php artisan serve
 
 ***Copy index.php and .htaccess files to First Folder
 
-***Change two line
-require __DIR__.'/../vendor/autoload.php';  To.. require __DIR__.'/vendor/autoload.php';
-$app = require_once __DIR__.'/../bootstrap/app.php'; To....  $app = require_once __DIR__.'/bootstrap/app.php';
+***Change two lines in index.php that just copied.
+require __DIR__.'/../vendor/autoload.php';  --To-- require __DIR__.'/vendor/autoload.php';
+$app = require_once __DIR__.'/../bootstrap/app.php'; --To--  $app = require_once __DIR__.'/bootstrap/app.php';
 
 =================== 01 Ans: How to get the LIST of all installed packages along with the version in composer And CHECK WHY IT IS USED?=====================
 My-Install-Pack: php artisan package:discover --ansi

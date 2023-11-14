@@ -48,7 +48,7 @@ DB-SEEDER-MIGRATE:-----
 
 
 
----------------01._Ans:  How to take control over the redirect if the validation fails?---------------
+---------------01. How to take control over the redirect if the validation fails?---------------
 
     use Illuminate\Support\Facades\Validator;
     public function submit(Request $request){
@@ -63,7 +63,7 @@ DB-SEEDER-MIGRATE:-----
                             ->withInput();
                 }
 
-----------------02._Ans:  How to fix Laravel Pagination is showing weird arrows?----------------------
+----------------02. How to fix Laravel Pagination is showing weird arrows?----------------------
 
 $posts->links('pagination::bootstrap-4')
 

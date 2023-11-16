@@ -91,7 +91,18 @@ Date: 31-Aug-2023
 
 
 
+=================Functions used in Blade =============================
+{{ Str::limit($news->description, 100) }}
+{!! $products->links() !!}
 
+@extends('layouts.app')
+@section('content')
+@endsection()
+@yield('content')
+
+@forelse()
+@empty
+@endforelse
 
 
 

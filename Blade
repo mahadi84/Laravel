@@ -124,14 +124,14 @@ REGISTER BLADE:--
     <input name="password"  type="password">
     <input name="password_confirmation"  type="password">
 
-RESET PASSWORD:--
+RESET PASSWORD (Link received through Email):--
     <form method="POST" action="{{ route('password.store') }}">
     <input name="email"  type="email" value="{{old('email')}}">
     <input name="password"  type="password">
     <input name="password_confirmation"  type="password">
 
 
-FORGOT PASSWORD:--
+FORGOT PASSWORD (Email Request Form):--
     <form method="POST" action="{{ route('password.email') }}">
     <input name="email"  type="email" value="{{old('email')}}">
 
@@ -140,7 +140,9 @@ CONFIRM PASSWORD:---
     <form method="POST" action="{{ route('password.confirm') }}">
     <input type="password" name="password" autocomplete="current-password" />
 
+
 UPDATE PROFILE:
+
 
 
 

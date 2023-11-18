@@ -105,6 +105,13 @@ Date: 31-Aug-2023
 @endforelse
 
 ========================== Breez Authentication  =====================
+LOGOUT-BUTTON:--
+    <form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit" class="btn btn-primary"> LOGOUT  </button>
+    </form>
+
+
 LOGIN BLADE:--
     <form  action="{{ route('login') }}" method="POST">
     <input name="email"     type="email" value="{{old('email')}}">
@@ -134,6 +141,8 @@ CONFIRM PASSWORD:---
     <input type="password" name="password" autocomplete="current-password" />
 
 UPDATE PROFILE:
+
+
 
 
 

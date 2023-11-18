@@ -12,6 +12,7 @@
 02.  How to Laravel Pagination is showing weird arrows?
 
 03.  How to generate RANDDOM NUMBER with RANDOM CHARECTER?
+04. How to send an email?
 
 
 
@@ -75,6 +76,20 @@ $pin = mt_rand(1000000, 9999999).mt_rand(1000000, 9999999).$characters[rand(0, s
 $string = str_shuffle($pin);
 
 ------------------------------------------------------------------------------------------------
+
+==================================04. How to send an email? ===============================
+Steps:
+  01 > Create a Mailtrap account.
+  02 > Add mailtrap info to env file
+  03 > CMD: php artisan make:mail OrderShipped  (It will create a file in the App folder with the name Mail)
+  04 > Add Subject, mail content and attachment in App\Mail\OrderShipped file.
+  05 > Route: 
+        use Illuminate\Support\Facades\Mail;
+        use App\Mail\OrderShipped;
+          Route::get('send/mail', function () {
+              Mail::send(new OrderShipped);
+          });
+
 
 
 

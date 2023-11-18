@@ -37,14 +37,10 @@ ROLBACK:-----
 
 
   ->Steps to Insert data into table using seeder?
-   1> Create Seeder  2> Write column data into the seeder 3> Connect the seeder to DB seeder 4> Migrate Database seeder 5> check database table.  --that's it
+   1> Create Seeder(php artisan make:seeder UserSeeder)  2> Write column data into the seeder 
+   3> Connect the seeder to DB seeder 4> Migrate Database seeder(php artisan db:seed) 
+   5> check the database table.  --that's it
 
-Website: https://laravel.com/docs/10.x/seeding
-SEEDER-CREATE:-----
- > php artisan make:seeder UserSeeder
-
-DB-SEEDER-MIGRATE:-----
- > php artisan db:seed
 
 
 

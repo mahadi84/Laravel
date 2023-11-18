@@ -110,7 +110,29 @@ LOGIN BLADE:--
 <input name="email"     type="email" value="{{old('email')}}">
 <input name="password"  type="password">
 
-REGISTER BLADE:--
+REGISTER BLADE/RESET PASSWORD::--
+<form method="POST" action="{{ route('register') }}">
+<input name="name"  type="name" value="{{old('name')}}">
+<input name="email"  type="email" value="{{old('email')}}">
+<input name="password"  type="password">
+<input name="password_confirmation"  type="password">
+
+FORGOT PASSWORD:--
+<form method="POST" action="{{ route('password.email') }}">
+<input name="email"  type="email" value="{{old('email')}}">
+
+
+UPDATE PROFILE:
+
+
+CONFIRM PASSWORD:---
+<form method="POST" action="{{ route('password.confirm') }}">
+<input type="password" name="password" autocomplete="current-password" />
+
+
+
+
+
 
 
 

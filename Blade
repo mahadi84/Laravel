@@ -110,12 +110,19 @@ LOGIN BLADE:--
 <input name="email"     type="email" value="{{old('email')}}">
 <input name="password"  type="password">
 
-REGISTER BLADE/RESET PASSWORD::--
+REGISTER BLADE:--
 <form method="POST" action="{{ route('register') }}">
 <input name="name"  type="name" value="{{old('name')}}">
 <input name="email"  type="email" value="{{old('email')}}">
 <input name="password"  type="password">
 <input name="password_confirmation"  type="password">
+
+RESET PASSWORD:--
+<form method="POST" action="{{ route('password.store') }}">
+<input name="email"  type="email" value="{{old('email')}}">
+<input name="password"  type="password">
+<input name="password_confirmation"  type="password">
+
 
 FORGOT PASSWORD:--
 <form method="POST" action="{{ route('password.email') }}">

@@ -106,35 +106,34 @@ Date: 31-Aug-2023
 
 ========================== Breez Authentication  =====================
 LOGIN BLADE:--
-<form  action="{{ route('login') }}" method="POST">
-<input name="email"     type="email" value="{{old('email')}}">
-<input name="password"  type="password">
+    <form  action="{{ route('login') }}" method="POST">
+    <input name="email"     type="email" value="{{old('email')}}">
+    <input name="password"  type="password">
 
 REGISTER BLADE:--
-<form method="POST" action="{{ route('register') }}">
-<input name="name"  type="name" value="{{old('name')}}">
-<input name="email"  type="email" value="{{old('email')}}">
-<input name="password"  type="password">
-<input name="password_confirmation"  type="password">
+    <form method="POST" action="{{ route('register') }}">
+    <input name="name"  type="name" value="{{old('name')}}">
+    <input name="email"  type="email" value="{{old('email')}}">
+    <input name="password"  type="password">
+    <input name="password_confirmation"  type="password">
 
 RESET PASSWORD:--
-<form method="POST" action="{{ route('password.store') }}">
-<input name="email"  type="email" value="{{old('email')}}">
-<input name="password"  type="password">
-<input name="password_confirmation"  type="password">
+    <form method="POST" action="{{ route('password.store') }}">
+    <input name="email"  type="email" value="{{old('email')}}">
+    <input name="password"  type="password">
+    <input name="password_confirmation"  type="password">
 
 
 FORGOT PASSWORD:--
-<form method="POST" action="{{ route('password.email') }}">
-<input name="email"  type="email" value="{{old('email')}}">
-
-
-UPDATE PROFILE:
+    <form method="POST" action="{{ route('password.email') }}">
+    <input name="email"  type="email" value="{{old('email')}}">
 
 
 CONFIRM PASSWORD:---
-<form method="POST" action="{{ route('password.confirm') }}">
-<input type="password" name="password" autocomplete="current-password" />
+    <form method="POST" action="{{ route('password.confirm') }}">
+    <input type="password" name="password" autocomplete="current-password" />
+
+UPDATE PROFILE:
 
 
 

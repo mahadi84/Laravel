@@ -104,6 +104,12 @@ Date: 31-Aug-2023
 @empty
 @endforelse
 
+======================== Profile Image/Name Show ====================
+<img  src="{{ (!empty(Auth::user()->profile_image)) ? url('public/upload/user_images/'.Auth::user()->profile_image):url('public/upload/default_image.jpg') }}">
+<span>{{ !empty(Auth::user()->name) ? Auth::user()->name: '' }}</span>
+
+
+
 ========================== Breez Authentication  =====================
 LOGOUT-BUTTON:--
     <form method="POST" action="{{ route('logout')}}">

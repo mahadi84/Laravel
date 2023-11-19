@@ -106,11 +106,11 @@ Date: 31-Aug-2023
 
 ========================== Breez Authentication  =====================
 LOGOUT-BUTTON:--
-    <form method="POST" action="{{ route('logout') }}">
-    @csrf
-    <button type="submit" class="btn btn-primary"> LOGOUT  </button>
-    </form>
-
+    <form method="POST" action="{{ route('logout')}}">
+        @csrf
+    <a class="btn btn-primary" onclick="event.preventDefault();  this.closest('form').submit();">   Log Out    </a>
+   </form>
+   
 
 LOGIN BLADE:--
     <form  action="{{ route('login') }}" method="POST">

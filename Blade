@@ -105,7 +105,7 @@ Date: 31-Aug-2023
 @endforelse
 
 ======================== Profile Image/Name Show ====================
-<img  src="{{ (!empty(Auth::user()->profile_image)) ? url('public/upload/user_images/'.Auth::user()->profile_image):url('public/upload/default_image.jpg') }}">
+<img  src="{{ (!empty(Auth::user()->image)) ? url('public/upload/user_images/'.Auth::user()->image):url('public/default_image.jpg') }}">
 <span>{{ !empty(Auth::user()->name) ? Auth::user()->name: '' }}</span>
 
 

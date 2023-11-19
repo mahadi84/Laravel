@@ -12,7 +12,7 @@
 02. How to Laravel Pagination is showing weird arrows?
 
 03. How to generate RANDDOM NUMBER with RANDOM CHARECTER?
-04. How to send an email?
+04. How to send Password-Reset-Link to an email?
 
 
 
@@ -77,7 +77,7 @@ $string = str_shuffle($pin);
 
 ------------------------------------------------------------------------------------------------
 
-==================================04. How to send an email? ===============================
+================================== 04. How to send Password-Reset-Link to an email? ===============================
 Steps:
   01 > Create a Mailtrap account.
   02 > Add mailtrap info to env file

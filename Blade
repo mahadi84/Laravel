@@ -129,6 +129,7 @@ RESET PASSWORD (Link received through Email):--
     <input type="hidden" name="token" value="{{ $request->route('token') }}">
     <input name="email"  type="email" value="old('email', $request->email)">
     <input name="password"  type="password">
+         $errors->get('password')
         <span class="text-danger">{{ $errors->first('password') }}</span>
     <input name="password_confirmation"  type="password">
          <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>

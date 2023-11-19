@@ -126,9 +126,12 @@ REGISTER BLADE:--
 
 RESET PASSWORD (Link received through Email):--
     <form method="POST" action="{{ route('password.store') }}">
-    <input name="email"  type="email" value="{{old('email')}}">
+    <input type="hidden" name="token" value="{{ $request->route('token') }}">
+    <input name="email"  type="email" value="old('email', $request->email)">
     <input name="password"  type="password">
+        <span class="text-danger">{{ $errors->first('password') }}</span>
     <input name="password_confirmation"  type="password">
+         <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
 
 
 FORGOT PASSWORD (Email Request Form):--

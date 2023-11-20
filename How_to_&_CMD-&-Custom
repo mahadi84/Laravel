@@ -55,7 +55,7 @@ ROLBACK:-----
 REGULAR VALIDATION:----
   $request->validate([
       'title' => ['required', 'unique:posts', 'max:255'],
-      'body' => ['required'],
+      'email'    => 'required|email|unique:users,id,'.Auth::User()->id,
   ]);
 
 VALIDATE AND REDIRECT IF FAILS TO VLAIDATE:---

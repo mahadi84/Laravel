@@ -88,7 +88,33 @@ Date: 31-Aug-2023
 
 </div> <!---end row--->
 
+================= Error Message =====================================
+@if ($message = Session::get('success'))
+<div class="text-center">
+     <h5  class="text-success">{{ $message }}</h5>  
+</div>
+@endif
 
+ 
+
+@if ($message = Session::get('error'))
+  <div class="text-center">
+    <h5  class="text-danger">{{ $message }}</h5>   
+</div>
+@endif   
+
+
+<!-- To show multiple validation error -->
+<!-- @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Error!</strong> <br>
+                <ul>
+                @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+        </div>
+@endif      -->
 
 
 =================Functions used in Blade =============================

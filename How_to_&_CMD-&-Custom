@@ -13,7 +13,7 @@
 
 03. How to generate RANDDOM NUMBER with RANDOM CHARECTER?
 04. How to send Password-Reset-Link to an email?
-05. How to redirect SPECIFIC LINK after login in Breez Authentication?
+05. How to redirect a user to a SPECIFIC PAGE after login in with Breez Authentication?
 
 
 
@@ -91,7 +91,7 @@ Steps:
               Mail::send(new OrderShipped);
           });
 
-============================ 05. How to redirect SPECIFIC LINK after login in Breez Authentication? ==================
+============================ 05. How to redirect a user to a SPECIFIC PAGE after login in with Breez Authentication? ==================
 Go to Auth/AuthenticatedSessionController and update as per my need:------
 
    public function store(LoginRequest $request): RedirectResponse {

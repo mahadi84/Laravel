@@ -17,6 +17,8 @@
 04. How to send Password-Reset-Link to an email?
 05. How to redirect a user to a SPECIFIC PAGE after login in with Breez Authentication?
 
+06. How to create a new ROUTE?
+
 
 
 ==============================00._Ans: CMD: ========================
@@ -116,7 +118,17 @@ Go to Auth/AuthenticatedSessionController and update as per my need:------
     }
 
 
-=================
+====================== 06. How to create a new ROUTE? =====================
+Step:01:--
+ Create a file with a new route name to the App/Routes folder (Ex: Admin.php)
+
+Step:02:--
+ Register it to App/Providers/RouteServiceProvider
+
+that's it.
+
+
+==========================
 
 
 

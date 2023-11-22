@@ -2,6 +2,7 @@ Date: 31/08/2023
 
 
 01. What is Traits? Class vs Traits?
+02. What is Sweetalert?
 
 
 ================= 01. What is Traits? Class vs Traits? ======================
@@ -60,6 +61,11 @@ public function user(){
 
 }
 
+================================ 02. What is Sweetalert?  =============================
+To show message on POP-UP more organized way than Bootstrap Modal.
+
+WEBSITE:
+https://sweetalert2.github.io/#examples
 
 
 

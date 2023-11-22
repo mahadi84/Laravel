@@ -18,6 +18,8 @@
 05. How to redirect a user to a SPECIFIC PAGE after login in with Breez Authentication?
 
 06. How to create a new ROUTE?
+07. How to show message(error,success) with toaster?
+
 
 
 
@@ -128,7 +130,26 @@ Step:02:--
 that's it.
 
 
-==========================
+==========================  07. How to show messages (error, success) with toaster? =======================
+CDN:
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+USE:
+@if(Session::has('message'))
+    <script>
+       toaster.options={
+        "progressBar" : true,
+        "closeButton" : true,
+        }
+     toastr.error("{{Session::get('message')}}", 'Success!', {timeOut:12000});
+     toastr.success("{{Session::get('message')}}")
+     toastr.warning("{{Session::get('message')}}")
+     toastr.info("{{Session::get('message')}}")
+    </script>
+@endif
+
+
 
 
 

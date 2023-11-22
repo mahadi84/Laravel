@@ -60,8 +60,6 @@ Test here:https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_ser
 
 
 ==============================01_Ans: How to check if the Email is a duplicate in the db table?================
-
-
 CONTROLLER FUNCTION:------
 public function CheckEmail(Request $request){
         $email= $request->email;
@@ -114,9 +112,7 @@ function duplicateEmail(element) {
 </script>
 
 ======================= 02._Ans: How to preview an image before inserting it in html form? =================================
-
-
-HTML:-----
+BLADE:-----
 <input name="image" type="file" class="form-control"   id="image">
 <image id="show_image"  class="rounded avater-lg" src="{{ url('public/upload/default_image.jpg') }}" style="width: 80px; height: 80px;"  alt="Profile Image"> 
 
@@ -137,8 +133,7 @@ SCRIPT:-----
 @endsection   
 
 ======================= 03. How to insert data into the table showing the validation message? =================================
-
-Web: https://www.teknowize.com/articles/web-articles/laravel-ajax-crud-operation
+WEBSITE: https://www.teknowize.com/articles/web-articles/laravel-ajax-crud-operation
 
 CONTROLLER FUNCTION:--------
    function employee_add(Request $request){
@@ -168,7 +163,7 @@ CONTROLLER FUNCTION:--------
         }
     } 
 
-HTML:------
+BLADE:------
 
 <span id="success-message"></span>
 <span id="error-message"></span>
@@ -225,7 +220,7 @@ $("#submit_form").click(function(e){
 
 ============================ 04. How to get data from the database and show it in the input field?============================
 
-Route:------- 
+ROUTE:------- 
 Route::get('Order-show-due/{id}', 'Order_Show_Due');
 
 Controller:------------
@@ -239,7 +234,7 @@ public function Order_Show_Due($id){
         }
 }
 
-Blade:------- 
+BLADE:------- 
 <button  onclick="orderDue('{{$pen->id}}')" type="button" > <i class="fas fa-check"></i> </button>
 <input name="order_id" id="order_id"  type="text">
 <input name="total" id="total"  type="text">
@@ -288,7 +283,7 @@ endforeach
 
 
 =================================== 06. How to validate form data with jquery? ===================================
-
+SCRIPT:---
 
 $(document).ready(function(){
     $('#myForm').validate({

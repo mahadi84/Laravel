@@ -64,8 +64,9 @@ public function user(){
 ================================ 02. What is Sweetalert?  =============================
 To show message on POP-UP more organized way than Bootstrap Modal.
 
-WEBSITE:
-https://sweetalert2.github.io/#examples
+WEBSITE: https://sweetalert2.github.io/#examples
+
+CDN: <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 

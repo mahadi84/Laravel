@@ -115,6 +115,28 @@ Date: 31-Aug-2023
                 </ul>
         </div>
 @endif      -->
+-----------------Toas---------------------
+Website: 
+https://github.com/CodeSeven/toastr
+CDN:
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+USE:
+@if(Session::has('message'))
+    <script>
+       toastr.options={
+        "progressBar" : true,
+        "closeButton" : true,
+        }
+     toastr.error("{{Session::get('message')}}", 'Success!', {timeOut:12000});
+     toastr.success("{{Session::get('message')}}")
+     toastr.warning("{{Session::get('message')}}")
+     toastr.info("{{Session::get('message')}}")
+    </script>
+@endif
+
+
 
 
 =================Functions used in Blade =============================

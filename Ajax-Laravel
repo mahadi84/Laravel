@@ -315,7 +315,9 @@ $(document).ready(function(){
 });
 
 =========================== 07. How to delete data with sweetalert2 and ajax?  ===============================
-SWITALERT2-TUTORIAL: https://sweetalert2.github.io/#examples 
+SWITALERT2-TUTORIAL: https://sweetalert2.github.io/#examples
+
+CDN: <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 BLADE: <a href="{{route('admin.slider.destroy', $slider->id)}}"  class=""> Delete </a>
 

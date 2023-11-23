@@ -3,7 +3,7 @@
               ->Clear_Cache,           ->Create_Model, 
               ->Create_Controller,     ->Migration, 
               ->Rollback,              ->Seeder
-              ->Steps to Insert data into a table using seeder?
+             
 
 01. How to VALIDATE INPUT FIELDS (regular) and 
            > REDIRECT if the Validation fails and 
@@ -15,7 +15,8 @@
 05. How to redirect a user to a SPECIFIC PAGE after logging in with Breez Authentication?
 
 06. How to create a new ROUTE?
-07. How to insert Bulk (let's say 1000) data into a table?
+07. How to Insert data into a table using seeder?
+08. How to insert Bulk (let's say 1000) data into a table?
 
 
 ==============================00._Ans: CMD: ========================
@@ -38,11 +39,6 @@ ROLBACK:-----
  > php artisan migrate:rollback (Rolback Last One migration)
  > php artisan migrate:refresh  (Rolback All migration)
 
-
-  ->Steps to Insert data into table using seeder?
-   1> Create Seeder(php artisan make:seeder UserSeeder)  2> Write column data into the seeder 
-   3> Connect the seeder to DB seeder 4> Migrate Database seeder(php artisan db:seed) 
-   5> check the database table.  --that's it
 
 
 ========================= 01. How to VALIDATE INPUT regularly and redirect if the validation fails and CUSTOMIZE VALIDATION MESSAGE? ======================
@@ -113,7 +109,7 @@ Go to Auth/AuthenticatedSessionController and update as per my need:------
     }
 
 
-====================== 06. How to create a new ROUTE? =====================
+====================== 06. How to create a new ROUTE? ===========================
 Step:01:--
  Create a file with a new route name to the App/Routes folder (Ex: Admin.php)
 
@@ -123,7 +119,16 @@ Step:02:--
 that's it.
 
 
-==========================  07. How to insert Bulk (let's say 1000) data into a table? =======================
+===================== 07. How  TO INSERT DATA INTO TABLE USING SEEDER? ==========
+   1> Create Seeder(php artisan make:seeder UserSeeder)  
+   2> Write column data into the seeder as ARRAY
+   3> Connect the seeder to the DB seeder 
+   4> Migrate Database seeder(php artisan db:seed) 
+   5> check the database table.  --that's it
+
+
+
+==========================  08. How to insert Bulk (let's say 1000) data into a table? =======================
 01. Create a Factory  and add row info Like: 'email' => fake()->unique()->safeEmail(), 'phone' => '0171'.mt_rand(1000000, 9999999) then
 02. php artisan tinker
     > User::factory(1000)->create()

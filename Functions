@@ -1,39 +1,5 @@
 Date: 24-Aug-2023 
 
-
-
-01. How to Minus Multiple Data from a Table?
-
-$OrderDetails = $this->OrderDetailsModel->where('order_tbl_id', $id)->get();
-             foreach($OrderDetails as $det){
-                $update  = $this->ProductModel
-                            ->where('id', $det->product_tbl_id)
-                            ->update(['quantity' => DB::raw('quantity -'.$det->product_qty)]);
-                //**Below query not working in this case
-                // $product = $this->ProductModel->where('id', $det->product_tbl_id)->get();
-                // $product->quantity = ($product->quantity-$det->product_qty);
-                // $update  = $product->save();
-             }
-------------------------------
-
-02. Insert data into the second table collecting from  the other table's last inserted ID.
-
-$order=$this->OrderModel; 
-        $order->total           = $request->total;
-        $order->paid_ammount    = $request->paid_ammount;
-        $order->due             = $due;
-        
-        if ($order->save()) {
-            $contents= Cart::content();
-                foreach($contents as $content){                   
-                    $orderDetails= new OrderDetails(); //must have to create 'new model' inside the loop
-                        $orderDetails->order_tbl_id   = $order->id; 
-                        $orderDetails->product_tbl_id = $content->id;
-                        $orderDetails->product_qty    = $content->qty;
-                    $insert= $orderDetails->save();
-                }
------------------------------------------
-
 where('email', 'like',  '%'.Request::get('email').'%')
 
 @if(Auth::user()->can('permission.menu'))
@@ -52,7 +18,6 @@ Current Year: date('Y')
 Next Year: date('Y')+1
 
 
-
 date('d-m-Y', strtotime($date)); OUTPUT: 24-Aug-2023
 ->diffForHumans();               OUTPUT:  10 Minutes Ago
 
@@ -62,16 +27,11 @@ Employee::get(['emp_id','name']);
 mt_rand(100,999);
 
 
-
 Employee::create($request->except('_token'));
  ->withSuccess('Employee has been delete successfully.');
 
-
-
-
  @method('delete')
  @method('put') --update
-
 
 Route::controller(ControllerName::class)->group(function(){
        Route::get('about', 'about')
@@ -79,15 +39,13 @@ Route::controller(ControllerName::class)->group(function(){
 
 Route::group(['middleware' => 'admin'], function(){}
 
-
 ----------------------------
 
 Request::get(), Request::segment(2)
 request()->validate()
 $request->name
 
-
-find($id), get(), all(), first()
+find($id), findOrFail($id), get(), all(), first()
 
 csrf_token(), reponse()->json();
 

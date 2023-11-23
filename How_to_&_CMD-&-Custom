@@ -5,7 +5,7 @@
               ->Rollback,              ->Seeder
              
 
-01. How to > REDIRECT if the Validation fails and 
+01. How to > REDIRECT to other page, if the Validation fails and 
            > CUSTOMIZE Validtiona message?
 02. How to Laravel Pagination is showing weird arrows?
 

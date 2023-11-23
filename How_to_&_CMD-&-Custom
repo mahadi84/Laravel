@@ -1,12 +1,9 @@
 
-00. CMD: For: ->Clear_Cache, 
-              ->Create_Model, 
-              ->Create_Controller, 
-              ->Migration, 
-              ->Rollback,
-              ->Seeder
+00. CMD FOR: How to: 
+              ->Clear_Cache,           ->Create_Model, 
+              ->Create_Controller,     ->Migration, 
+              ->Rollback,              ->Seeder
               ->Steps to Insert data into a table using seeder?
-
 
 01. How to VALIDATE INPUT FIELDS (regular) and 
            > REDIRECT if the Validation fails and 
@@ -19,7 +16,6 @@
 
 06. How to create a new ROUTE?
 07. How to insert Bulk (let's say 1000) data into a table?
-
 
 
 ==============================00._Ans: CMD: ========================
@@ -47,8 +43,6 @@ ROLBACK:-----
    1> Create Seeder(php artisan make:seeder UserSeeder)  2> Write column data into the seeder 
    3> Connect the seeder to DB seeder 4> Migrate Database seeder(php artisan db:seed) 
    5> check the database table.  --that's it
-
-
 
 
 ========================= 01. How to VALIDATE INPUT regularly and redirect if the validation fails and CUSTOMIZE VALIDATION MESSAGE? ======================

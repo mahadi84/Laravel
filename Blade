@@ -1,7 +1,25 @@
 Date: 31-Aug-2023
 
+01. DYNAMIC SELECT OPTION (ADD+EDIT)
+02. CHECKED-BOX Filled by  ARRAY data from Database
+03. WYSIWYG (Text Editor on HTML)
 
-==============  SELECT OPTION (ADD+EDIT):  ===================
+04. Show Jquery Datatable
+05.1 1-Column Html input Field
+05.2 2-Column Html input Field
+
+06. Show Validation and CRUD Message
+07. Show Error Message and CRUD with TOASTR
+08. Functions used in Blade 
+
+09.  Profile Image/Name Show befor insert
+10.  Breez Authentication form
+
+
+
+
+
+==============  01.  DYNAMIC SELECT OPTION (ADD+EDIT):  ===================
 
 00.:----
 <label for="emp_name" class="form-label">Employee Name</label>
@@ -28,7 +46,7 @@ Date: 31-Aug-2023
 
 
 
-============================ ARRAY INPUT CHECK-BOX =====================
+============================ 02. CHECKED-BOX Filled by  ARRAY data from Database =====================
 
 @foreach($p_name as $key => $p_nam)
     <div class="form-check">
@@ -38,12 +56,12 @@ Date: 31-Aug-2023
 @endforeach
 
 
-==================== WYSIWYG (Text Editor on HTML): ====================
+==================== 03. WYSIWYG (Text Editor on HTML): ====================
 
 <textarea id="elm1" name="description" class="form-control"   id="description">{{ $about->description }}</textarea>
  
 
-=========================== Datatable =================================
+=========================== 04. Show Jquery Datatable =================================
 
 <table id="basic-datatable" class="table dt-responsive nowrap w-100">
 
@@ -54,7 +72,7 @@ Date: 31-Aug-2023
 
 
 
-==================== 1-Column  Html Field =======================
+==================== 05.1 1-Column  Html Input Field =======================
 
 <div class="row mb-3">
   <label for="name" class="col-sm-2 col-form-label">Name</label>
@@ -66,7 +84,7 @@ Date: 31-Aug-2023
 <!-- end row -->
 
 
-==================== 2-Columns  Html Fields =======================
+==================== 05.2 2-Columns  Html Input Fields =======================
 
 <div class='row'>
 
@@ -88,7 +106,7 @@ Date: 31-Aug-2023
 
 </div> <!---end row--->
 
-================= Show Error Message =====================================
+================= 06. Show Validation and CRUD Message =====================================
 @if ($message = Session::get('success'))
 <div class="text-center">
      <h5  class="text-success">{{ $message }}</h5>  
@@ -115,7 +133,7 @@ Date: 31-Aug-2023
                 </ul>
         </div>
 @endif      -->
------------------ Show Error Message with TOASTR---------------------
+----------------- 07. Show Error and CRUD Message with TOASTR---------------------
 WEBSITE: 
 https://github.com/CodeSeven/toastr
 
@@ -140,7 +158,7 @@ USE:
 
 
 
-=================Functions used in Blade =============================
+================= 08. Functions used in Blade =============================
 {{ Str::limit($news->description, 100) }}
 {!! $products->links() !!}
 
@@ -153,13 +171,13 @@ USE:
 @empty
 @endforelse
 
-======================== Profile Image/Name Show ====================
+======================== 09. Profile Image/Name Show before insert ====================
 <img  src="{{ (!empty(Auth::user()->image)) ? url('public/upload/user_images/'.Auth::user()->image):url('public/default_image.jpg') }}">
 <span>{{ !empty(Auth::user()->name) ? Auth::user()->name: '' }}</span>
 
 
 
-========================== Breez Authentication  =====================
+========================== 10. Breez Authentication form  =====================
 LOGOUT-BUTTON:--
     <form method="POST" action="{{ route('logout')}}">
         @csrf

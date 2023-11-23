@@ -18,6 +18,9 @@
 07. How to Insert data into a table using seeder?
 08. How to insert Bulk (let's say 1000) data into a table?
 
+09. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table
+10. How to insert data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table
+
 
 ==============================00._Ans: CMD: ========================
 
@@ -134,6 +137,39 @@ that's it.
     > User::factory(1000)->create()
 
 That's it.
+
+
+========================== 09. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table ====================================
+
+$OrderDetails = $this->OrderDetailsModel->where('order_tbl_id', $id)->get();
+             foreach($OrderDetails as $det){
+                $update  = $this->ProductModel
+                            ->where('id', $det->product_tbl_id)
+                            ->update(['quantity' => DB::raw('quantity -'.$det->product_qty)]);
+                //**Below query not working in this case
+                // $product = $this->ProductModel->where('id', $det->product_tbl_id)->get();
+                // $product->quantity = ($product->quantity-$det->product_qty);
+                // $update  = $product->save();
+             }
+
+
+======================== 10. How to insert data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table ==========
+
+$order=$this->OrderModel; 
+        $order->total           = $request->total;
+        $order->paid_ammount    = $request->paid_ammount;
+        $order->due             = $due;
+        
+        if ($order->save()) {
+            $contents= Cart::content();
+                foreach($contents as $content){                   
+                    $orderDetails= new OrderDetails(); //must have to create 'new model' inside the loop
+                        $orderDetails->order_tbl_id   = $order->id; 
+                        $orderDetails->product_tbl_id = $content->id;
+                        $orderDetails->product_qty    = $content->qty;
+                    $insert= $orderDetails->save();
+                }
+-----------------------------------------
 
 
 

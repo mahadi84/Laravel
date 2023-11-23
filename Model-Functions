@@ -1,5 +1,8 @@
 Date: 31-Aug-2023
 
+01. What needs to add into newly created model?
+
+
 protected $table = '';
 protected $guarded = [];
 

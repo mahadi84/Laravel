@@ -5,7 +5,7 @@
               ->Migration, 
               ->Rollback,
               ->Seeder
-              ->Steps to Insert data into table using seeder?
+              ->Steps to Insert data into a table using seeder?
 
 
 01. How to VALIDATE INPUT FIELDS (regular) and 
@@ -13,9 +13,9 @@
            > CUSTOMIZE Validtiona message?
 02. How to Laravel Pagination is showing weird arrows?
 
-03. How to generate RANDDOM NUMBER with RANDOM CHARECTER?
-04. How to send Password-Reset-Link to an email?
-05. How to redirect a user to a SPECIFIC PAGE after login in with Breez Authentication?
+03. How to generate a RANDOM NUMBER with RANDOM CHARACTER?
+04. How to check Password-Reset-Email-Link whether working or not with Mailtrap?
+05. How to redirect a user to a SPECIFIC PAGE after logging in with Breez Authentication?
 
 06. How to create a new ROUTE?
 07. How to insert Bulk (let's say 1000) data into a table?
@@ -90,7 +90,7 @@ $string = str_shuffle($pin);
 
 
 
-================================== 04. How to send Password-Reset-Link to an email? ===============================
+================================== 04. How to check Password-Reset-Email-Link whether working or not with Mailtrap? ===============================
 Steps:
   01 > Create a Mailtrap account.
   02 > Add mailtrap info to env file

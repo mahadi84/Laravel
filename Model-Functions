@@ -1,11 +1,17 @@
 Date: 31-Aug-2023
 
-01. What needs to add into newly created model?
+01. What needs to be added to the newly created model?
+02. How to search (Query) value and return it to?
+03. Why and How do join tables? Ex: Employee Name to Designation and Salary
 
+04. How to change data formate Y-m-d to d-m-Y or 1 minute before or 12 Months before like that? 
 
+=========01. What needs to be added to the newly created model?=================
 protected $table = '';
 protected $guarded = [];
 
+
+==============02. How to search (Query) value and return it to? ==================
 
 CONTROLLER: $data['jobs'] = $this->model->getJobs($request);
 -----------
@@ -44,11 +50,14 @@ public function getJobsHistory($request){
     }
 
 
+===============3. Why and How do join tables? Ex: Employee Name to Designation and Salary======================
 
     public function categoryTable(){
         return $this->belongsTo(Product::class, 'categories_tbl_id', 'id');
     }
 **{{!empty($pro->categories_tbl_id) ? $pro->categoryTable->name : '' }}
+
+==============04. How to change data formate Y-m-d to d-m-Y or 1 minute before or 12 Months before like that? ===================
 
     public function ydm($date){
         return date('d-m-Y', strtotime($date));
@@ -57,3 +66,5 @@ public function getJobsHistory($request){
     public function textDate($date){
         return \Carbon\Carbon::parse($date)->diffForHumans();
     }
+
+-------------

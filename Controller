@@ -1,8 +1,6 @@
 Date: 31-Aug-2023
 
-01. How to VALIDATE INPUT FIELDS (regular) and 
-           > CUSTOMIZE Validtiona message?
-
+01. How to VALIDATE INPUT FIELDS (regular)?
 02. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table
 03. How to insert data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table
 
@@ -14,20 +12,6 @@ REGULAR VALIDATION:----
       'title' => ['required', 'unique:posts', 'max:255'],
       'email'    => 'required|email|unique:users,id,'.Auth::User()->id,
   ]);
-
-VALIDATE AND REDIRECT IF FAILS TO VLAIDATE:---
-    use Illuminate\Support\Facades\Validator;
-    public function submit(Request $request){
-            $validator = Validator::make($request->all(),[
-                'name' => 'required|min:2',
-                'phonenumber' => 'required|min:10|max:10'
-            ],
-            [ 'name.required' => 'Put your custom message here' ]);            
-                if ($validator->fails()) {
-                    return redirect(url()->previous() .'#contact')
-                            ->withErrors($validator)
-                            ->withInput();
-                }
 
 ========================== 02. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table ====================================
 

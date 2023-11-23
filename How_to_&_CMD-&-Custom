@@ -5,8 +5,7 @@
               ->Rollback,              ->Seeder
              
 
-01. How to VALIDATE INPUT FIELDS (regular) and 
-           > REDIRECT if the Validation fails and 
+01. How to > REDIRECT if the Validation fails and 
            > CUSTOMIZE Validtiona message?
 02. How to Laravel Pagination is showing weird arrows?
 
@@ -17,9 +16,6 @@
 06. How to create a new ROUTE?
 07. How to Insert data into a table using seeder?
 08. How to insert Bulk (let's say 1000) data into a table?
-
-09. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table
-10. How to insert data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table
 
 
 ==============================00._Ans: CMD: ========================

@@ -21,6 +21,7 @@ Ajax-Laravel:
 
 06. How to validate form data with jquery?
 07. How to delete data with sweetalert2 and ajax?
+08. How to create an Active/Inactive SWITCH-INDICATOR?
 
 
 =========================== 00. Common syntax for JQUERY and AJAX; ===============================
@@ -389,6 +390,48 @@ CONTROLLER:----
     }
 
 
+================================ 08. How to create an Active/Inactive SWITCH-INDICATOR? ==========================================
+BLADE:-----
+    <label class="custom-switch mt-2">
+        <input type="checkbox" {{ ($query->status == '1') ? 'checked' ? ''}} name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+        <span class="custom-switch-indicator"></span>           
+    </label>
+            
+SCRIPT:-------------
+<script>
+$(document).ready(function(){       
+        $('body').on('click', '.change-status', function(){
+            let id = $(this).data('id');
+            let isChecked = $(this).is(':checked');
+            $.ajax({
+              url: "{{route('admin.category.change-status')}}",
+              method: 'PUT',
+              data: {
+                id: id,
+                status: isChecked
+              },
+              success: function(data){
+                toastr.success(data.message);
+              },
+              error: function(xhr, status, error){
+                toastr.error(data.message);
+                console.log(error);
+              }
+            })          
+        })
+      });
+</script>
+
+CONTROLLER:----
+    public function changeStatus(Request $request){
+        $category= $this->categoryModel->findOrFail($request->id);
+        $category->status= $request->status == 'true' ? 1: 0;
+        if ($category->save()) {
+            return response(['status'=> 'success', 'message' => 'Active Successfully']); 
+         }else{
+            return response(['status'=> 'error', 'message' => 'Faild...!']);  
+        }  
+    }
 
 
 

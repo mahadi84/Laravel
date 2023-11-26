@@ -12,16 +12,16 @@ Ajax-Laravel:
         f) Success and Error function to show data
         g) For loop to show multiple error message
 
-01: How to check if the Email is a duplicate in the db table?
+01: How to check if the Email is a duplicate in the db table? Ex: Check email before registration.
 02. How to preview an image before inserting it in html form?
-03. How to insert data into the table showing the validation message?
+03. How to insert data into the table showing the validation message? Ex: While Website Contact Form data submission.
 
-04. How to get data from the database and show it in the input field with json?
-05. How to select Multiple checkboxes in one click?
+04. How to get data from the database and show it in the input field with json? Ex: Show Salary of an employee. 
+05. How to select Multiple checkboxes in one click? Ex: Provide Spatie permission
 
 06. How to validate form data with jquery?
-07. How to delete data with sweetalert2 and ajax?
-08. How to create an Active/Inactive SWITCH-INDICATOR?
+07. How to delete data with sweetalert2 and ajax? Ex: Action button where All data shows 
+08. How to create an Active/Inactive SWITCH-INDICATOR? Ex: To show/stop showing a menu etc.
 
 
 =========================== 00. Common syntax for JQUERY and AJAX; ===============================

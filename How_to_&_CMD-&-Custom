@@ -5,7 +5,7 @@
               ->Rollback,              ->Seeder
              
 
-01. How to > REDIRECT to other page, if the Validation fails and 
+01. How to > REDIRECT to another page, if the Validation fails and 
            > CUSTOMIZE Validtiona message?
 02. How to Laravel Pagination is showing weird arrows?
 
@@ -13,7 +13,7 @@
 04. How to check Password-Reset-Email-Link whether working or not with Mailtrap?
 05. How to redirect a user to a SPECIFIC PAGE after logging in with Breez Authentication?
 
-06. How to create a new ROUTE?
+06. How to create a new ROUTE and add an extra route to the Resource route?
 07. How to Insert data into a table using seeder?
 08. How to insert Bulk (let's say 1000) data into a table?
 
@@ -115,6 +115,12 @@ Step:01:--
 Step:02:--
  Register it to App/Providers/RouteServiceProvider
 
+Add extra route to Resource Route:-----
+// Category
+Route::put('change-status', [CategoryController::class, 'changeStatus'])->name('category.change-status');
+Route::resource('category', CategoryController::class);
+
+** Must put extra route to above of resource route
 that's it.
 
 

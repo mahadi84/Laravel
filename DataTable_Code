@@ -1,0 +1,50 @@
+01. What to add in Blade and Controller
+02. How to SHOW/ADD:
+    A> EDIT and DELETE Button
+    B> IF/ELSE data show like ACTIVE/INACTIVE
+    C> IMAGE
+    D> 
+
+
+================  BLADE: ==============
+ {{ $dataTable->table() }}
+
+@push('scripts')
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+@endpush
+------------
+CONTROLLER:-------
+use App\DataTables\UsersDataTable;
+ public function index(UsersDataTable $dataTable){
+        $data['title']  = 'Users';
+        return $dataTable->render('admin.user.index', $data);
+    }
+
+======================= DATA-TABLE-SETTINGS ===================================
+A) ->addColumn('action', function($query) {
+            $editBtn = "<a href='". route('admin.user.edit', $query->id) ."' class='btn btn-primary btn-sm'><i class='far fa-edit'></i></a>";
+            $deleteBtn = "<a href='". route('admin.user.destroy', $query->id) ."' class='btn btn-danger btn-sm ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+            return $editBtn.$deleteBtn;
+        })
+
+B) ->addColumn('status', function($query) { 
+            $active   = '<i class="badge badge-info">Active</i>';
+            $inActive = '<i class="badge badge-danger">Inactive</i>'; 
+            if($query->status == 'active'){
+                return $active;
+            }else {
+                return $inActive;
+            }
+        })
+
+C) ->addColumn('image', function($query) {            
+            if(!empty($query->image)){
+                return $img = "<img width='100px' src='". asset("uploads/user_images/".$query->image) ."' ></img>";
+            }else{
+                return $img = "<img width='100px' src='". asset("default_image.jpg") ."' ></img>";
+            }
+        })
+D) 
+
+->rawColumns(['image','status','action'])
+            ->setRowId('id');

@@ -27,15 +27,34 @@ A) ->addColumn('action', function($query) {
             return $editBtn.$deleteBtn;
         })
 
-B) ->addColumn('status', function($query) { 
-            $active   = '<i class="badge badge-info">Active</i>';
-            $inActive = '<i class="badge badge-danger">Inactive</i>'; 
-            if($query->status == 'active'){
-                return $active;
+B.0) ACTIVE/INACTIVE SWITCH:----
+  ->addColumn('status', function($query) {            
+            if($query->status == '1'){
+                $button= '<label class="custom-switch mt-2">
+                <input type="checkbox" checked name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+                <span class="custom-switch-indicator"></span>           
+              </label>';    
             }else {
-                return $inActive;
+                $button= '<label class="custom-switch mt-2">
+                <input type="checkbox" name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+                <span class="custom-switch-indicator"></span>           
+              </label>';
             }
-        })
+            return $button;
+        }) 
+
+
+B.1)ACTIVE/INACTIVE BADGE:----
+    ->addColumn('status', function($query) { 
+                $active   = '<i class="badge badge-info">Active</i>';
+                $inActive = '<i class="badge badge-danger">Inactive</i>'; 
+                if($query->status == 'active'){
+                    return $active;
+                }else {
+                    return $inActive;
+                }
+            })
+    
 
 C) ->addColumn('image', function($query) {            
             if(!empty($query->image)){

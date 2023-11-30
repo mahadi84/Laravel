@@ -51,7 +51,9 @@ Date: 31-Aug-2023
 
 
 ==================== 03. WYSIWYG (Text Editor on HTML): ====================
-
+01:--
+<textarea name="description"  class="summernote" style="display: none;"  id="description"  placeholder="Enter description" >{{ old('description') }}</textarea>
+02:
 <textarea id="elm1" name="description" class="form-control"   id="description">{{ $about->description }}</textarea>
  
 

@@ -1,5 +1,5 @@
 CREATE TABLE users (
-            id bigint(20) NOT NULL PRIMARY KEY,
+            id bigint(20) AUTO_INCREMENT PRIMARY KEY,
             name varchar(100) NOT NULL,
             username varchar(50) NOT NULL,             
             email varchar(100) NOT NULL,
@@ -19,7 +19,8 @@ INSERT INTO users (id,name, username, email, password, phone,  role, status, ima
 
 *123456
 
-CREATE TABLE headers( id INT AUTO_INCREMENT PRIMARY KEY, 
+CREATE TABLE headers( 
+	    id bigint(20) AUTO_INCREMENT PRIMARY KEY, 
             title VARCHAR(200) NOT NULL UNIQUE,
             sub_title VARCHAR(500) NOT NULL,
             image VARCHAR(255) NOT NULL,

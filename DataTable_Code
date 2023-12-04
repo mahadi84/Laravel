@@ -63,7 +63,28 @@ C) ->addColumn('image', function($query) {
                 return $img = "<img width='100px' src='". asset("default_image.jpg") ."' ></img>";
             }
         })
-D) 
 
-->rawColumns(['image','status','action'])
+D) ->addColumn('type', function($query){
+            switch ($query->product_type) {
+                case '1':
+                    return '<i class="badge badge-success">New Arrival</i>';
+                    break;
+                case '2':
+                    return '<i class="badge badge-warning">Featured Product</i>';
+                    break;
+                case '3':
+                    return '<i class="badge badge-info">Top Product</i>';
+                    break;
+
+                case '4':
+                    return '<i class="badge badge-danger">Top Product</i>';
+                    break;
+
+                default:
+                    return '<i class="badge badge-dark">None</i>';
+                    break;
+            }
+        })
+
+->rawColumns(['image', 'type','status','action'])
             ->setRowId('id');

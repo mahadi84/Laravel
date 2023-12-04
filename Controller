@@ -7,6 +7,9 @@ Date: 31-Aug-2023
 
 ========================= 01. How to VALIDATE INPUT regularly and redirect if the validation fails and CUSTOMIZE VALIDATION MESSAGE? ======================
 
+ $product->child_category_id = empty(!$request->child_category_id) ? $request->child_category_id : ''; 
+
+
 REGULAR VALIDATION:----
   $request->validate([
       'title' => ['required', 'unique:posts', 'max:255'],

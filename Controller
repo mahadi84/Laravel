@@ -9,12 +9,13 @@ Date: 31-Aug-2023
  
 REGULAR VALIDATION:----
   $request->validate([
-      'title' => ['required', 'unique:posts', 'max:255'],
-      'email'    => 'required|email|unique:users,id,'.Auth::User()->id,
+      'image.*' => ['image','mimes:jpg,png,jpeg', 'max:2048','dimensions:min_width=520, min_height=520, max_width=530, max_height=520'], **For Multiimage
+      'email'  => ['required','email','unique:user'],  ***check_tbl_name 
       'seo_title' => ['nullable','max:200'],
   ]);
 
-$product->child_category_id = empty(!$request->child_category_id) ? $request->child_category_id : ''; 
+INSERT: $product->seo_title = empty(!$request->seo_title) ? $request->seo_title : ''; 
+UPDATE: $product->seo_title = empty(!$request->seo_title) ? $request->seo_title : $product->seo_title;
 
 ========================== 02. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table ====================================
 

@@ -22,9 +22,18 @@ use App\DataTables\UsersDataTable;
 
 ======================= DATA-TABLE-SETTINGS ===================================
 A) ->addColumn('action', function($query) {
-            $editBtn = "<a href='". route('admin.user.edit', $query->id) ."' class='btn btn-primary btn-sm'><i class='far fa-edit'></i></a>";
-            $deleteBtn = "<a href='". route('admin.user.destroy', $query->id) ."' class='btn btn-danger btn-sm ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
-            return $editBtn.$deleteBtn;
+            $editBtn = "<a href='". route('admin.product.edit', $query->id) ."' class='btn btn-primary btn-sm'><i class='far fa-edit'></i></a>";
+            $deleteBtn = "<a href='". route('admin.product.destroy', $query->id) ."' class='btn btn-danger btn-sm ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+            $multiBtn = '<div class="btn-group dropleft">
+                <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i>
+                </button>
+                <div class="dropdown-menu dropleft" x-placement="left-start" style="position: absolute; transform: translate3d(-202px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
+                <a class="dropdown-item" href="'. route('admin.product-image-gallery', ['product' => $query->id]) .'"><i class="far fa-image"></i> Image Gallery</a>
+                <a class="dropdown-item" href="'. route('admin.product-variant-index', ['product' => $query->id]) .'"><i class="far fa-file"></i> Varient</a>
+            </div>';
+
+            return $editBtn.$deleteBtn.$multiBtn;
         })
 
 B.0) ACTIVE/INACTIVE SWITCH:----

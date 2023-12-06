@@ -7,59 +7,10 @@ Date: 31/08/2023
 
 ================= 01. What is Traits? Class vs Traits? ======================
 Traits are a collection of methods that can be incorporated into any other classes for reusability.
-A classe:-- provide a complete implementation of a specific service or functionality, 
+A class:-- provide a complete implementation of a specific service or functionality, 
 whereas 
 A Traits:-- provide a set of methods that can be mixed into multiple classes to provide them with additional functionality.
 
-TRAITS:---
-
-namespace App\Http\Traits;
-use Illuminate\Http\Request;
-use App\Models\Student;
-
-
-trait StudentTrait {
-
-    public function uploadImage(Request $request, $inputName, $width, $height, $path){
-        if ($request->hasFile($inputName)) {
-                        $request->validate([
-                    'image'  => ['required','image','mimes:jpg,png,jpeg', 'max:2048'
-                        // 'dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
-                        ],
-                        ]);
-                        $image= $request->file($inputName);
-                        $randomStr= Str::random(30);
-                        $image_name = $randomStr.'.'.$image->getClientOriginalExtension();
-
-                        Image::make($image)->resize($width,$height)
-                                        ->save(public_path($path).$image_name);
-                                        //*save=move and size= width,height
-                    return $path; 
-            };
-      }
-    
-    public function index() {
-        // Fetch all the students from the 'student' table.
-        $student = Student::all();
-        return view('welcome')->with(compact('student'));
-    }
-}
-
-CONTROLLER:---
-
-namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Http\Traits\StudentTrait;
-class StudentController extends Controller
-{
-    use StudentTrait;
- 
-public function user(){
-  $imagePath= $this->uploadImage($request, 'image', 'width', 'height', 'upload/user_images')
-   $user->image= $imagePath;
-  }
-
-}
 
 ================================ 02. What is Sweetalert?  =============================
 To show message on POP-UP more organized way than Bootstrap Modal.

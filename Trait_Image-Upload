@@ -18,7 +18,7 @@ function uploadImage(Request $request, $inputName, $path){
     }
 
     public function uploadMultiImage(Request $request, $inputName, $path){
-        $image = [];        
+        $readyImage = [];        
         if($request->hasFile($inputName)){
             $images = $request->{$inputName};
             foreach($images as $image){
@@ -26,9 +26,9 @@ function uploadImage(Request $request, $inputName, $path){
                 $randomStr= Str::random(30);
                 $imageName = $randomStr.'.'.$ext;
                 $image->move(public_path($path), $imageName);
-                $image[] =  $imageName;
+                $readyImage[] =  $imageName;
             }
-            return $image;
+            return $readyImage;
        }
     }
 

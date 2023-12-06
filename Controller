@@ -20,7 +20,8 @@ UPDATE: $product->seo_title = empty(!$request->seo_title) ? $request->seo_title 
 LARAVEL-REDIRECTS:--
        return redirect()->back()->with('success', "Job: {$job->job_title} - registered successfull.");
        return redirect('/')->with('success', 'You are logged out!!');
-       return redirect("admin/employees")->with('success', 'Update successfull.');
+       return redirect()->route('admin.product.index')->with('success', 'Update successfull.');  **route name
+       return redirect("admin/employees")->with('success', 'Update successfull.'); **url 
 
 AJAX/JAVASCRIPT-REDIRECTS:--
       return response(['status'=>'success', 'message'=>'Data inserted successfully');

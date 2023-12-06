@@ -1,18 +1,13 @@
 Date: 31/08/2023
 
 
-01. What is Traits? Class vs Traits?
-02. What is Sweetalert?
+
+01. What is Sweetalert?
 
 
-================= 01. What is Traits? Class vs Traits? ======================
-Traits are a collection of methods that can be incorporated into any other classes for reusability.
-A class:-- provide a complete implementation of a specific service or functionality, 
-whereas 
-A Traits:-- provide a set of methods that can be mixed into multiple classes to provide them with additional functionality.
 
 
-================================ 02. What is Sweetalert?  =============================
+================================ 01. What is Sweetalert?  =============================
 To show message on POP-UP more organized way than Bootstrap Modal.
 
 WEBSITE: https://sweetalert2.github.io/#examples

@@ -5,8 +5,7 @@
               ->Rollback,              ->Seeder
              
 
-01. How to > REDIRECT to another page, if the Validation fails and 
-           > CUSTOMIZE Validtiona message?
+01. How to ---
 02. How to Laravel Pagination is showing weird arrows?
 
 03. How to generate a RANDOM NUMBER with RANDOM CHARACTER?
@@ -40,27 +39,8 @@ ROLBACK:-----
 
 
 
-========================= 01. How to VALIDATE INPUT regularly and redirect if the validation fails and CUSTOMIZE VALIDATION MESSAGE? ======================
-
-REGULAR VALIDATION:----
-  $request->validate([
-      'title' => ['required', 'unique:posts', 'max:255'],
-      'email'    => 'required|email|unique:users,id,'.Auth::User()->id,
-  ]);
-
-VALIDATE AND REDIRECT IF FAILS TO VLAIDATE:---
-    use Illuminate\Support\Facades\Validator;
-    public function submit(Request $request){
-            $validator = Validator::make($request->all(),[
-                'name' => 'required|min:2',
-                'phonenumber' => 'required|min:10|max:10'
-            ],
-            [ 'name.required' => 'Put your custom message here' ]);            
-                if ($validator->fails()) {
-                    return redirect(url()->previous() .'#contact')
-                            ->withErrors($validator)
-                            ->withInput();
-                }
+========================= 01.======================
+--
 
 ============= 02. How to fix Laravel Pagination is showing weird arrows?======================
 

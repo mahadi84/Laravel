@@ -1,13 +1,12 @@
 Date: 24-Aug-2023 
 
-
-
 @if(Auth::user()->can('permission.menu'))
 @endif
 
 php artisan key:generate
 
 number_format(10000) = 10,000
+mt_rand(100,999);
 
 Current Month:  date('M') =Ex: Oct
 Current Month:  date('F') =Ex: October
@@ -17,18 +16,9 @@ Previous Month:  date('F', strtotime('-1month'))  Ex: Semptember
 Current Year: date('Y')
 Next Year: date('Y')+1
 
-
 date('d-m-Y', strtotime($date)); OUTPUT: 24-Aug-2023
 ->diffForHumans();               OUTPUT:  10 Minutes Ago
 
-
-Employee::get(['emp_id','name']);
-
-mt_rand(100,999);
-
-
-Employee::create($request->except('_token'));
- ->withSuccess('Employee has been delete successfully.');
 
  @method('delete')
  @method('put') --update
@@ -42,17 +32,10 @@ Route::group(['middleware' => 'admin'], function(){}
 ----------------------------
 
 Request::get(), Request::segment(2)
-request()->validate()
-$request->name
-
-find($id), findOrFail($id), get(), all(), first()
-
-csrf_token(), reponse()->json();
 
 file(), hasFile(), exists(), move()
 
-save(), delete(), where()
-orderBy(), paginate(), belongsTo()
+orderBy(), paginate()
 
 redirect(), back(), intended(), with(), to(),
 
@@ -61,8 +44,6 @@ Str::random(50);
 
 Auth::user(), attempt(), check(), logout()
 
-session('error')
-$errors->first('name')
 
 
 

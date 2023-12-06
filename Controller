@@ -1,8 +1,8 @@
 Date: 31-Aug-2023
 
-01. How to VALIDATE INPUT FIELDS (regular)?
+01. How to VALIDATE INPUT FIELDS (regular) and Laravel and Ajax/Javascript Redirect?
 02. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table
-03. How to insert data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table
+03. How to insert MULTIPLE data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table
 
 
 ========================= 01. How to VALIDATE INPUT regularly and redirect if the validation fails and CUSTOMIZE VALIDATION MESSAGE? ======================
@@ -16,6 +16,16 @@ REGULAR VALIDATION:----
 
 INSERT: $product->seo_title = empty(!$request->seo_title) ? $request->seo_title : ''; 
 UPDATE: $product->seo_title = empty(!$request->seo_title) ? $request->seo_title : $product->seo_title;
+
+LARAVEL-REDIRECTS:--
+       return redirect()->back()->with('success', "Job: {$job->job_title} - registered successfull.");
+       return redirect('/')->with('success', 'You are logged out!!');
+       return redirect("admin/employees")->with('success', 'Update successfull.');
+
+AJAX/JAVASCRIPT-REDIRECTS:--
+      return response(['status'=>'success', 'message'=>'Data inserted successfully');
+      return response()->json(array('exists' => true));
+
 
 ========================== 02. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table ====================================
 

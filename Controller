@@ -1,9 +1,14 @@
 Date: 31-Aug-2023
 
+00. Functions: WHERE(), findOrFail()
 01. How to VALIDATE INPUT FIELDS (regular) and Laravel and Ajax/Javascript Redirect?
 02. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table
 03. How to insert MULTIPLE data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table
 
+
+============================== 00. Functions:  =============================
+
+WHERE('email', 'like',  '%'.Request::get('email').'%')
 
 ========================= 01. How to VALIDATE INPUT regularly and redirect if the validation fails and CUSTOMIZE VALIDATION MESSAGE? ======================
  

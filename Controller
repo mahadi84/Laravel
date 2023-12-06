@@ -8,7 +8,9 @@ Date: 31-Aug-2023
 
 ============================== 00. Functions:  =============================
 
-WHERE('email', 'like',  '%'.Request::get('email').'%')
+WHERE('product_id', $request->product_id)->get();
+WHERE('email', 'like',  '%'.Request::get('email').'%')->get();
+
 
 ========================= 01. How to VALIDATE INPUT regularly and redirect if the validation fails and CUSTOMIZE VALIDATION MESSAGE? ======================
  

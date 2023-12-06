@@ -1,7 +1,7 @@
 Date: 31-Aug-2023
 
 00. Functions: WHERE(), findOrFail()
-01. How to VALIDATE INPUT FIELDS (regular) and Laravel and Ajax/Javascript Redirect?
+01. How to VALIDATE input fields, CUSTOMIZE validation message, REDIRECT if the validation fails and Laravel, Ajax/Javascript Redirect?
 02. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table
 03. How to insert MULTIPLE data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table
 
@@ -12,14 +12,29 @@ WHERE('product_id', $request->product_id)->get();
 WHERE('email', 'like',  '%'.Request::get('email').'%')->get();
 
 
-========================= 01. How to VALIDATE INPUT regularly and redirect if the validation fails and CUSTOMIZE VALIDATION MESSAGE? ======================
+========================= 01.How to VALIDATE input fields, CUSTOMIZE validation message, REDIRECT if the validation fails and Laravel, Ajax/Javascript Redirect?======================
  
 REGULAR VALIDATION:----
   $request->validate([
       'image.*' => ['image','mimes:jpg,png,jpeg', 'max:2048','dimensions:min_width=520, min_height=520, max_width=530, max_height=520'], **For Multiimage
       'email'  => ['required','email','unique:user'],  ***check_tbl_name 
       'seo_title' => ['nullable','max:200'],
-  ]);
+       ],
+       [ 'email.required' => 'Put your email here' ]); 
+);
+
+VALIDATE AND REDIRECT IF FAILS TO VLAIDATE:------
+    use Illuminate\Support\Facades\Validator;
+    public function submit(Request $request){
+            $validator = Validator::make($request->all(),[
+                'name' => 'required|min:2',
+                'phonenumber' => 'required|min:10|max:10'
+            ],           
+                if ($validator->fails()) {
+                    return redirect(url()->previous() .'#contact')
+                            ->withErrors($validator)
+                            ->withInput();
+                }
 
 INSERT: $product->seo_title = empty(!$request->seo_title) ? $request->seo_title : ''; 
 UPDATE: $product->seo_title = empty(!$request->seo_title) ? $request->seo_title : $product->seo_title;

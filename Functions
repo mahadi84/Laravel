@@ -1,8 +1,6 @@
 Date: 24-Aug-2023 
 
 
-$product->child_category_id = empty(!$request->child_category_id) ? $request->child_category_id : ''; 
-where('email', 'like',  '%'.Request::get('email').'%')
 
 @if(Auth::user()->can('permission.menu'))
 @endif

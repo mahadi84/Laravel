@@ -10,8 +10,8 @@ CREATE TABLE users (
             image varchar(255) DEFAULT NULL,
             email_verified_at timestamp NULL DEFAULT NULL,
             remember_token varchar(100) DEFAULT NULL,
-            created_at timestamp NULL DEFAULT NULL,
-            updated_at timestamp NULL DEFAULT NULL
+                created_at timestamp NULL DEFAULT NULL,
+                updated_at timestamp NULL DEFAULT NULL
             );
 
 INSERT INTO users (id,name, username, email, password, phone,  role, status, image,  email_verified_at, remember_token, created_at, updated_at) VALUES

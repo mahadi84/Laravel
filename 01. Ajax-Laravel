@@ -12,7 +12,7 @@ Ajax-Laravel:
         f) Success and Error function to show data
         g) For loop to show multiple error message
 
-(04)01. How to get data from the database and show it in the input field with JSON? Ex: Show the Salary of an employee. 
+(04)01. How to SHOW data get from the database into the input field with JSON? Ex: Show the Salary of an employee. 
 (03)02. How do INSERT data into the table showing the validation message? Ex: While Website Contact Form data submission.
 (08)03. How to UPDATE an Active/Inactive SWITCH-INDICATOR? Ex: To show/stop showing a menu/Employee/User etc.
 (07)04. How to DELETE data with sweetalert2 and Ajax? Ex: Action button where All data shows 
@@ -63,7 +63,7 @@ Test here:https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_ser
         });
 
 
-============================ 01. How to get/SHOW data from the database into the input field?============================
+============================ 01. How to SHOW data get from the database into the input field?============================
 
 ROUTE:------- 
 Route::get('Order-show-due/{id}', 'Order_Show_Due');
@@ -108,7 +108,7 @@ SCRIPT:-----
 @endsection   
 
 
-======================= 02. How to insert data into the table showing the validation message? =================================
+======================= 02. How to INSERT data into the table showing the validation message? =================================
 WEBSITE: https://www.teknowize.com/articles/web-articles/laravel-ajax-crud-operation
 
 CONTROLLER FUNCTION:--------
@@ -194,7 +194,7 @@ $("#submit_form").click(function(e){
 </script>
 
 
-================================ 03. How to create an Active/Inactive SWITCH-INDICATOR? ==========================================
+================================ 03. How to UPDATE an Active/Inactive SWITCH-INDICATOR? ==========================================
 BLADE:-----
     <label class="custom-switch mt-2">
         <input type="checkbox" {{ ($query->status == '1') ? 'checked' ? ''}} name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
@@ -241,7 +241,7 @@ CONTROLLER:----
     }
 
 
-=========================== 04. How to delete data with sweetalert2 and ajax?  ===============================
+=========================== 04. How to DELETE data with sweetalert2 and ajax?  ===============================
 SWITALERT2-TUTORIAL: https://sweetalert2.github.io/#examples
 
 CDN: 
@@ -314,40 +314,7 @@ CONTROLLER:----
      }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-==============================01_Ans: How to check if the Email is a duplicate in the db table?================
+==============================05: How to check if the Email is a duplicate in the db table?================
 CONTROLLER FUNCTION:------
 public function CheckEmail(Request $request){
         $email= $request->email;
@@ -399,7 +366,7 @@ function duplicateEmail(element) {
 }
 </script>
 
-======================= 02._Ans: How to preview an image before inserting it in html form? =================================
+======================= 06. How to preview an image before inserting it in html form? =================================
 BLADE:-----
 <input name="image" type="file" class="form-control"   id="image">
 <image id="show_image"  class="rounded avater-lg" src="{{ url('public/upload/default_image.jpg') }}" style="width: 80px; height: 80px;"  alt="Profile Image"> 
@@ -420,138 +387,7 @@ SCRIPT:-----
 </script>
 @endsection   
 
-======================= 03. How to insert data into the table showing the validation message? =================================
-WEBSITE: https://www.teknowize.com/articles/web-articles/laravel-ajax-crud-operation
-
-CONTROLLER FUNCTION:--------
-   function employee_add(Request $request){
-         $request->validate([
-                        'name' => 'required|min:2',
-                        'message' => 'required|min:10'                     
-                    ]);
-
-    $contact_form= $this->contact_formModel;
-        $contact_form->name    = trim($request->name);
-        $contact_form->message = trim($request->message);
-
-        if($contact_form->save()){
-            $response = [
-                'status'=>'ok',
-                'success'=>true,
-                'message'=>'Thanks! We will get back to you.'
-            ];
-            return $response;
-        }else{
-            $response = [
-                'status'=>'ok',
-                'success'=>false,
-                'message'=>'Error .!! Record created failed!'
-            ];
-            return $response;
-        }
-    } 
-
-BLADE:------
-
-<span id="success-message"></span>
-<span id="error-message"></span>
-            <form id="contact_form" class='php-email-form'>          
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name">
-                </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
-              </div>        
-             
-              <div class="text-center"><button id="submit_form" type="submit">Send Message</button></div>
-            </form>
-
-
-SCRIPT:-----
-<script type="text/javascript">   
-$("#submit_form").click(function(e){
-        e.preventDefault();
-
-        var name = $("input[name=name]").val(); 
-        var message = $("textarea[name=message]").val();
-// alert (message);
-
-        $.ajax({
-          type : "POST",
-          data : {
-            name: name,
-            message: message,
-            _token: "{{csrf_token()}}"
-          },
-          url  : "{{ url('page/contact_form-add-post') }}",
-          
-          success: function(response) {
-           $('#error-message').html('');
-           $('#success-message').append('<div class="alert alert-success">'+response.message+'</div');
-           // $('#success-message').html(response.message);
-           $("#contact_form")[0].reset();
-          },
-          error: function (xhr) {
-           $('#success-message').html('');
-           $('#error-message').html('');
-           $.each(xhr.responseJSON.errors, function(key,value) {
-           $('#error-message').append('<div class="text-center text-danger">'+value+'</div');
-          }); 
-          },                    
-    });
-     
-});
-
-</script>
-
-
-============================ 04. How to get data from the database and show it in the input field?============================
-
-ROUTE:------- 
-Route::get('Order-show-due/{id}', 'Order_Show_Due');
-
-Controller:------------
-public function Order_Show_Due($id){
-        $data['title'] = 'Order';
-        $order = $this->OrderModel->find($id);
-         if ($salary) {
-             return response()->json(['order' => $order]);            
-        }else{
-             return response()->json(['message' => 'No Salary Found']);
-        }
-}
-
-BLADE:------- 
-<button  onclick="orderDue('{{$pen->id}}')" type="button" > <i class="fas fa-check"></i> </button>
-<input name="order_id" id="order_id"  type="text">
-<input name="total" id="total"  type="text">
-
-<div id="error-message"> </div>
-
-SCRIPT:-----
-@section('script')
-<script type="text/javascript">   
-    function orderDue(id){
-        $.ajax({
-            type : "GET",
-            url:"{{ url('Order-show-due')}}/"+id,
-            dataType: "json",
-               success: function(response) {
-                    if (response.order) {              
-                        $('#order_id').val(response.order.order_id);
-                        $('#total').val(response.order.total);
-                    }else{
-                        $('#error-message').val(response.message);
-                    }
-              },
-            });
-    };
-</script>
-@endsection   
-
-
-======================================05. Select Multiple checkboxes ===================================
+====================================== 07. Select Multiple checkboxes ===================================
 @foreach()
 <input name="permission_id[]" value="{{$p_nam->id}}" class="form-check-input" type="checkbox" id="formCheck{{ $p_nam->id}}" >
 endforeach
@@ -567,7 +403,7 @@ endforeach
 </script>
 
 
-=================================== 06. How to validate form data with jquery? ===================================
+=================================== 08. How to validate form data with jquery? ===================================
 SCRIPT:---
 
 $(document).ready(function(){
@@ -598,4 +434,7 @@ $(document).ready(function(){
         },
     });
 });
+
+
+
 

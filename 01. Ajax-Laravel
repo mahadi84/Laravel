@@ -62,7 +62,61 @@ Test here:https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_ser
 
 
 ============================ 01. How to SHOW data get from the database into the input field?============================
+-------A: SHOW DATA ON SELECT OPTION: ----------------------
+BLADE:-----
+    GET DATA FROM HERE:---
+    <select class="form-control main-category" name="category_id" >
+        <option selected disabled>Select category name</option>
+        @forelse($category as $cat)
+           <option value="{{ $cat->id }}" {{ ( old('category_id') == $cat->id ) ? ' selected' : '' }}>{{ $cat->name }}</option>
+        @empty
+          <option> 'No Users available in Database' </option>                              
+        @endforelse                         
+    </select>
+    
+    SHOW HERE:-----
+        <select class="form-control sub-category" name="sub_category_id" >
+          <option selected disabled>Select sub category</option>         
+        </select>
 
+SCRIPT:----        
+    <script>
+        $(document).ready(function(){
+            $('body').on('change', '.main-category', function(e){
+                let id = $(this).val();
+                $.ajax({
+                    method: 'GET',
+                    url: "{{route('product.get-sub-categories')}}",
+                    data: {
+                        id:id
+                    },
+                    success: function(data){
+                        $('.sub-category').html('<option value="">Select Sub Category</option>')
+                        $.each(data, function(i, item){
+                            $('.sub-category').append(`<option value="${item.id}">${item.name}</option>`)
+                        })
+                    },
+                    error: function(xhr, status, error){
+                        console.log(error);
+                    }
+                })
+            })
+        });
+    </script>
+
+
+ROUTE:----
+    Route::get('get-sub-categories',   [ProductController::class, 'getSubCategories'])->name('product.get-sub-categories');
+
+CONTROLLER:--
+    public function getSubCategories(Request $request){
+        $subCategories = $this->subCategoryModel->where('category_id',$request->id)->get();
+        return $subCategories;
+    }
+
+
+
+---------B:SHOW DATA IN INPUT FIELD:-------------
 ROUTE:------- 
     Route::get('Order-show-due/{id}', 'Order_Show_Due');
 
@@ -104,6 +158,10 @@ SCRIPT:-----
         };
     </script>
     @endsection   
+
+
+
+
 
 
 ======================= 02. How to INSERT data into the table showing the validation message? =================================

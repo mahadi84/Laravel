@@ -201,7 +201,7 @@ BLADE:-----
             
 SCRIPT:-------------
     <script>
-    $(document).ready(function(){       
+        $(document).ready(function(){       
             $('body').on('click', '.change-status', function(){
                 let id = $(this).data('id');
                 let isChecked = $(this).is(':checked');

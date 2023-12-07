@@ -19,16 +19,12 @@ Ajax-Laravel:
 
 
 
-01: How to check if the Email is a duplicate in the db table? Ex: Check whether email already exists before registration.
-02. How to preview an image before inserting it in html form?
-03. How to insert data into the table showing the validation message? Ex: While Website Contact Form data submission.
+05: How to check if the Email is a duplicate in the db table? Ex: Check whether email already exists before registration.
+06. How to preview an image before inserting it in html form?
+07. How to select Multiple checkboxes in one click? Ex: Provide Spatie permission
 
-04. How to get data from the database and show it in the input field with json? Ex: Show Salary of an employee. 
-05. How to select Multiple checkboxes in one click? Ex: Provide Spatie permission
+08. How to validate form data with jquery?
 
-06. How to validate form data with jquery?
-07. How to delete data with sweetalert2 and ajax? Ex: Action button where All data shows 
-08. How to create an Active/Inactive SWITCH-INDICATOR? Ex: To show/stop showing a menu/Employee/User etc.
 
 
 =========================== 00. Common syntax for JQUERY and AJAX; ===============================

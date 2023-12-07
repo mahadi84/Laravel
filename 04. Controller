@@ -21,7 +21,7 @@ Employee::create($request->except('_token'));
 REGULAR VALIDATION:----
   $request->validate([
       'image.*' => ['image','mimes:jpg,png,jpeg', 'max:2048','dimensions:min_width=520, min_height=520, max_width=530, max_height=520'], **For Multiimage
-      'email'  => ['required','email','unique:user'],  ***check_tbl_name 
+      'email'  => ['required','email','unique:users,email,'.$user->id],  ***check_tbl_name 
       'seo_title' => ['nullable','max:200'],
        ],
        [ 'email.required' => 'Put your email here' ]); 

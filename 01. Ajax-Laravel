@@ -12,7 +12,14 @@ Ajax-Laravel:
         f) Success and Error function to show data
         g) For loop to show multiple error message
 
-01: How to check if the Email is a duplicate in the db table? Ex: Check wheater email already exists before registration.
+(04)01. How to get data from the database and show it in the input field with JSON? Ex: Show the Salary of an employee. 
+(03)02. How do INSERT data into the table showing the validation message? Ex: While Website Contact Form data submission.
+(08)03. How to UPDATE an Active/Inactive SWITCH-INDICATOR? Ex: To show/stop showing a menu/Employee/User etc.
+(07)04. How to DELETE data with sweetalert2 and Ajax? Ex: Action button where All data shows 
+
+
+
+01: How to check if the Email is a duplicate in the db table? Ex: Check whether email already exists before registration.
 02. How to preview an image before inserting it in html form?
 03. How to insert data into the table showing the validation message? Ex: While Website Contact Form data submission.
 
@@ -58,6 +65,290 @@ Test here:https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_ser
             data = $("#MyForm").serialize()+'&_token: "{{csrf_token()}}"',
             );
         });
+
+
+============================ 01. How to get/SHOW data from the database into the input field?============================
+
+ROUTE:------- 
+Route::get('Order-show-due/{id}', 'Order_Show_Due');
+
+Controller:------------
+public function Order_Show_Due($id){
+        $data['title'] = 'Order';
+        $order = $this->OrderModel->find($id);
+         if ($salary) {
+             return response()->json(['order' => $order]);            
+        }else{
+             return response()->json(['message' => 'No Salary Found']);
+        }
+}
+
+BLADE:------- 
+<button  onclick="orderDue('{{$pen->id}}')" type="button" > <i class="fas fa-check"></i> </button>
+<input name="order_id" id="order_id"  type="text">
+<input name="total" id="total"  type="text">
+
+<div id="error-message"> </div>
+
+SCRIPT:-----
+@section('script')
+<script type="text/javascript">   
+    function orderDue(id){
+        $.ajax({
+            type : "GET",
+            url:"{{ url('Order-show-due')}}/"+id,
+            dataType: "json",
+               success: function(response) {
+                    if (response.order) {              
+                        $('#order_id').val(response.order.order_id);
+                        $('#total').val(response.order.total);
+                    }else{
+                        $('#error-message').val(response.message);
+                    }
+              },
+            });
+    };
+</script>
+@endsection   
+
+
+======================= 02. How to insert data into the table showing the validation message? =================================
+WEBSITE: https://www.teknowize.com/articles/web-articles/laravel-ajax-crud-operation
+
+CONTROLLER FUNCTION:--------
+   function employee_add(Request $request){
+         $request->validate([
+                        'name' => 'required|min:2',
+                        'message' => 'required|min:10'                     
+                    ]);
+
+    $contact_form= $this->contact_formModel;
+        $contact_form->name    = trim($request->name);
+        $contact_form->message = trim($request->message);
+
+        if($contact_form->save()){
+            $response = [
+                'status'=>'ok',
+                'success'=>true,
+                'message'=>'Thanks! We will get back to you.'
+            ];
+            return $response;
+        }else{
+            $response = [
+                'status'=>'ok',
+                'success'=>false,
+                'message'=>'Error .!! Record created failed!'
+            ];
+            return $response;
+        }
+    } 
+
+BLADE:------
+
+<span id="success-message"></span>
+<span id="error-message"></span>
+            <form id="contact_form" class='php-email-form'>          
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name">
+                </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
+              </div>        
+             
+              <div class="text-center"><button id="submit_form" type="submit">Send Message</button></div>
+            </form>
+
+
+SCRIPT:-----
+<script type="text/javascript">   
+$("#submit_form").click(function(e){
+        e.preventDefault();
+
+        var name = $("input[name=name]").val(); 
+        var message = $("textarea[name=message]").val();
+// alert (message);
+
+        $.ajax({
+          type : "POST",
+          data : {
+            name: name,
+            message: message,
+            _token: "{{csrf_token()}}"
+          },
+          url  : "{{ url('page/contact_form-add-post') }}",
+          
+          success: function(response) {
+           $('#error-message').html('');
+           $('#success-message').append('<div class="alert alert-success">'+response.message+'</div');
+           // $('#success-message').html(response.message);
+           $("#contact_form")[0].reset();
+          },
+          error: function (xhr) {
+           $('#success-message').html('');
+           $('#error-message').html('');
+           $.each(xhr.responseJSON.errors, function(key,value) {
+           $('#error-message').append('<div class="text-center text-danger">'+value+'</div');
+          }); 
+          },                    
+    });
+     
+});
+
+</script>
+
+
+================================ 03. How to create an Active/Inactive SWITCH-INDICATOR? ==========================================
+BLADE:-----
+    <label class="custom-switch mt-2">
+        <input type="checkbox" {{ ($query->status == '1') ? 'checked' ? ''}} name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+        <span class="custom-switch-indicator"></span>           
+    </label>
+            
+SCRIPT:-------------
+    <script>
+    $(document).ready(function(){       
+            $('body').on('click', '.change-status', function(){
+                let id = $(this).data('id');
+                let isChecked = $(this).is(':checked');
+                $.ajax({
+                  url: "{{route('admin.category.change-status')}}",
+                  method: 'PUT',
+                  data: {
+                    id: id,
+                    status: isChecked
+                  },
+                  success: function(data){
+                    toastr.success(data.message);
+                  },
+                  error: function(xhr, status, error){
+                    toastr.error(data.message);
+                    console.log(error);
+                  }
+                })          
+            })
+          });
+    </script>
+
+ROUTE:---
+    Route::put('product-change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
+
+CONTROLLER:----
+    public function changeStatus(Request $request){
+        $category= $this->categoryModel->findOrFail($request->id);
+        $category->status= $request->status == 'true' ? 1: 0;
+        if ($category->save()) {
+            return response(['status'=> 'success', 'message' => 'Active Successfully']); 
+         }else{
+            return response(['status'=> 'error', 'message' => 'Faild...!']);  
+        }  
+    }
+
+
+=========================== 04. How to delete data with sweetalert2 and ajax?  ===============================
+SWITALERT2-TUTORIAL: https://sweetalert2.github.io/#examples
+
+CDN: 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+BLADE:
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <a href="{{route('admin.slider.destroy', $slider->id)}}"  class="delete-item"> Delete </a>
+
+SCRIPT:-----
+    <script>
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')  }
+        });
+
+        $('body').on('click', '.delete-item', function(event){
+            event.preventDefault();
+
+            let deleteUrl = $(this).attr('href');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {                   
+                        $.ajax({
+                            type: 'DELETE',
+                            url: deleteUrl,
+                            success: function(data){
+                                if(data.status == 'success'){
+                                    Swal.fire( 'Deleted!', data.message, 'success')
+                                    window.location.reload();
+                                }else if (data.status == 'error'){
+                                    Swal.fire('Cant Delete', data.message, 'error' )
+                                }
+                            },
+                            error: function(xhr, status, error){
+                                console.log(error);
+                            }
+                        })
+                    }
+            })
+        })
+    })
+  </script>
+
+
+ROUTE:
+    Route::delete('product-image-destroy/{id}', [ProductImageGalleryController::class, 'destroy'])->name('product-image-destroy');
+    OR
+    Route::resource('product', ProductVariantController::class); ***For resource Route: 
+
+CONTROLLER:----
+     public function destroy(string $id){
+        $Slider = $this->SliderModel->find($id);
+            if (!empty($Slider->image) && file_exists('uploads/slider_images/'.$Slider->image)) {
+                unlink('uploads/slider_images/'.$Slider->image);
+             } 
+                if($Slider->delete()){
+                    return response(['status'=> 'success', 'message' => 'Deleted Successfully']); 
+                }else {
+                    return response(['status'=> 'error', 'message' => 'Faild !! Something went wrong.']);
+                } 
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ==============================01_Ans: How to check if the Email is a duplicate in the db table?================
@@ -311,127 +602,4 @@ $(document).ready(function(){
         },
     });
 });
-
-=========================== 07. How to delete data with sweetalert2 and ajax?  ===============================
-SWITALERT2-TUTORIAL: https://sweetalert2.github.io/#examples
-
-CDN: 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-BLADE:
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <a href="{{route('admin.slider.destroy', $slider->id)}}"  class="delete-item"> Delete </a>
-
-SCRIPT:-----
-    <script>
-    $(document).ready(function(){
-        $.ajaxSetup({
-            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')  }
-        });
-
-        $('body').on('click', '.delete-item', function(event){
-            event.preventDefault();
-
-            let deleteUrl = $(this).attr('href');
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {                   
-                        $.ajax({
-                            type: 'DELETE',
-                            url: deleteUrl,
-                            success: function(data){
-                                if(data.status == 'success'){
-                                    Swal.fire( 'Deleted!', data.message, 'success')
-                                    window.location.reload();
-                                }else if (data.status == 'error'){
-                                    Swal.fire('Cant Delete', data.message, 'error' )
-                                }
-                            },
-                            error: function(xhr, status, error){
-                                console.log(error);
-                            }
-                        })
-                    }
-            })
-        })
-    })
-  </script>
-
-
-ROUTE:
-    Route::delete('product-image-destroy/{id}', [ProductImageGalleryController::class, 'destroy'])->name('product-image-destroy');
-    OR
-    Route::resource('product', ProductVariantController::class); ***For resource Route: 
-
-CONTROLLER:----
-     public function destroy(string $id){
-        $Slider = $this->SliderModel->find($id);
-            if (!empty($Slider->image) && file_exists('uploads/slider_images/'.$Slider->image)) {
-                unlink('uploads/slider_images/'.$Slider->image);
-             } 
-                if($Slider->delete()){
-                    return response(['status'=> 'success', 'message' => 'Deleted Successfully']); 
-                }else {
-                    return response(['status'=> 'error', 'message' => 'Faild !! Something went wrong.']);
-                } 
-     }
-
-
-================================ 08. How to create an Active/Inactive SWITCH-INDICATOR? ==========================================
-BLADE:-----
-    <label class="custom-switch mt-2">
-        <input type="checkbox" {{ ($query->status == '1') ? 'checked' ? ''}} name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
-        <span class="custom-switch-indicator"></span>           
-    </label>
-            
-SCRIPT:-------------
-    <script>
-    $(document).ready(function(){       
-            $('body').on('click', '.change-status', function(){
-                let id = $(this).data('id');
-                let isChecked = $(this).is(':checked');
-                $.ajax({
-                  url: "{{route('admin.category.change-status')}}",
-                  method: 'PUT',
-                  data: {
-                    id: id,
-                    status: isChecked
-                  },
-                  success: function(data){
-                    toastr.success(data.message);
-                  },
-                  error: function(xhr, status, error){
-                    toastr.error(data.message);
-                    console.log(error);
-                  }
-                })          
-            })
-          });
-    </script>
-
-ROUTE:---
-    Route::put('product-change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
-
-CONTROLLER:----
-    public function changeStatus(Request $request){
-        $category= $this->categoryModel->findOrFail($request->id);
-        $category->status= $request->status == 'true' ? 1: 0;
-        if ($category->save()) {
-            return response(['status'=> 'success', 'message' => 'Active Successfully']); 
-         }else{
-            return response(['status'=> 'error', 'message' => 'Faild...!']);  
-        }  
-    }
-
-
-
-
 

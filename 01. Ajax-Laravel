@@ -242,7 +242,7 @@ BLADE:-------
 
 <div id="error-message"> </div>
 
-Script:-----
+SCRIPT:-----
 @section('script')
 <script type="text/javascript">   
     function orderDue(id){
@@ -264,7 +264,6 @@ Script:-----
 @endsection   
 
 
-
 ======================================05. Select Multiple checkboxes ===================================
 @foreach()
 <input name="permission_id[]" value="{{$p_nam->id}}" class="form-check-input" type="checkbox" id="formCheck{{ $p_nam->id}}" >
@@ -279,8 +278,6 @@ endforeach
         }
     });
 </script>
-
-
 
 
 =================================== 06. How to validate form data with jquery? ===================================
@@ -318,14 +315,15 @@ $(document).ready(function(){
 =========================== 07. How to delete data with sweetalert2 and ajax?  ===============================
 SWITALERT2-TUTORIAL: https://sweetalert2.github.io/#examples
 
-CDN: <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+CDN: 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 BLADE:
-<meta name="csrf-token" content="{{ csrf_token() }}" />
-<a href="{{route('admin.slider.destroy', $slider->id)}}"  class=""> Delete </a>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <a href="{{route('admin.slider.destroy', $slider->id)}}"  class=""> Delete </a>
 
 SCRIPT:-----
-<script>
+    <script>
     $(document).ready(function(){
         $.ajaxSetup({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')  }
@@ -345,39 +343,36 @@ SCRIPT:-----
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
-                if (result.isConfirmed) {
-                   
-                    $.ajax({
-                        type: 'DELETE',
-                        url: deleteUrl,
-                        success: function(data){
-                            if(data.status == 'success'){
-                                Swal.fire(
-                                    'Deleted!',
-                                    data.message,
-                                    'success'
-                                )
-                                window.location.reload();
-                            }else if (data.status == 'error'){
-                                Swal.fire(
-                                    'Cant Delete',
-                                    data.message,
-                                    'error'
-                                )
+                    if (result.isConfirmed) {                   
+                        $.ajax({
+                            type: 'DELETE',
+                            url: deleteUrl,
+                            success: function(data){
+                                if(data.status == 'success'){
+                                    Swal.fire( 'Deleted!', data.message, 'success')
+                                    window.location.reload();
+                                }else if (data.status == 'error'){
+                                    Swal.fire('Cant Delete', data.message, 'error' )
+                                }
+                            },
+                            error: function(xhr, status, error){
+                                console.log(error);
                             }
-                        },
-                        error: function(xhr, status, error){
-                            console.log(error);
-                        }
-                    })
-                }
+                        })
+                    }
             })
         })
     })
   </script>
 
+
+ROUTE:
+    Route::delete('product-image-destroy/{id}', [ProductImageGalleryController::class, 'destroy'])->name('product-image-destroy');
+    OR
+    Route::resource('product', ProductVariantController::class); ***For resource Route: 
+
 CONTROLLER:----
- public function destroy(string $id){
+     public function destroy(string $id){
         $Slider = $this->SliderModel->find($id);
             if (!empty($Slider->image) && file_exists('uploads/slider_images/'.$Slider->image)) {
                 unlink('uploads/slider_images/'.$Slider->image);
@@ -387,7 +382,7 @@ CONTROLLER:----
                 }else {
                     return response(['status'=> 'error', 'message' => 'Faild !! Something went wrong.']);
                 } 
-    }
+     }
 
 
 ================================ 08. How to create an Active/Inactive SWITCH-INDICATOR? ==========================================
@@ -398,29 +393,32 @@ BLADE:-----
     </label>
             
 SCRIPT:-------------
-<script>
-$(document).ready(function(){       
-        $('body').on('click', '.change-status', function(){
-            let id = $(this).data('id');
-            let isChecked = $(this).is(':checked');
-            $.ajax({
-              url: "{{route('admin.category.change-status')}}",
-              method: 'PUT',
-              data: {
-                id: id,
-                status: isChecked
-              },
-              success: function(data){
-                toastr.success(data.message);
-              },
-              error: function(xhr, status, error){
-                toastr.error(data.message);
-                console.log(error);
-              }
-            })          
-        })
-      });
-</script>
+    <script>
+    $(document).ready(function(){       
+            $('body').on('click', '.change-status', function(){
+                let id = $(this).data('id');
+                let isChecked = $(this).is(':checked');
+                $.ajax({
+                  url: "{{route('admin.category.change-status')}}",
+                  method: 'PUT',
+                  data: {
+                    id: id,
+                    status: isChecked
+                  },
+                  success: function(data){
+                    toastr.success(data.message);
+                  },
+                  error: function(xhr, status, error){
+                    toastr.error(data.message);
+                    console.log(error);
+                  }
+                })          
+            })
+          });
+    </script>
+
+ROUTE:---
+    Route::put('product-change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
 
 CONTROLLER:----
     public function changeStatus(Request $request){

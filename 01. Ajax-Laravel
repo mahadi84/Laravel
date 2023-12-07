@@ -62,7 +62,7 @@ Test here:https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_ser
 
 
 ============================ 01. How to SHOW data get from the database into the input field?============================
--------A: SHOW DATA ON SELECT OPTION: ----------------------
+-------A: show data on SELECT OPTION: ----------------------
 BLADE:-----
     GET DATA FROM HERE:---
     <select class="form-control main-category" name="category_id" >
@@ -116,7 +116,7 @@ CONTROLLER:--
 
 
 
----------B:SHOW DATA IN INPUT FIELD:-------------
+---------B: show data into INPUT FIELD:-------------
 ROUTE:------- 
     Route::get('Order-show-due/{id}', 'Order_Show_Due');
 

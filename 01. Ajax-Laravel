@@ -252,8 +252,8 @@ $("#submit_form").click(function(e){
 
 ================================ 03. How to UPDATE the status of a column with an Active/Inactive SWITCH-INDICATOR? ==========================================
 BLADE:-----
-    <label class="custom-switch mt-2">
-        <input type="checkbox" {{ ($query->status == '1') ? 'checked' ? ''}} name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+   <label class="custom-switch mt-2">
+       <input type="checkbox" {{ $sli->status == 1 ? 'checked' : ''}} name="custom-switch-checkbox" data-id="{{$sli->id}}" class="custom-switch-input change-status">
         <span class="custom-switch-indicator"></span>           
     </label>
             

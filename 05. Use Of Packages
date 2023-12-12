@@ -325,6 +325,7 @@ WEBSITE:-----------
 CMD: 
     > composer require yajra/laravel-datatables
     > php artisan datatables:make Users
+    > php artisan datatable:make RequestPendingVendor  --model  Vendor
 
  **Escape Vite option otherwise it will download all file
  ** use cdn

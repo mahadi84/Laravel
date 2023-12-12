@@ -9,6 +9,10 @@ Date: 11-Oct-2023
 06. Yajra Datatable 
 
 
+07. Use of Toaster
+08. Use of SweetAlert2
+
+
 =================== 01. EXPORT & IMPORT with Matlab Excell ====================
 
 -------Controller:-----------
@@ -326,11 +330,25 @@ CMD:
  ** use cdn
 
 
+============================== 07. Use of Toaster  ==================================
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  
+  <script>
+    @if ($errors->any())
+        @foreach($errors->all() as $error)
+            toastr.error("{{$error}}")
+        @endforeach
+    @endif
+
+    @if ($message = Session::get('success'))
+     toastr.success('{{$message}}')
+    @endif
+  </script>
 
 
-
-
-
+================================== 08. Use of Sweetaler2 =================================
 
 
 

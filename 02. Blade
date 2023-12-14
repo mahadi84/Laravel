@@ -2,7 +2,7 @@ Date: 31-Aug-2023
 
 01. DYNAMIC SELECT OPTION (ADD+EDIT)
 02. CHECKED-BOX Filled by  ARRAY data from Database
-03. WYSIWYG (Text Editor on HTML)
+03. 
 
 04. Show Jquery Datatable
 05.1 1-Column Html input Field
@@ -50,17 +50,8 @@ Date: 31-Aug-2023
 @endforeach
 
 
-==================== 03. WYSIWYG (Text Editor on HTML): ====================
+==================== 03. : ====================
 
-01:--SUMMERNOTE
-CDN: https://summernote.org/getting-started/ 
-<textarea name="description"  class="summernote" style="display: none;"  id="description"  placeholder="Enter description" >{{ old('description') }}</textarea>
-script:  $('.summernote').summernote({
-        height:150
-    })
-02:
-<textarea id="elm1" name="description" class="form-control"   id="description">{{ $about->description }}</textarea>
- 
 
 =========================== 04. Show Jquery Datatable =================================
 

@@ -319,16 +319,28 @@ use Illuminate\Support\Facades\Storage;
 
 
 =============================  06. Yajra Datatable  =====================================
-WEBSITE:-----------
-  https://yajrabox.com/docs/laravel-datatables/10.0/quick-starter
+WEBSITE:-  https://yajrabox.com/docs/laravel-datatables/10.0/quick-starter
 
-CMD: 
-    > composer require yajra/laravel-datatables
-    > php artisan datatables:make Users
-    > php artisan datatable:make RequestPendingVendor  --model  Vendor
+-------------SETUP---------------
+ **Escape Vite option in CMD PROMPT, otherwise it will download all file
+CMD: > composer require yajra/laravel-datatables
+CREATE-TABLE: > php artisan datatables:make User  ***Here User is model name
+              > php artisan datatable:make RequestPendingVendor  --model  Vendor
 
- **Escape Vite option otherwise it will download all file
  ** use cdn
+
+------------- USE -----------
+
+BLADE:
+  <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+  <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    {{ $dataTable->table() }}
+
+@push('scripts')
+{{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+@endpush
+
+
 
 
 

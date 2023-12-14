@@ -13,7 +13,7 @@ protected $guarded = [];
 
 ==============02. How to search (Query) value and return it to? ==================
 
-CONTROLLER: $data['jobs'] = $this->model->getJobs($request);
+CONTROLLER: $data['jobs'] = Model::getJobs($request);
 -----------
 
 use Request;

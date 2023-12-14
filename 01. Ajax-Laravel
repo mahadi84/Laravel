@@ -2,17 +2,6 @@ DATE: 20-Sept-2023
 
 Ajax-Laravel:
 ---------------
-BLADE:
-@push('scripts')
- <script>
-    ---
- </script>
-@endpush
-
-MASTER-BLADE:
- @stack('scripts')
-
-
 
 
 00. Common syntax for JQUERY and AJAX 
@@ -34,13 +23,21 @@ MASTER-BLADE:
 07. How to select Multiple checkboxes in one click? Ex: Provide Spatie permission
 
 08. How to validate form data with jQuery?
-09.
-10.
+09. How to use Toaster?
+10. How to use Sweet-Alert?
 
 
 
 
 =========================== 00. Common syntax for JQUERY and AJAX; ===============================
+
+BLADE:
+@push('scripts')
+ <script>--- </script>
+@endpush
+
+MASTER-BLADE:  @stack('scripts')
+--------
 var name = $("input[name=name]").val();
  if(name.length > 2){ }
 

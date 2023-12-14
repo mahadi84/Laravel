@@ -440,7 +440,7 @@ function duplicateEmail(element) {
 ======================= 06. How to preview an image before inserting it in html form? =================================
 BLADE:-----
 <input name="image" type="file" class="form-control"   id="image">
-<image id="show_image"  class="rounded avater-lg" src="{{ url('public/upload/default_image.jpg') }}" style="width: 80px; height: 80px;"  alt="Profile Image"> 
+<image id="show_image"  class="rounded avater-lg" src="{{ url('public/upload/default_image.jpg') }}" style="width: 80px; height: 80px;"  alt="Image"> 
 
 
 SCRIPT:-----

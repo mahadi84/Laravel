@@ -4,12 +4,12 @@ Date: 31-Aug-2023
 02. CHECKED-BOX Filled by  ARRAY data from Database
 03. 
 
-04. Show Jquery Datatable
+04. 
 05.1 1-Column Html input Field
 05.2 2-Column Html input Field
 
 06. Show Validation and CRUD Message
-07. Show Error Message and CRUD with TOASTR
+07. 
 08. Functions used in Blade 
 
 09. Profile Image/Name Show befor insert
@@ -53,13 +53,9 @@ Date: 31-Aug-2023
 ==================== 03. : ====================
 
 
-=========================== 04. Show Jquery Datatable =================================
+=========================== 04. =================================
 
-<table id="basic-datatable" class="table dt-responsive nowrap w-100">
 
-<script type="text/javascript">
-    $('#basic-datatable').DataTable();
- </script>
 
 
 ==================== 05.1 1-Column  Html Input Field =======================
@@ -121,27 +117,8 @@ Date: 31-Aug-2023
         </div>
 @endif      -->
 
-============================== 07. Show Error and CRUD Message with TOASTR  =======================
-WEBSITE: 
-https://github.com/CodeSeven/toastr
+============================== 07.   =======================
 
-CDN:
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-USE:
-@if(Session::has('message'))
-    <script>
-       toastr.options={
-        "progressBar" : true,
-        "closeButton" : true,
-        }
-     toastr.error("{{Session::get('message')}}", 'Success!', {timeOut:12000});
-     toastr.success("{{Session::get('message')}}")
-     toastr.warning("{{Session::get('message')}}")
-     toastr.info("{{Session::get('message')}}")
-    </script>
-@endif
 
 
 

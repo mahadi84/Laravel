@@ -22,9 +22,9 @@ Ajax-Laravel:
 06. How to preview an image before inserting it in html form?
 07. How to select Multiple checkboxes in one click? Ex: Provide Spatie permission
 
-08. How to validate form data with jQuery?
-09. How to use Toaster?
-10. How to use Sweet-Alert?
+08. How to use Toaster?
+09. How to use Sweet-Alert?
+10. How to use SUMMERNOTE(in Textarea)?
 
 
 
@@ -471,40 +471,7 @@ endforeach
 </script>
 
 
-=================================== 08. How to validate form data with jquery? ===================================
-SCRIPT:---
-
-$(document).ready(function(){
-    $('#myForm').validate({
-    rules: {
-      designation: {
-        required: true,
-      },
-    },
-
-    messages :{
-      designation:{
-        required: 'Please Enter designation',
-      },  
-    }, I
-
-        errorElement: 'span',
-        errorPlacement: function (error, element) {
-          error.addClass('invalid-feedback');
-          element.closest('.desig').append(error);   //.desig is input field class name
-        },
-
-        highlight function (element, errorClass, validClass){ 
-          $(element).addClass('is-invalid');
-        },
-        unhighlight : function (element, errorClass, validClass){ 
-          $(element).removeClass('is-invalid');
-        },
-    });
-});
-
-
-============================== 09. Use of Toaster  ==================================
+============================== 08. Use of Toaster  ==================================
 
 BLADE:
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -531,7 +498,7 @@ SCRIPT:
   </script>
 
 
-================================== 10. Use of Sweetaler2 =================================
+================================== 09. Use of Sweetaler2 =================================
 WEBSITE: https://sweetalert2.github.io/#examples
 CDN: <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -592,6 +559,19 @@ SCRIPT:----------
   </script>
 
 
+================ 10. How to use SUMMERNOTE (in textarea) ===========================
+WEBSITE: https://summernote.org/getting-started/ 
+
+BLADE:
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js">
+
+<textarea name="description"  class="summernote" placeholder="Enter description" >{{ old('description') }}</textarea>
+
+SCRIPT:  
+$('.summernote').summernote({
+        height:150
+    })
 
 
 

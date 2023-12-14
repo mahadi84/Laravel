@@ -87,7 +87,8 @@ BLADE:-----
           <option selected disabled>Select sub category</option>         
         </select>
 
-SCRIPT:----        
+SCRIPT:---- 
+@push('scripts')
     <script>
         $(document).ready(function(){
             $('body').on('change', '.main-category', function(e){
@@ -111,7 +112,7 @@ SCRIPT:----
             })
         });
     </script>
-
+@endpush
 
 ROUTE:----
     Route::get('get-sub-categories',   [ProductController::class, 'getSubCategories'])->name('product.get-sub-categories');

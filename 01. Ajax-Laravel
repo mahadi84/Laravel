@@ -2,6 +2,18 @@ DATE: 20-Sept-2023
 
 Ajax-Laravel:
 ---------------
+BLADE:
+@push('scripts')
+ <script>
+    ---
+ </script>
+@endpush
+
+MASTER-BLADE:
+ @stack('scripts')
+
+
+
 
 00. Common syntax for JQUERY and AJAX 
     ex: a) Click to respond to specific div/id/class, 

@@ -511,11 +511,17 @@ $('.summernote').summernote({
     })
 
 ====================== 10. How to use Datepicker =================================
-BLADE:
-<link rel="stylesheet" href="{{asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.css')}}">
- <script src="{{asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+*** This daterangepicker works as data picker
 
-SCRIP:
+CDN: https://www.daterangepicker.com/
+GITHUB:  https://github.com/Ometria/bootstrap-daterangepicker/blob/master/README.md
+
+BLADE:--
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+SCRIPT (OPTIONAL):--
 <script>
     $('.datepicker').daterangepicker({
         locale: {

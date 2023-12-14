@@ -506,9 +506,18 @@ $(document).ready(function(){
 
 ============================== 09. Use of Toaster  ==================================
 
+BLADE:
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-  
+
+CONTROLLER:
+if($product->delete()){
+    return response(["status"=> "success", "message" => "Deleted Successfully"]);            
+   }else {
+   return response(["status"=> "error", "message" => "Failed! Not Deleted."]); 
+   }
+
+SCRIPT:
   <script>
     @if ($errors->any())
         @foreach($errors->all() as $error)
@@ -524,9 +533,7 @@ $(document).ready(function(){
 
 ================================== 10. Use of Sweetaler2 =================================
 WEBSITE: https://sweetalert2.github.io/#examples
-
-CDN: 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+CDN: <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 BLADE:
   <a href='{{route('admin.sub-category.destroy', $query->id)}}' class='btn btn-danger btn-sm ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";

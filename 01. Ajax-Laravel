@@ -9,7 +9,7 @@ DATE: 20-Sept-2023
         f) Success and Error function to show data
         g) For loop to show multiple error message
 
-01. How to SHOW data get from the database into the input field with JSON? Ex: Show the Salary of an employee. 
+01. How to SHOW data get from the database into the input field with JSON? Ex: Show the Salary of an employee Or Get data, Selecting Options. 
 02. How do INSERT data into the table showing the validation message? Ex: While Website Contact Form data submission.
 03. How to UPDATE the status of a column with an Active/Inactive SWITCH-INDICATOR? Ex: To show/stop showing a menu/Employee/User etc.
 04. How to DELETE data with sweetalert2 and Ajax? Ex: Action button where All data shows 

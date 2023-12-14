@@ -1,40 +1,6 @@
 Date: 31/08/2023
 
 
-
-01. What is Sweetalert?
-
-
-
-
-================================ 01. What is Sweetalert?  =============================
-To show message on POP-UP more organized way than Bootstrap Modal.
-
-WEBSITE: https://sweetalert2.github.io/#examples
-
-CDN: <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 =========================================
 01. What are NPM, and Composer?
 02. Is the same a package.json and a composer.json?

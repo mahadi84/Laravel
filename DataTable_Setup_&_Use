@@ -34,7 +34,7 @@ use App\DataTables\UsersDataTable;
         return $dataTable->render('admin.user.index', $data);
     }
 
-======================= DATA-TABLE-SETTINGS ===================================
+======================= DATA/BUTTON-SHOW ===================================
 A) ->addColumn('action', function($query) {
             $editBtn = "<a href='". route('admin.product.edit', $query->id) ."' class='btn btn-primary btn-sm'><i class='far fa-edit'></i></a>";
             $deleteBtn = "<a href='". route('admin.product.destroy', $query->id) ."' class='btn btn-danger btn-sm ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";

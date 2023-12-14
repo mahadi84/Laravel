@@ -1,9 +1,5 @@
 DATE: 20-Sept-2023
 
-Ajax-Laravel:
----------------
-
-
 00. Common syntax for JQUERY and AJAX 
     ex: a) Click to respond to specific div/id/class, 
         b) Prevent page load, 

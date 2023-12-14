@@ -148,7 +148,7 @@ BLADE:-------
 <div id="error-message"> </div>
 
 SCRIPT:-----
-    @section('script')
+    @push('scripts')
     <script type="text/javascript">   
         function orderDue(id){
             $.ajax({
@@ -166,7 +166,7 @@ SCRIPT:-----
                 });
         };
     </script>
-    @endsection   
+    @endpush   
 
 
 
@@ -222,7 +222,8 @@ BLADE:------
 
 
 SCRIPT:-----
-<script type="text/javascript">   
+@push('scripts')
+<script>   
 $("#submit_form").click(function(e){
         e.preventDefault();
 
@@ -257,6 +258,7 @@ $("#submit_form").click(function(e){
 });
 
 </script>
+@endpush
 
 
 ================================ 03. How to UPDATE the status of a column with an Active/Inactive SWITCH-INDICATOR? ==========================================
@@ -267,6 +269,7 @@ BLADE:-----
     </label>
             
 SCRIPT:-------------
+@push('scripts')
     <script>
         $(document).ready(function(){       
             $('body').on('click', '.change-status', function(){
@@ -290,6 +293,7 @@ SCRIPT:-------------
             })
           });
     </script>
+@endpush
 
 ROUTE:---
     Route::put('product-change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
@@ -406,7 +410,8 @@ HTML:--------
 
 
 SCRIPT:-------
-<script type="text/javascript">
+@push('scripts')
+<script>
 function duplicateEmail(element) {
   var email= $(element).val();
   // alert(email);
@@ -430,6 +435,7 @@ function duplicateEmail(element) {
   });
 }
 </script>
+@endpush
 
 ======================= 06. How to preview an image before inserting it in html form? =================================
 BLADE:-----
@@ -438,7 +444,7 @@ BLADE:-----
 
 
 SCRIPT:-----
-@section('script')
+@push('scripts')
 <script type="text/javascript">   
    $(document).ready(function(){
         $('#image').change(function(e){
@@ -450,14 +456,16 @@ SCRIPT:-----
         });
     });      
 </script>
-@endsection   
+@endpush  
 
 ====================================== 07. Select Multiple checkboxes ===================================
 @foreach()
 <input name="permission_id[]" value="{{$p_nam->id}}" class="form-check-input" type="checkbox" id="formCheck{{ $p_nam->id}}" >
 endforeach
 
-<script type="text/javascript">
+
+@push('scripts')
+<script>
     $('#formCheckAll').click(function(){
         if ($(this).is(':checked')) {
             $('input[type=checkbox]').prop('checked',true);
@@ -466,7 +474,7 @@ endforeach
         }
     });
 </script>
-
+@endpush
 
 ============================== 08. Use of Toaster  ==================================
 

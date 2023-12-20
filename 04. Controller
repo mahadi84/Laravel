@@ -108,6 +108,13 @@ class JobController extends Controller
 
 ============================ RESET Password Controller ==============================================
 
+BLADE:---
+<input type="password" name="current_password" class="form-control" >
+<input type="password" name="password" class="form-control" >
+<input type="password" name="password_confirmation" class="form-control" >
+
+
+CONTROLLER:--
     public function updatePassword(Request $request){
         $request->validate([
             'current_password' => ['required', 'current_password'],

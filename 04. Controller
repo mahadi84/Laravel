@@ -85,172 +85,44 @@ $order=$this->OrderModel;
                         $orderDetails->product_qty    = $content->qty;
                     $insert= $orderDetails->save();
                 }
------------------------------------------
+
 
 ============================== CRUD  and Excell download ==========================
 <?php
-
-namespace App\Http\Controllers\Backend;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 // Excel service provider
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\JobsExport;
 
-
 class JobController extends Controller
 {
-
-        private $model;
-        public function __construct(){
-            $this->model = new  \App\Models\Job;
-        }
-
-
-    public function all(Request $request){
+   public function all(Request $request){
         $data['title'] = 'Job list';
-        $data['jobs'] = $this->model->getJobs($request);
+        $data['jobs'] = Job::getJobs($request);
         return view('Backend.Job.AllJobs.alljobs', $data);
     }
 
     public function export_jobs(Request $request){
        return Excel::download(new JobsExport, 'jobs.xlsx');
     }
-
-
-
-    public function add_job(){
-        $data['title'] = 'Add Job';
-        return view('Backend.Job.AddJob.addjob', $data);
-    }
-
-
-    public function add_job_post(Request $request){
-
-        $request->validate([
-           'job_title'  => "required|min:3",
-           'min_salary' => "required|numeric",
-           'max_salary' => 'required|numeric'  
-        ]);
-         
-        $job             = $this->model;
-        $job->job_title  = trim($request->job_title);
-        $job->min_salary = trim($request->min_salary);
-        $job->max_salary = trim($request->max_salary);
-       
-            if($job->save()) {
-                return redirect()->back()
-                                 ->with('success', "Job: {$job->job_title} - registered successfull.");           
-            }else {
-                 return redirect()->back()
-                                 ->with('error', 'Faild !! Something went wrong.');
-            }     
-    }
-
-
-    public function edit_job($id){
-        $data['title'] = 'Edit job';
-        $data['job']   = $this->model->find($id);
-
-        // dd($data['job']);
-        return view('Backend.Job.EditJob.editjob', $data);
-    }
-
-    
-    public function update_job(Request $request, $id){        
-        $job= $this->model->find($id);
-        $request->validate([
-           'job_title'  => "required|min:3",
-           'min_salary' => "required|numeric",
-           'max_salary' => 'required|numeric'  
-        ]);
-
-            $job->job_title  = trim($request->job_title);
-            $job->min_salary = trim($request->min_salary);
-            $job->max_salary = trim($request->max_salary);
-
-            if ($job->save()) {
-                return redirect("admin/jobs")->with('success', 'Update successfull.');  
-            }else{
-                 return redirect()->back()->with('error', 'Faild...!!');
-            }
-    }
-
-    public function delete_job(Request $request, $id){
-       
-            $job=$this->model->find($id);
-            if ($request->isMethod('post')) {
-                    if($job->delete()){
-                        return redirect('admin/jobs')->with('success', 'Employee info deleted.');           
-                    }else {
-                        return redirect()->back()->with('error', 'Faild !! Something went wrong.');
-                    }  
-            }
-             return view('Backend.Job.DeleteJob.delete_job', ['job'=> $job]);
-    }
-
 }
 
-============================ My Profile IMAGE Controller ==============================================
-<?php
+============================ RESET Password Controller ==============================================
 
-namespace App\Http\Controllers\Backend;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Auth;
-use Str;
-
-
-class MyProfileImageController extends Controller
-{
-
-        private $userModel;
-        public function __construct(){
-            $this->userModel = new  \App\Models\User;
-        }
-
-        public function my_profile_image(){
-         $data['title'] = 'Profile image';
-         $data['me'] = $this->userModel->find(Auth::user()->id);   
-         return view('Backend.MyProfileImage.ProfileImageShow.profile_image_show', $data);
-    	}
-
-        public function myprofile_image_edit(){
-         $data['title'] = 'Edit my profile image';
-         $data['me'] = $this->userModel->find(Auth::user()->id);
-         return view('Backend.MyProfileImage.ProfileImageEdit.profile_image_edit', $data);
-        }
-
-    
-   
-    public function myprofile_image_update(Request $request){        
+    public function updatePassword(Request $request){
         $request->validate([
-           'profile_image'   => ['required','image','mimes:jpg,png,jpeg', 'max:2048']
-                                        // 'dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',                             
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required','confirmed', 'min:8']
         ]);
-  
-        $me= $this->userModel->find(Auth::user()->id);        
-                         if (!empty($me->profile_image) && file_exists('public/upload/images/'.$me->profile_image)) {
-                            unlink('public/upload/images/'.$me->profile_image);
-                         } 
-                        $file= $request->file('profile_image');
-                        $randomStr= Str::random(30);
-                        $filename = $randomStr .'.'. $file->getClientOriginalExtension();
 
-                        $file->move('public/upload/images/', $filename);
-                        $me->profile_image = $filename;            
-                
-            if ($me->save()) {
-                return redirect("admin/employees")->with('success', 'Update successfull.');  
-            }else{
-                 return redirect()->back()->with('error', 'Faild...!!');
-            }
-        }
+        $request->user()->update([
+            'password' => $request->password
+        ]);
+
+        return redirect()->back()->with('success', 'Your Password Updated Successfully!');
+    }
 
 
-}
+
 
 
 =================================================== LOGIN CONTROLLER ===========================================

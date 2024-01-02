@@ -6,7 +6,7 @@ Date: 31-Aug-2023
 02. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table
 03. How to insert MULTIPLE data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table
 
-04. How to use CreateOrUpdate() what's the advantage of using it, the simple exception to using it?
+04. How to use CreateOrUpdate(), what's the advantage of using it, the simple exception to using it?
 
 
 ============================== 00. Functions:  =============================

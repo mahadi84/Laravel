@@ -109,6 +109,22 @@ protected $filable=['id', 'site_name']
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ============================== CRUD  and Excell download ==========================
 <?php
 // Excel service provider

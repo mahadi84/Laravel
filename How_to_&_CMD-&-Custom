@@ -3,6 +3,7 @@
               ->Clear_Cache,           ->Create_Model, 
               ->Create_Controller,     ->Migration, 
               ->Rollback,              ->Seeder
+              ->Time Zone
              
 
 01. How to ---
@@ -15,6 +16,10 @@
 06. How to create a new ROUTE and add an extra route to the Resource route?
 07. How to Insert data into a table using seeder?
 08. How to insert Bulk (let's say 1000) data into a table?
+
+09. How to set TimeZone & get and show Data to all views (pages)?
+10. How to PUT data ex: country, currency, etc. into a file inside the Config folder and use it in a Blade?
+11. Why and How to Use Helper?
 
 
 ==============================00._Ans: CMD: ========================
@@ -37,7 +42,9 @@ ROLBACK:-----
  > php artisan migrate:rollback (Rolback Last One migration)
  > php artisan migrate:refresh  (Rolback All migration)
 
-
+DATE:-------
+>php artisan tinker
+>config('app.timezone')
 
 ========================= 01.======================
 --
@@ -121,38 +128,79 @@ that's it.
 That's it.
 
 
-========================== 09. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table ====================================
 
-$OrderDetails = $this->OrderDetailsModel->where('order_tbl_id', $id)->get();
-             foreach($OrderDetails as $det){
-                $update  = $this->ProductModel
-                            ->where('id', $det->product_tbl_id)
-                            ->update(['quantity' => DB::raw('quantity -'.$det->product_qty)]);
-                //**Below query not working in this case
-                // $product = $this->ProductModel->where('id', $det->product_tbl_id)->get();
-                // $product->quantity = ($product->quantity-$det->product_qty);
-                // $update  = $product->save();
-             }
+================================== 09. How to set TimeZone & get and show Data to all views (pages)?   =============================================================
+GO TO App\Providers\AppServiceProvider File:
 
+use App\Models\GeneralSetting;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\View;
 
-======================== 10. How to insert data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table ==========
+public function boot(): void{
 
-$order=$this->OrderModel; 
-        $order->total           = $request->total;
-        $order->paid_ammount    = $request->paid_ammount;
-        $order->due             = $due;
-        
-        if ($order->save()) {
-            $contents= Cart::content();
-                foreach($contents as $content){                   
-                    $orderDetails= new OrderDetails(); //must have to create 'new model' inside the loop
-                        $orderDetails->order_tbl_id   = $order->id; 
-                        $orderDetails->product_tbl_id = $content->id;
-                        $orderDetails->product_qty    = $content->qty;
-                    $insert= $orderDetails->save();
-                }
------------------------------------------
+        $generalSetting=GeneralSetting::first();
+
+        // Set time zone
+        Config::set('app.timezone', $generalSetting->time_zone);
+
+        /* Share variable at all view */
+        View::composer('*', function($view) use ($generalSetting){
+            $view->with('settings', $generalSetting);
+        }); 
+    }
 
 
 
+================================== 10. How to PUT data ex: country, currency, etc. into a file inside the Config folder and use it in a Blade?  ==================================
+Go To "Config" Folder and Create a File(ex: Settings.php) & PUT Data:---
+<?php
+return  [
+    'currecy_list' => [
+        'Albania Lek' => 'ALL',
+        'Afghanistan Afghani' => 'AFN',
+      ],
+ 'time_zone' => [
+        'Pacific/Midway' => '(UTC-11:00) Midway',
+        'Pacific/Niue' => '(UTC-11:00) Niue',
+      ],
+];
+
+IN BLADE, Use data like the below:--------------
+          @foreach (config('settings.currecy_list') as $currency)
+                   <option {{@$generalSettings->currency_name == $currency ? 'selected' : ''}} value="{{$currency}}">{{$currency}}</option>
+          @endforeach
+
+
+======================================== 11. Why and How to Use Helper? ====================================================================================
+To Create reusable Functions and use any controller I want ex:
+
+-> I Create a helper.php inside the Helpher Folder 
+-> Add the file link into composer.json into the "autoload" section like below
+          "autoload": {
+                  "psr-4": {
+                      "App\\": "app/",
+                      "Database\\Factories\\": "database/factories/",
+                      "Database\\Seeders\\": "database/seeders/"
+                  },
+                  "files": [
+                      "app/Helpers/helpers.php"
+                  ]
+              },
+-> And Create a function for example:
+        function checkDiscount($product){
+            $currentDate = date('Y-m-d');
+            if($product->offer_price>0 && $currentDate >= $product->offer_start_date && $currentDate <= $product->offer_end_date){
+                return true;
+            }
+            return false;
+        }
+
+IN BLADE:------
+       @if(checkDiscount($product))
+           <h4>{{$settings->currency_icon}}{{number_format($product->offer_price)}} <del>${{number_format($product->price)}}</del></h4>
+       @else
+           <h4>{{$settings->currency_icon}}{{number_format($product->price)}} </h4>
+       @endif
+
+-------------------------------------------------
 

@@ -6,6 +6,8 @@ Date: 31-Aug-2023
 02. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table
 03. How to insert MULTIPLE data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table
 
+04. How to use CreateOrUpdate() what's the advantage of using it, the simple exception to using it?
+
 
 ============================== 00. Functions:  =============================
 
@@ -85,6 +87,26 @@ $order=$this->OrderModel;
                         $orderDetails->product_qty    = $content->qty;
                     $insert= $orderDetails->save();
                 }
+
+
+===============================04. How to use CreateOrUpdate() what's the advantage of using it, the simple exception to using it? ===================================
+
+CONTROLLER:-----------
+public function generalSettingUpdate(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'site_name'     => ['required', 'max:200']
+        ]);
+
+        GeneralSetting::updateOrCreate(
+            ['id' => 1],
+            [ 'site_name'=> $request->site_name ]
+        );
+
+MODEL:-----------
+protected $filable=['id', 'site_name']
+
 
 
 ============================== CRUD  and Excell download ==========================
@@ -258,7 +280,6 @@ class LoginController extends Controller
         $data['title'] = 'Fortgot password';
         return view('Login.forgot_password', $data);
     }
-
 
 
 }

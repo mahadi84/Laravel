@@ -1,7 +1,7 @@
 Date: 31-Aug-2023
 
 00. Functions: 
-            WHERE, LIKE, ORDER BY, INSERT ALL FIELDs except ONE, GET ONLY TWO FIELDs FROM A TABLE,
+            FIRST(),WHERE, LIKE, ORDER BY, INSERT ALL FIELDs except ONE, GET ONLY TWO FIELDs FROM A TABLE,
 01. How to VALIDATE input fields, CUSTOMIZE validation message, REDIRECT if the validation fails and Laravel, Ajax/Javascript Redirect?
 02. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table
 03. How to insert MULTIPLE data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table
@@ -10,7 +10,7 @@ Date: 31-Aug-2023
 
 
 ============================== 00. Functions:  =============================
-
+Model::First(); **Only Return the first row of the table.
 WHERE('email', 'like',  '%'.Request::get('email').'%')->get();
 WHERE('product_id', $request->product_id)->get()->orderBy('created_at');
 

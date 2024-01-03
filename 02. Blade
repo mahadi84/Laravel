@@ -2,7 +2,7 @@ Date: 31-Aug-2023
 
 01. DYNAMIC SELECT OPTION (ADD+EDIT)
 02. CHECKED-BOX Filled by  ARRAY data from Database
-03. 
+03. Functions used in Blade
 
 04. 
 05.1 1-Column Html input Field
@@ -50,7 +50,30 @@ Date: 31-Aug-2023
 @endforeach
 
 
-==================== 03. : ====================
+================= 03. Functions used in Blade =============================
+{{ Str::limit($news->description, 100) }}
+{!! $products->links() !!}
+
+@extends('layouts.app')
+
+
+@yield('content')
+@section('content')
+@endsection()
+
+
+@stack('scripts')
+@push('scripts')
+    <script>
+         $(document).on('submit', '.shopping-cart-form', function(e) {
+            e.preventDefault();
+        });
+    </script>
+@endpush
+
+@forelse()
+@empty
+@endforelse
 
 
 =========================== 04. =================================
@@ -123,30 +146,10 @@ Date: 31-Aug-2023
 
 
 
-================= 08. Functions used in Blade =============================
-{{ Str::limit($news->description, 100) }}
-{!! $products->links() !!}
-
-@extends('layouts.app')
+================= 08.  =============================
 
 
-@yield('content')
-@section('content')
-@endsection()
 
-
-@stack('scripts')
-@push('scripts')
-    <script>
-         $(document).on('submit', '.shopping-cart-form', function(e) {
-            e.preventDefault();
-        });
-    </script>
-@endpush
-
-@forelse()
-@empty
-@endforelse
 
 ======================== 09. Profile Image/Name Show before insert ====================
 <img  src="{{ (!empty(Auth::user()->image)) ? url('public/upload/user_images/'.Auth::user()->image):url('public/default_image.jpg') }}">

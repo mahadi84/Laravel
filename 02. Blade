@@ -128,9 +128,21 @@ Date: 31-Aug-2023
 {!! $products->links() !!}
 
 @extends('layouts.app')
+
+
+@yield('content')
 @section('content')
 @endsection()
-@yield('content')
+
+
+@stack('scripts')
+@push('scripts')
+    <script>
+         $(document).on('submit', '.shopping-cart-form', function(e) {
+            e.preventDefault();
+        });
+    </script>
+@endpush
 
 @forelse()
 @empty

@@ -48,7 +48,7 @@ BLADE:
 
 
 --------
-
+$(document).on('submit', '.shopping-cart-form', function(e) {
 $("#submit_form").click(function(e){ 
 $('.delivery').on('click', function(e){
     e.preventDefault();

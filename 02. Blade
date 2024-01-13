@@ -4,16 +4,13 @@ Date: 31-Aug-2023
 02. CHECKED-BOX Filled by  ARRAY data from Database
 03. Functions used in Blade
 
-04. 
+04. Breez Authentication form
 05.1 1-Column Html input Field
 05.2 2-Column Html input Field
 
 06. Show Validation and CRUD Message
-07. 
-08.
+07. Image/Name Show
 
-09. Profile Image/Name Show before insert
-10. Breez Authentication form
 
 
 
@@ -76,8 +73,47 @@ Date: 31-Aug-2023
 @endforelse
 
 
-=========================== 04. =================================
+========================== 04. Breez Authentication form  =====================
+LOGOUT-BUTTON:--
+    <form method="POST" action="{{ route('logout')}}">
+        @csrf
+    <a href='#' onclick="event.preventDefault();  this.closest('form').submit();">   Log Out    </a>
+   </form>
+   
 
+LOGIN BLADE:--
+    <form  action="{{ route('login') }}" method="POST">
+    <input name="email"     type="email" value="{{old('email')}}">
+    <input name="password"  type="password">
+
+REGISTER BLADE:--
+    <form method="POST" action="{{ route('register') }}">
+    <input name="name"  type="name" value="{{old('name')}}">
+    <input name="email"  type="email" value="{{old('email')}}">
+    <input name="password"  type="password">
+    <input name="password_confirmation"  type="password">
+
+RESET PASSWORD (Link received through Email):--
+    <form method="POST" action="{{ route('password.store') }}">
+    <input type="hidden" name="token" value="{{ $request->route('token') }}">
+    <input name="email"  type="email" value="{{old('email', $request->email)}}">
+    <input name="password"  type="password">
+        <span class="text-danger">{{ $errors->first('password') }}</span>
+    <input name="password_confirmation"  type="password">
+         <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+
+
+FORGOT PASSWORD (Email Request Form):--
+    <form method="POST" action="{{ route('password.email') }}">
+    <input name="email"  type="email" value="{{old('email')}}">
+
+
+CONFIRM PASSWORD:---
+    <form method="POST" action="{{ route('password.confirm') }}">
+    <input type="password" name="password" autocomplete="current-password" />
+
+
+UPDATE PROFILE:
 
 
 
@@ -140,64 +176,19 @@ Date: 31-Aug-2023
         </div>
 @endif      -->
 
-============================== 07.   =======================
-
-
-
-
-
-================= 08.  =============================
-
-
-
-
-======================== 09. Profile Image/Name Show before insert ====================
+======================== 07. Profile Image/Name Show ====================
 <img  src="{{ (!empty(Auth::user()->image)) ? url('public/upload/user_images/'.Auth::user()->image):url('public/default_image.jpg') }}">
 <span>{{ !empty(Auth::user()->name) ? Auth::user()->name: '' }}</span>
 
 
 
-========================== 10. Breez Authentication form  =====================
-LOGOUT-BUTTON:--
-    <form method="POST" action="{{ route('logout')}}">
-        @csrf
-    <a href='#' onclick="event.preventDefault();  this.closest('form').submit();">   Log Out    </a>
-   </form>
-   
-
-LOGIN BLADE:--
-    <form  action="{{ route('login') }}" method="POST">
-    <input name="email"     type="email" value="{{old('email')}}">
-    <input name="password"  type="password">
-
-REGISTER BLADE:--
-    <form method="POST" action="{{ route('register') }}">
-    <input name="name"  type="name" value="{{old('name')}}">
-    <input name="email"  type="email" value="{{old('email')}}">
-    <input name="password"  type="password">
-    <input name="password_confirmation"  type="password">
-
-RESET PASSWORD (Link received through Email):--
-    <form method="POST" action="{{ route('password.store') }}">
-    <input type="hidden" name="token" value="{{ $request->route('token') }}">
-    <input name="email"  type="email" value="{{old('email', $request->email)}}">
-    <input name="password"  type="password">
-        <span class="text-danger">{{ $errors->first('password') }}</span>
-    <input name="password_confirmation"  type="password">
-         <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
 
 
-FORGOT PASSWORD (Email Request Form):--
-    <form method="POST" action="{{ route('password.email') }}">
-    <input name="email"  type="email" value="{{old('email')}}">
 
 
-CONFIRM PASSWORD:---
-    <form method="POST" action="{{ route('password.confirm') }}">
-    <input type="password" name="password" autocomplete="current-password" />
 
 
-UPDATE PROFILE:
+
 
 
 

@@ -36,24 +36,40 @@ BLADE:
 
 MASTER-BLADE:  @stack('scripts')
 --------
-var name = $("input[name=name]").val();
- if(name.length > 2){ }
+
+ $('.delivery').on('click', function(){
+        var data-id_value = $(this).data('id');
+        var input_value = $(this).val();
+        var input_value = $('#showEmail').val();
+        var input_value = $(this).siblings('.product-qty'); // Grab input field value with class="peoduct-qty"
+        var input_value = $("input[name=name]").val(); // Grab Specific field value
+            if(input_value.length > 2){
+                alert('Hello');
+                console.log('Hello');
+            }
+        var data = $("#MyForm").serialize()
+}
+
+
+
+ 
 
 type="text/javascript"
 $(document).ready(function(){ });
 $("#submit_form").click(function(e){  });
-$.ajax({ });
 e.preventDefault();
+$.ajax({ });
+type : '', data:'', url: ''
 success:function(response){};
 error:function(xhr){};
+
 $.each(xhr.responseJSON.errors, function(key,value) { });
 OR
 for (var i = 0; i < outputfromserver.length; i++) {  alert outputfromserver[0];  }
+OR
+for(var item in data){data['item']}
 
-var name = $("input[name=name]").val();
-type : '', data:'', url: ''
 $('#error-message').html('');
-$('#showEmail').val();
 $('#success-message').append('<div class="alert alert-success">'+response.message+'</div');
 $("#contact_form")[0].reset();
 

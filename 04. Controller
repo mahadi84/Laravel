@@ -7,6 +7,7 @@ Date: 31-Aug-2023
 03. How to insert MULTIPLE data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table
 
 04. How to use CreateOrUpdate(), what's the advantage of using it, the simple exception to using it?
+05. USE OF SESSION CLASS AND FUNCTIONs?
 
 
 ============================== 00. Functions:  =============================
@@ -109,6 +110,12 @@ protected $filable=['id', 'site_name']
 
 
 
+================05. Session(Class vs Function):==============
+use Illuminate\Support\Facades\Session;
+Session::put('coupon',['coupon_name' => $coupon->name,'discount' => $coupon->discount])
+Session::forget('coupon')
+session()->has('coupon')
+session()->get('coupon')['discount'];
 
 
 

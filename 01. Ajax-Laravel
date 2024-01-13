@@ -46,7 +46,7 @@ $(document).ready(function(){
         });
 
 $("#submit_form").click(function(e){ 
-$('.delivery').on('click', function(){
+$('.delivery').on('click', function(e){
     e.preventDefault();
         var data-id_value = $(this).data('id');
         var input_value = $(this).val();

@@ -1,44 +1,6 @@
 Date: 24-Aug-2023 
 
 
-
-<input class="product-qty"  data-id="{{$item->rowId}}" 
-       type="text" min="1" max="100" value="{{$item->qty}}" readonly /> 
-
-==============
-
-$('body').on('click', '.remove_sidebar_product', function(e) {
-$(document).on('submit', '.coupon-code-form', function(e) {
-$('.clear_cart').on('click', function(e){
-      e.preventDefault();
-    ----------
-})
-
-==============
-
-let formData = $(this).serialize();
-let rowId = $(this).data('id');
-
-let input = $(this).siblings('.product-qty'); ***get array value
-let quantity = parseInt(input.val()) - 1;
-    if(quantity<1){
-       quantity = 1;
-    }
-let rowId = input.data('id');
-      input.val(quantity);
-
-
-================Session(Class vs Function):==============
-use Illuminate\Support\Facades\Session;
-Session::put('coupon',['coupon_name' => $coupon->name,'discount' => $coupon->discount])
-Session::forget('coupon')
-session()->has('coupon')
-session()->get('coupon')['discount'];
-
-
-===============================================================================================================
-
-
 @if(Auth::user()->can('permission.menu'))
 @endif
 

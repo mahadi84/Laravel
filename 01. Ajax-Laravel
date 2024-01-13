@@ -60,12 +60,21 @@ $('.delivery').on('click', function(){
         var data = $("#MyForm").serialize()
 }
 
-
-$.ajax({ });
-type : '', data:'', url: ''
-success: function(data){if(data.status === 'success'){alert('hello')}},
-error: function(data){},
-error:function(xhr){};
+----
+$.ajax({
+method: 'POST',
+data: formData,
+url: "{{route('coupon-check')}}",
+success: function(data) {
+    if(data.status === 'success'){        
+        getCouponCalculation()
+        toastr.success(data.message);
+    }else if (data.status === 'error'){
+        toastr.error(data.message);
+    }
+},
+error: function(data) {}
+})
 
 $.each(xhr.responseJSON.errors, function(key,value) { });
 OR

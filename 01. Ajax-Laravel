@@ -34,7 +34,8 @@ BLADE:
  <script>--- </script>
 @endpush
 
-MASTER-BLADE:  @stack('scripts')
+MASTER-BLADE:  
+@stack('scripts')
 --------
 
  $('.delivery').on('click', function(){

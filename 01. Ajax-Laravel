@@ -10,9 +10,9 @@ DATE: 20-Sept-2023
         g) For loop to show multiple error message
 
 01. How to SHOW data get from the database into the input field with JSON? Ex: Show the Salary of an employee Or Get data, Selecting Options. 
-02. How do INSERT data into the table showing the validation message? Ex: While Website Contact Form data submission.
+02. How do INSERT data into the table showing the validation message? Ex: While Website CONTACT FORM data submission.
 03. How to UPDATE the status of a column with an Active/Inactive SWITCH-INDICATOR? Ex: To show/stop showing a menu/Employee/User etc.
-04. How to DELETE data with sweetalert2 and Ajax? Ex: Action button where All data shows 
+04. How to DELETE data with SWEETALERT2 and Ajax? Ex: Action button where All data shows 
 
 05. How to check if the Email is a duplicate in the db table? Ex: Check whether the email already exists before registration.
 06. How to preview an image before inserting it in html form?
@@ -29,22 +29,25 @@ DATE: 20-Sept-2023
 
 =========================== 00. Common syntax for JQUERY and AJAX; ===============================
 type="text/javascript"
+--
+MASTER-BLADE:
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+    @stack('scripts')
+
 BLADE:
     @push('scripts')
-     <script>--- </script>
-    @endpush
-
-MASTER-BLADE:  
-    @stack('scripts')
---------
-MASTER-BLADE: <meta name="csrf-token" content="{{ csrf_token() }}" />
-BLADE:
-    $(document).ready(function(){ 
-     $.ajaxSetup({
-        headers: {
+     <script>
+         $(document).ready(function(){ 
+         $.ajaxSetup({
+         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    </script>
+    @endpush
+
+
+--------
 
 $("#submit_form").click(function(e){ 
 $('.delivery').on('click', function(e){

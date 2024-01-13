@@ -37,7 +37,7 @@ BLADE:
 MASTER-BLADE:  
 @stack('scripts')
 --------
-BLADE: <meta name="csrf-token" content="{{ csrf_token() }}" />
+MASTER-BLADE: <meta name="csrf-token" content="{{ csrf_token() }}" />
 $(document).ready(function(){ 
  $.ajaxSetup({
             headers: {

@@ -59,15 +59,6 @@ Date: 31-Aug-2023
 @endsection()
 
 
-@stack('scripts')
-@push('scripts')
-    <script>
-         $(document).on('submit', '.shopping-cart-form', function(e) {
-            e.preventDefault();
-        });
-    </script>
-@endpush
-
 @forelse()
 @empty
 @endforelse

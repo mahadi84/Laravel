@@ -28,7 +28,7 @@ DATE: 20-Sept-2023
 
 
 =========================== 00. Common syntax for JQUERY and AJAX; ===============================
-
+type="text/javascript"
 BLADE:
 @push('scripts')
  <script>--- </script>
@@ -38,7 +38,10 @@ MASTER-BLADE:
 @stack('scripts')
 --------
 
- $('.delivery').on('click', function(){
+$(document).ready(function(){ 
+$("#submit_form").click(function(e){ 
+$('.delivery').on('click', function(){
+    e.preventDefault();
         var data-id_value = $(this).data('id');
         var input_value = $(this).val();
         var input_value = $('#showEmail').val();
@@ -52,16 +55,10 @@ MASTER-BLADE:
 }
 
 
-
- 
-
-type="text/javascript"
-$(document).ready(function(){ });
-$("#submit_form").click(function(e){  });
-e.preventDefault();
 $.ajax({ });
 type : '', data:'', url: ''
-success:function(response){};
+success: function(data){if(data.status === 'success'){alert('hello')}},
+error: function(data){},
 error:function(xhr){};
 
 $.each(xhr.responseJSON.errors, function(key,value) { });

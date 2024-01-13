@@ -61,7 +61,7 @@ $('.delivery').on('click', function(e){
                 alert('Hello');
                 console.log('Hello');
             }
-        var data = $("#MyForm").serialize()
+        var formData = $("#MyForm").serialize()
 }
 
 ----

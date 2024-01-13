@@ -63,7 +63,10 @@ $('.delivery').on('click', function(e){
             }
         var formData = $("#MyForm").serialize()
 }
-
+----Grab one data-ID's value and append it other ID's input-value----
+    $('.shipping_address').on('click', function(){
+            $('#shipping_address_id').val($(this).data('id'));
+    })
 ----
 $.ajax({
 method: 'POST',

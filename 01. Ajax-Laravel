@@ -49,8 +49,8 @@ BLADE:
 
 --------
 $('input[type="radio"]').prop('checked', false);
-$('#shipping_method_id').val("");
 if(!$('.agree_term').prop('checked')){}
+$('#shipping_method_id').val("");
 --
 $(document).on('submit', '.shopping-cart-form', function(e) {
 $("#submit_form").click(function(e){ 

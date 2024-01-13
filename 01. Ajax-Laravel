@@ -55,7 +55,7 @@ $('.delivery').on('click', function(e){
         var data-id_value = $(this).data('id');
         var input_value = $(this).val();
         var input_value = $('#showEmail').val();
-        var input_value = $(this).siblings('.product-qty'); // Grab input field value with class="peoduct-qty"
+        var input_value = $(this).siblings('.product-qty'); // Grab input field value from class="peoduct-qty"
         var input_value = $("input[name=name]").val(); // Grab Specific field value
             if(input_value.length > 2){
                 alert('Hello');

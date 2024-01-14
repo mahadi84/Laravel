@@ -49,6 +49,7 @@ BLADE:
 
 --------
 $('input[type="radio"]').prop('checked', false);
+$('.term_condition').prop('checked'); //when term and condion is ticked.
 if(!$('.agree_term').prop('checked')){}
 $('#shipping_method_id').val("");
 --
@@ -66,6 +67,8 @@ $('.delivery').on('click', function(e){
                 console.log('Hello');
             }
         var formData = $("#MyForm").serialize()
+        
+        if(!$('.term_condition').prop('checked')){ alert('read and tick to confirm the condiion')}
 }
 ----Grab one data-ID's value and append it other ID's input-value----
     $('.shipping_address').on('click', function(){

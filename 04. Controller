@@ -111,9 +111,16 @@ protected $filable=['id', 'site_name']
 
 
 ================05. Session(Class vs Function):==============
+
 use Illuminate\Support\Facades\Session;
+
+CLASS:------
 Session::put('coupon',['coupon_name' => $coupon->name,'discount' => $coupon->discount])
+Session::has('coupon')
+Session::get('coupon')['discount'];
 Session::forget('coupon')
+
+FUNCTION:----
 session()->has('coupon')
 session()->get('coupon')['discount'];
 

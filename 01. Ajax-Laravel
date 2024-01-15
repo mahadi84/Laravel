@@ -68,7 +68,9 @@ $('.delivery').on('click', function(e){
             }
         var formData = $("#MyForm").serialize()
         
-        if(!$('.term_condition').prop('checked')){ alert('read and tick to confirm the condiion')}
+        if(!$('.term_condition').prop('checked')){ 
+             window.location.reload(); OR window.location.href = data.redirect_url;
+            }
 }
 ----Grab one data-ID's value and append it other ID's input-value----
     $('.shipping_address').on('click', function(){

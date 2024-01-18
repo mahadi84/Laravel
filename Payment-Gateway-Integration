@@ -14,8 +14,16 @@ NEED TO KNOW About PAYPAL:--
 --Catch Token, Transaction ID 
   **and insert into Order, Order_Product, and Transaction Table and Clear the Cart-Session
 
+BLADE:
+    <a class="nav-link common_btn text-center" href="{{route('user.paypal-payment')}}">Pay with Paypal</a>
+
+ROUTE:
+    Route::get('paypal/payment', [PaymentController::class, 'payWithPaypal'])->name('paypal-payment');
+    Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal-success');
+    Route::get('paypal/cancel',  [PaymentController::class, 'paypalCancel'])->name('paypal-cancel');
+
 CONTROLLER:--
-use Srmklive\PayPal\Services\PayPal as PayPalClient;
+    use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
     public function paypalConfig(){
         //I've created this Model only for dynamically insert and get client-id, Currencty_name etc. 

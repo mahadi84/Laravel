@@ -3,7 +3,11 @@ PAYPAL INTEGRATION:
 ------------------
 **Need two Paypal accounts, One is to receive money(Seller) other is dropbox(Buyer) account to pay.
 
-// Configuration
+WEBSITE: https://srmklive.github.io/laravel-paypal/docs.html#section-2
+
+CONTROLLER:--
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
+
     public function paypalConfig(){
         //I've created this Model only for dynamically insert and get client-id, Currencty_name etc. 
         $paypalSetting = PaymentPaypalSetting::first();

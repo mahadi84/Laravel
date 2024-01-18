@@ -217,15 +217,12 @@ REVERT:
     $address = json_decode($order->address);
 
 PRINT:
-
- @foreach ($order->orderProducts as $product)
-          @php
-              $variants = json_decode($product->variants);
-          @endphp                           
-              @foreach ($variants as $key => $variant)
-                <b>{{$key}}:</b> {{$variant->name}}{{$variant->price}} 
-              @endforeach                          
-          @endforeach
+   @foreach ($order->orderProducts as $product)
+        $variants = json_decode($product->variants);                      
+          @foreach ($variants as $key => $variant)
+            <b>{{$key}}:</b> {{$variant->name}}{{$variant->price}} 
+          @endforeach                          
+    @endforeach
 
     <b>Name:</b> {{$address->name}}<br>
     <b>Email: </b> {{$address->email}}<br>

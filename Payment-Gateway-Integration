@@ -5,6 +5,15 @@ PAYPAL INTEGRATION:
 
 WEBSITE: https://srmklive.github.io/laravel-paypal/docs.html#section-2
 
+NEED TO KNOW About PAYPAL:-- 
+--Configuration(Array)
+--Create Object from Paypal-Class
+--Built-in functions 
+--Built-in Jason-Array
+--Catch 1 URL from  Returned 4 URLs/Links 
+--Catch Token, Transaction ID 
+  **and insert into Order, Order_Product, and Transaction Table and Clear the Cart-Session
+
 CONTROLLER:--
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
@@ -99,8 +108,7 @@ use Srmklive\PayPal\Services\PayPal as PayPalClient;
         return redirect()->route('user.payment-cancel');
     }
 
-    public function paypalCancel()
-    {
+    public function paypalCancel(){
         return redirect()->route('user.payment')->with('error','Someting went wrong try agin later!');
     }
 =============================================

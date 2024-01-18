@@ -24,6 +24,23 @@ WEBSITE: https://srmklive.github.io/laravel-paypal/docs.html#section-2
        --Catch Token, Transaction ID 
          **and insert into Order, Order_Product, and Transaction Table and Clear the Cart-Session
 
+**MODEL & TABLE:
+         Model-Name: PaymentPaypalSetting;
+
+         CREATE TABLE payment_paypal_settings(
+           id int(1)  NOT NULL,
+           status tinyint(1) NOT NULL,
+           mode tinyint(1) NOT NULL, //**Live or Dropbox
+           country_name varchar(255) NOT NULL,
+           currency_name varchar(255) NOT NULL,
+           currency_rate double NOT NULL,
+           client_id text NOT NULL,
+           secret_key text NOT NULL,
+             created_at timestamp NULL DEFAULT NULL,
+             updated_at timestamp NULL DEFAULT NULL
+         );
+
+
 BLADE:
     <a class="nav-link common_btn text-center" href="{{route('user.paypal-payment')}}">Pay with Paypal</a>
 

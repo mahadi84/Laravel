@@ -1,9 +1,11 @@
 
 PAYPAL INTEGRATION:
 ------------------
-**Need two Paypal accounts, One is to receive money(Seller) other is dropbox(Buyer) account to pay.
-
 WEBSITE: https://srmklive.github.io/laravel-paypal/docs.html#section-2
+
+
+**FOR TESTING: Need two Paypal accounts, One is to receive money(Seller) other is dropbox(Buyer) account to pay.
+
 
 NEED TO KNOW About PAYPAL:-- 
 --Configuration(Array)

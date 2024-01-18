@@ -126,6 +126,8 @@ CONTROLLER:--
         return redirect()->route('user.payment-cancel');
     }
 
+***user.paypal-success/cancel & user.payment-success/cancel, these two are different routes, Don't get confused.
+
     public function paypalCancel(){
         return redirect()->route('user.payment')->with('error','Someting went wrong try agin later!');
     }

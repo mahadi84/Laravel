@@ -21,6 +21,8 @@
 10. How to PUT data ex: country, currency, etc. into a file inside the Config folder and use it in a Blade?
 11. Why and How to Use Helper?
 
+12. How to convert, revert and print, Array-Data or Session-Array-Data into JSON?
+
 
 ==============================00._Ans: CMD: ========================
 
@@ -202,5 +204,25 @@ IN BLADE:------
            <h4>{{$settings->currency_icon}}{{number_format($product->price)}} </h4>
        @endif
 
--------------------------------------------------
 
+
+===================================================== 12. How to convert, revert and print, Array-Data or Session-Array-Data into JSON? =======================
+
+CONVERT:
+    $product->variants = json_encode($item->options->variants);
+    $order->address = json_encode(Session::get('address'));
+
+REVERT:
+    $shipping = json_decode($product->variants);
+    $address = json_decode($order->address);
+
+PRINT:
+    <b>Name:</b> {{$address->name}}<br>
+    <b>Email: </b> {{$address->email}}<br>
+    <b>Phone:</b> {{$address->phone}}<br>
+    <b>Address:</b> {{$address->address}},<br>
+    {{$address->city}}, {{$address->state}}, {{$address->zip}}<br>
+    {{$address->country}}
+   
+
+=====================

@@ -1,4 +1,4 @@
-01. What to add in Blade and Controller
+01. What to add in Blade and Controller and ADVANCE TOPIC
 02. How to SHOW/ADD:
     A> EDIT and DELETE Button
     B> IF/ELSE data show like ACTIVE/INACTIVE
@@ -34,13 +34,28 @@ use App\DataTables\UsersDataTable;
         return $dataTable->render('admin.user.index', $data);
     }
 
-======================= DATA/BUTTON-SHOW ===================================
-00) Filter search for join-table-data: Example: in between ORDER and TRANSACTION table
+========================Advance Topic =====================================
+01) 
+//Filter search for join-table-data: Example: in between ORDER and TRANSACTION table
 ->filterColumn('invoice_id', function($query, $keyword){
                 $query->whereHas('order', function($query) use ($keyword){
                     $query->where('invocie_id', 'like', "%$keyword%");
                 });
             })
+
+
+02) 
+//Filter the own product only from orderProduct table where Admin, Vendor both has product ordered by user
+public function query(Order $model): QueryBuilder{
+        return $model::whereHas('orderProducts', function($query){
+            $query->where('vendor_id', Auth::user()->vendor->id);
+        })->newQuery();
+    }
+
+
+
+======================= DATA/BUTTON-SHOW ===================================
+
 
 
 A) ->addColumn('action', function($query) {

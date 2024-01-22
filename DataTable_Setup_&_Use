@@ -45,7 +45,7 @@ use App\DataTables\UsersDataTable;
 
 
 02) 
-//Filter the own product only from orderProduct table where Admin, Vendor both has product ordered by user
+//Filter and SHOW Only the own(vendor's) product from orderProduct table where Admin, Vendor both has product ordered by user
 public function query(Order $model): QueryBuilder{
         return $model::whereHas('orderProducts', function($query){
             $query->where('vendor_id', Auth::user()->vendor->id);

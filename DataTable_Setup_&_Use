@@ -35,6 +35,14 @@ use App\DataTables\UsersDataTable;
     }
 
 ======================= DATA/BUTTON-SHOW ===================================
+00) Filter search for join-table-data: Example: in between ORDER and TRANSACTION table
+->filterColumn('invoice_id', function($query, $keyword){
+                $query->whereHas('order', function($query) use ($keyword){
+                    $query->where('invocie_id', 'like', "%$keyword%");
+                });
+            })
+
+
 A) ->addColumn('action', function($query) {
             $editBtn = "<a href='". route('admin.product.edit', $query->id) ."' class='btn btn-primary btn-sm'><i class='far fa-edit'></i></a>";
             $deleteBtn = "<a href='". route('admin.product.destroy', $query->id) ."' class='btn btn-danger btn-sm ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";

@@ -8,61 +8,89 @@ A Traits:-- provide a set of methods that can be mixed into multiple classes to 
 
 =================================== CODE  =====================
 <?php
+
 namespace App\Traits;
 use Illuminate\Http\Request;
+use Image;
 use File;
 use Str;
 
+
 trait ImageUploadTrait{
-    
-function uploadImage(Request $request, $inputName, $path){
+                                                 //'logo','500,600','uploads/logo'
+    public function uploadImage(Request $request, $inputName, $imgSize, $path){
         if($request->hasFile($inputName)){
             $image = $request->{$inputName};
             $ext = $image->getClientOriginalExtension();
             $randomStr= Str::random(30);
             $imageName = $randomStr.'.'.$ext;
-            $image->move(public_path($path), $imageName);
+
+            // $image->move(public_path($path), $imageName);
+
+                $img = explode(",", trim($imgSize));
+                $imgWidth = $img[0];
+                $imgHeight = $img[1];
+  
+            Image::make($image)->resize($imgWidth, $imgHeight)
+                                  ->save(public_path('uploads/'.$path.'/'.$imageName));
+
            return $imageName;
         }
     }
+                                                      //'logo','500,600','uploads/logo' 
+    public function uploadMultiImage(Request $request, $inputName, $imgSize, $path){
+        $allImages = [];        
+            if($request->hasFile($inputName)){
+                $images = $request->{$inputName};
+                foreach($images as $image){
+                    $ext = $image->getClientOriginalExtension();
+                    $randomStr= Str::random(30);
+                    $imageName = $randomStr.'.'.$ext;
 
-    public function uploadMultiImage(Request $request, $inputName, $path){
-        $readyImage = [];        
-        if($request->hasFile($inputName)){
-            $images = $request->{$inputName};
-            foreach($images as $image){
-                $ext = $image->getClientOriginalExtension();
-                $randomStr= Str::random(30);
-                $imageName = $randomStr.'.'.$ext;
-                $image->move(public_path($path), $imageName);
-                $readyImage[] =  $imageName;
-            }
-            return $readyImage;
-       }
+                        $img = explode(",", trim($imgSize));
+                        $imgWidth = $img[0];
+                        $imgHeight = $img[1];
+          
+                    Image::make($image)->resize($imgWidth, $imgHeight)
+                                          ->save(public_path('uploads/'.$path.'/'.$imageName));
+                    
+                    $allImages[] =  $imageName;  
+                }
+
+                return $allImages;
+        }
     }
 
-    public function updateImage(Request $request, $inputName, $path, $oldImage){
-        if($request->hasFile($inputName)){                      
-            if(File::exists(public_path( $path.'/'.$oldImage))){
-                File::delete(public_path( $path.'/'.$oldImage));
+                                               //'logo','500,600','uploads/logo', oldImage(Get_it_from_query) 
+    public function updateImage(Request $request, $inputName, $imgSize, $path, $oldImage){
+
+        if($request->hasFile($inputName)){                     
+            if(File::exists(public_path('uploads/'.$path.'/'.$oldImage))){
+                File::delete(public_path('uploads/'.$path.'/'.$oldImage));
             }
             $image = $request->{$inputName};
             $ext = $image->getClientOriginalExtension();
             $randomStr= Str::random(30);
             $imageName = $randomStr.'.'.$ext;
-            $image->move(public_path($path), $imageName);
+
+
+                $img = explode(",", trim($imgSize));
+                $imgWidth = $img[0];
+                $imgHeight = $img[1];
+ 
+            Image::make($image)->resize($imgWidth, $imgHeight)
+                                  ->save(public_path('uploads/'.$path.'/'.$imageName));
+
            return $imageName;
        }
     }
 
 
-     /** Handle Delte File */
-    public function deleteImage($path, $image){
-        if(File::exists(public_path( $path.'/'.$image))){
-            File::delete(public_path( $path.'/'.$image));
+                                //'uploads/logo', $query->image, 
+     public function deleteImage($path, $image){
+        if(File::exists(public_path('uploads/'.$path.'/'.$image))){
+            File::delete(public_path('uploads/'.$path.'/'.$image));
         }
      }
    
 }
-
-

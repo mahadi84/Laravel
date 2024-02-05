@@ -1,4 +1,10 @@
 
+@if ($products->hasPages())
+     {{$products->withQueryString()->links('pagination::bootstrap-4')}}
+@endif
+
+
+
 #pagination,
 #pagination2 {
   margin-top: 30px;

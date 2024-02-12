@@ -1,0 +1,104 @@
+
+
+
+BLADE-FRONTEND(show in nav-bar):
+========================
+@php
+    $categories = \App\Models\Category::where('status', 1)
+    ->with(['subCategoryTable' => function($query){
+        $query->where('status', 1)
+        ->with(['childCategoryTable' => function($query){
+            $query->where('status', 1);
+        }]);
+    }])
+    ->get();
+@endphp
+<nav>
+<ul class="wsus_menu_cat_item show_home toggle_menu">
+        @forelse($categories as $cat)
+            <li><a class=" {{ count($cat->subCategoryTable) > 0 ? 'wsus__droap_arrow' : '' }}" href="{{route('products.index',['category'=>$cat->slug])}}"><i class="{{$cat->icon}}"></i> {{$cat->name}} </a>
+            @if(count($cat->subCategoryTable) > 0 )                          
+                <ul class="wsus_menu_cat_droapdown"> 
+                    @foreach($cat->subCategoryTable as $subCat)                             
+                        <li><a href="{{route('products.index',['sub_category'=>$subCat->slug])}}">{{ $subCat->name}} <i class="{{ count($subCat->childCategoryTable) > 0 ? 'fas fa-angle-right' : '' }}"></i></a>
+                        @if( count($subCat->childCategoryTable) > 0)
+                            <ul class="wsus__sub_category">     
+                            @foreach($subCat->childCategoryTable as $childCat)                                                                           
+                               <li><a href="{{route('products.index',['child_category'=>$childCat->slug])}}">{{$childCat->name}}</a> </li>                                        
+                            @endforeach
+                            </ul>
+                        @endif
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+            </li>
+        @empty                        
+        @endforelse
+  <!-- <li><a href="#"><i class="fas fa-home-lg-alt"></i> Home & Garden</a></li> -->
+</ul>
+</nav>
+
+BACKEND INSERT-FORM with JQUERY:
+================================
+<div class='row'>
+<div class="col-md-4">
+    <div class="mb-3">
+        <label for="category_id" class="form-label">Category Name</label>
+        <select class="form-control main-category" name="category_id" >
+        <option selected disabled>Select category name</option>
+        @forelse($category as $cat)
+           <option value="{{ $cat->id }}" {{ ( old('category_id') == $cat->id ) ? ' selected' : '' }}>{{ $cat->name }}</option>
+        @empty
+          <option> 'No Users available in Database' </option>                              
+        @endforelse                         
+    </select>
+        <span class="text-danger">{{ $errors->first('category_id') }}</span>  
+    </div>
+</div>
+</div> <!---end row--->
+
+<div class='row'>
+<div class="col-md-4">
+    <div class="mb-3">
+        <label for="name" class="form-label">Select Sub Category</label>
+        <select class="form-control sub-category" name="sub_category_id" >
+        <option selected disabled>Select sub category</option>         
+    </select>
+    </div>
+</div>
+
+</div> <!---end row--->
+
+
+@push('scripts')
+<script>
+        $(document).ready(function(){
+            $('body').on('change', '.main-category', function(e){
+                let id = $(this).val();
+
+                $.ajax({
+                    method: 'GET',
+                    url: "{{route('admin.subcategory.get-sub-categories')}}",
+                    data: {
+                        id:id
+                    },
+                    success: function(data){
+                        $('.sub-category').html('<option value="">Select Sub Category</option>')
+
+                        $.each(data, function(i, item){
+                            $('.sub-category').append(`<option value="${item.id}">${item.name}</option>`)
+                        })
+                    },
+                    error: function(xhr, status, error){
+                        console.log(error);
+                    }
+                })
+            })
+        });
+
+</script>
+@endpush
+
+
+===============================

@@ -107,11 +107,18 @@ CONTROLLER:---------
                     $category= App\Models\ChildCategory::find($lastKey['child_category']);
                     $products[]= \App\Models\Product::where(['child_category_id'=>$category->id, 'status'=>1])->take(12)->get();
                   };
-                
+
                 @endphp 
             <button class="{{ $loop->index === 0 ? 'auto_click active' : '' }}" data-filter=".category-{{$loop->index}}">{{ $category->name}}</button>
         @endforeach
 
+//Show Product
+ @forelse($products as $key => $product)
+     @forelse($product as $item)
+        $item->product;
+        $item->thumb_image;
+     @endforelse
+@endforelse
 
 ---------JSON_ARRAY INSERT CONTROLLER:----------
  public function createOrUpdatePopular(Request $request){

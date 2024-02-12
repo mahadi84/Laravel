@@ -1,5 +1,40 @@
+
+01. How to get and show Products by 
+               a) MENU(Cat/Sub_Cat/Child_Cat)
+               b) SEARCH-BOX
+               c) BRAND-WISE
+               d) CATEGORY-WISE
+               e) PRICE-RANGE-WISE
+
+
+
 BLADE:
-PRICE-RANGE-WISE-SEARCH:-------
+A)MENU(Cat/Sub_Cat/Child_Cat)-SEARCH:  <li> href="{{route('products.index',['category'=>$cat->slug])}}"><i class="{{$cat->icon}}"></i> {{$cat->name}} </a>
+
+B)SEARCH-BOX-SEARCH:----
+   <form action="{{url()->current()}}">
+     <input type="text" name="search" value="{{request()->search}}" placeholder="Search...">
+     <button type="submit"><i class="far fa-search"></i></button>
+  </form>
+
+C)BRAND-WISE-SEARCH:--------
+    <ul>
+    @forelse ($brands as $brand )
+    <li><a href="{{route('products.index',['brand'=>$brand->slug])}}">{{$brand->name}}</a></li>
+    @empty
+         No Brands Available
+    @endforelse
+    </ul>
+
+D)CATEGORY-WISE-SEARCH:------
+     @forelse ($categories as $category )
+    <li><a href="{{route('products.index',['category'=>$category->slug])}}">{{$category->name}}</a></li>
+    @empty
+    No Category Available
+    @endforelse
+
+
+E)PRICE-RANGE-WISE-SEARCH:-------
      <form action="{{url()->current()}}">
     @foreach (request()->query() as $key => $value)
     @if($key != 'range')
@@ -9,36 +44,15 @@ PRICE-RANGE-WISE-SEARCH:-------
     <input type="text" class="form-control" name="range" placeholder="from-to" value="{{request()->range}}"/>
     <button type="submit" class="common_btn mt-2">filter</button>
     </form>
-BRAND-WISE-SEARCH:--------
-    <ul>
-    @forelse ($brands as $brand )
-    <li><a href="{{route('products.index',['brand'=>$brand->slug])}}">{{$brand->name}}</a></li>
-    @empty
-         No Brands Available
-    @endforelse
-    </ul>
-CATEGORY-WISE-SEARCH:------
-     @forelse ($categories as $category )
-    <li><a href="{{route('products.index',['category'=>$category->slug])}}">{{$category->name}}</a></li>
-    @empty
-    No Category Available
-    @endforelse
-SEARCH-BOX-SEARCH:----
-   <form action="{{url()->current()}}">
-     <input type="text" name="search" value="{{request()->search}}" placeholder="Search...">
-     <button type="submit"><i class="far fa-search"></i></button>
-  </form>
 
+-----------------------------------
+ROUTE: Route::get('products', [FrontendProducController::class, 'index'])->name('products.index');
 
-
-CONTROLLER:
+CONTROLLER:----------
 <?php
-
 namespace App\Http\Controllers\Frontend;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\Brand;

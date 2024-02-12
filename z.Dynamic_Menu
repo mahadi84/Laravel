@@ -1,8 +1,8 @@
-
-
+MENU->SUB_MENU->CHILD_MENU
+***If No child-menu, stop to sub_menu ***If No sub-menu, stop to menu
 
 BLADE-FRONTEND(show in nav-bar):
-========================
+===============================
 @php
     $categories = \App\Models\Category::where('status', 1)
     ->with(['subCategoryTable' => function($query){
@@ -101,4 +101,99 @@ BACKEND INSERT-FORM with JQUERY:
 @endpush
 
 
-===============================
+=============================== ADD PRODUCT to MENU =========================================
+<div class='row'>
+
+<div class="col-md-4">
+    <div class="mb-3">
+        <label for="category_id" class="form-label">Category</label>
+        <select class="form-control main-category" name="category_id" >
+          <option selected disabled>Select category</option>
+          @forelse($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+          @empty
+            <option> 'No Users available in Database' </option>                              
+          @endforelse                         
+       </select>
+        <span class="text-danger">{{ $errors->first('category_id') }}</span>  
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="mb-3">
+        <label for="sub_category_id" class="form-label" >Sub Category</label>
+        <select class="form-control sub-category" name="sub_category_id" >
+          <option value=''>Select sub category</option>
+        </select>
+        <span class="text-danger">{{ $errors->first('sub_category_id') }}</span>  
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="mb-3">
+        <label for="child_category_id" class="form-label">Child Category</label>
+        <select class="form-control child-category" name="child_category_id" >
+          <option value=''>Select child category</option>
+        </select>
+        <span class="text-danger">{{ $errors->first('child_category_id') }}</span>  
+    </div>
+</div>
+
+</div> <!---end row--->
+
+
+@push('scripts')
+        <script>
+                $(document).ready(function(){
+                  // Category   
+                    $('body').on('change', '.main-category', function(e){
+                        let id = $(this).val();
+
+                        $.ajax({
+                            method: 'GET',
+                            url: "{{route('admin.product.get-sub-categories')}}",
+                            data: {
+                                id:id
+                            },
+                            success: function(data){
+                                $('.sub-category').html('<option value="">Select Sub Category</option>')
+        
+                                $.each(data, function(i, item){
+                                    $('.sub-category').append(`<option value="${item.id}">${item.name}</option>`)
+                                })
+                            },
+                            error: function(xhr, status, error){
+                                console.log(error);
+                            }
+                        })
+                    })
+        
+                   // Sub Category and Child Category        
+                   $('body').on('change', '.sub-category', function(e){
+                        let id = $(this).val();
+        
+                        $.ajax({
+                            method: 'GET',
+                            url: "{{route('admin.product.get-child-categories')}}",
+                            data: {
+                                id:id
+                            },
+                            success: function(data){
+                                $('.child-category').html('<option value="">Select Child Category</option>')
+        
+                                $.each(data, function(i, item){
+                                    $('.child-category').append(`<option value="${item.id}">${item.name}</option>`)
+                                })
+                            },
+                            error: function(xhr, status, error){
+                                console.log(error);
+                            }
+                        })
+                    })
+        
+                });
+        </script>
+
+@endpush
+
+============

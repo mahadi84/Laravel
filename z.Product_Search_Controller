@@ -1,3 +1,29 @@
+BLADE:
+PRICE-RANGE-WISE-SEARCH:-------
+     <form action="{{url()->current()}}">
+    @foreach (request()->query() as $key => $value)
+    @if($key != 'range')
+        <input type="hidden" name="{{$key}}" value="{{$value}}" />
+    @endif
+    @endforeach
+    <input type="text" class="form-control" name="range" placeholder="from-to" value="{{request()->range}}"/>
+    <button type="submit" class="common_btn mt-2">filter</button>
+    </form>
+BRAND-WISE-SEARCH:--------
+    <ul>
+    @forelse ($brands as $brand )
+    <li><a href="{{route('products.index',['brand'=>$brand->slug])}}">{{$brand->name}}</a></li>
+    @empty
+         No Brands Available
+    @endforelse
+    </ul>
+CATEGORY-WISE-SEARCH:------
+     @forelse ($categories as $category )
+    <li><a href="{{route('products.index',['category'=>$category->slug])}}">{{$category->name}}</a></li>
+    @empty
+    No Category Available
+    @endforelse
+SEARCH-BOX-SEARCH:----
 
 
 

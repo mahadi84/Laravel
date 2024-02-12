@@ -1,6 +1,40 @@
 MENU->SUB_MENU->CHILD_MENU
 ***If No child-menu, stop to sub_menu ***If No sub-menu, stop to menu
 
+================ MENU(CATEGORIES) ================
+
+CREATE TABLE categories( 
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        icon VARCHAR(255) NOT NULL,
+        name VARCHAR(200) NOT NULL UNIQUE,
+        slug VARCHAR(500) NOT NULL,
+        status tinyint(1) NOT NULL DEFAULT 1,
+  	      created_at timestamp NULL DEFAULT NULL,
+	      updated_at timestamp NULL DEFAULT NULL
+        );
+
+CREATE TABLE sub_categories( 
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        category_id INT NOT NULL,
+        name VARCHAR(200) NOT NULL UNIQUE,
+        slug VARCHAR(500) NOT NULL,
+        status tinyint(1) NOT NULL,
+  	      created_at timestamp NULL DEFAULT NULL,
+	      updated_at timestamp NULL DEFAULT NULL
+        );
+
+CREATE TABLE child_categories( 
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        category_id INT NOT NULL,
+        sub_category_id INT NOT NULL,
+        name VARCHAR(200) NOT NULL UNIQUE,
+        slug VARCHAR(500) NOT NULL,
+        status tinyint(1) NOT NULL,
+  	      created_at timestamp NULL DEFAULT NULL,
+	      updated_at timestamp NULL DEFAULT NULL
+        );
+
+
 
 =============================== BLADE-FRONTEND(show in nav-bar): ============================
 @php

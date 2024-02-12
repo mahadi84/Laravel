@@ -1,4 +1,6 @@
 JSON= Javascript Object Notation.
+
+
 =================SHOW JSON DATA TO FRONEND:=================
 CONTROLLER: 
  $homepage_secion_banner_two = Advertisement::where('key', 'homepage_secion_banner_two')->first();
@@ -8,9 +10,6 @@ BLADE:
 {{@$homepage_secion_banner_two->banner_one->status == 1 ? 'checked':''}}
 {{@$homepage_secion_banner_two->banner_one->image}}
 {{$homepage_secion_banner_two->banner_two->banner_image}}
-
-
-
 
 
 DATA RECEIVE, ENCODE to JSON and INSERT TO A TABLE :
@@ -61,4 +60,87 @@ CONTROLLER:---------
             ['value' => $value]
         );
         return redirect()->back()->with('success', 'Updated Successfully!');
+    }
+
+
+
+
+======================================= ARRAY JSON DATA SHOW =====================================
+----------JSON_ARRAY in TABLE:-----
+[{"category":"15","sub_category":null,"child_category":null},{"category":"1","sub_category":"1","child_category":null},
+{"category":"8","sub_category":null,"child_category":null},{"category":"14","sub_category":null,"child_category":null}]
+
+-----------------ROUTE:---------------------------------------
+ $data['popularCategorySection']= HomePageSetting::where('key', 'popular_category_section')->first();
+
+---------------- BLADE ---------------------------
+ @php
+   $popularCategories = json_decode($popularCategorySection->value, true);
+ @endphp
+
+        @php
+        $products = [];
+        @endphp
+            
+        @foreach($popularCategories as $popularCategory)
+                @php
+                 $lastKey= [];
+                    foreach ($popularCategory as $key => $item){
+                        if( $item === null) {
+                            break;
+                        }
+                        // grab the last non-zero-value befor zero
+                        $lastKey = [$key => $item];                 
+                    }
+
+               
+                  if(array_keys($lastKey)[0] == 'category'){
+                    $category= \App\Models\Category::find($lastKey['category']);
+                    $products[]= \App\Models\Product::where(['category_id'=>$category->id, 'status'=>1])->take(12)->get();
+                                       
+                  }elseif(array_keys($lastKey)[0] == 'sub_category'){
+                    $category= App\Models\SubCategory::find($lastKey['sub_category']);
+                    $products[]= \App\Models\Product::where(['sub_category_id'=>$category->id, 'status'=>1])->take(12)->get();
+                  }elseif(array_keys($lastKey)[0] == 'child_category'){
+                    $category= App\Models\ChildCategory::find($lastKey['child_category']);
+                    $products[]= \App\Models\Product::where(['child_category_id'=>$category->id, 'status'=>1])->take(12)->get();
+                  };
+                
+                @endphp 
+            <button class="{{ $loop->index === 0 ? 'auto_click active' : '' }}" data-filter=".category-{{$loop->index}}">{{ $category->name}}</button>
+        @endforeach
+
+
+---------JSON_ARRAY INSERT CONTROLLER:----------
+ public function createOrUpdatePopular(Request $request){
+        $request->validate([
+            'category_01' => ['required', 'integer'],
+            'category_02' => ['required', 'integer'],
+        ]);
+
+        $data= [
+                    [
+                        'category'       => $request->category_01,
+                        'sub_category'   => $request->sub_category_01,
+                        'child_category' => $request->child_category_01,
+                    ],
+                    [
+                        'category'       => $request->category_02,
+                        'sub_category'   => $request->sub_category_02,
+                        'child_category' => $request->child_category_02,
+                    ],
+
+                  
+               ];
+
+       $ok = HomePageSetting::UpdateOrCreate(
+                            ['key' => 'popular_category_section'],
+                            ['value' => json_encode($data)]
+                            );
+        if ($ok) {
+           return redirect()->back()->with('success', 'Data update successfull');
+        }else{
+            return redirect()->back()->with('error', 'Failed !!');
+        }
+
     }

@@ -1,14 +1,14 @@
-01. TABLESs with JOIN for menu
-02. How to show dynamic menu in FRONTEND(BLADE).
-03. BACKEND INSERT-FORM with JQUERY.
-04. How to ADD PRODUCT to MENU.
-05. How to ACTIVE/INACTIVE MENU.
-06. MAIN MENU (Category) CONTROLLER
+01. What are the TABLES with JOIN that are used to create dynamic MENU, SUB_MENU and CHILD_MENU?
+02. How to show the dynamic menu in FRONTEND(BLADE)?
+03. How to create a menu BACKEND with FORM with JQUERY code?
+04. How to ADD PRODUCT to a Menu/Sub Menu/Child Menu?
+05. How to ACTIVE/INACTIVE any MENU?
+06. MAIN MENU (Category) CONTROLLER?
 
 MENU->SUB_MENU->CHILD_MENU
 ***If No child-menu, stop to sub_menu ***If No sub-menu, stop to menu
 
-================ 01. MENU(CATEGORIES) ================
+================ 01. What are the TABLES with JOIN that are used to create dynamic MENU, SUB_MENU and CHILD_MENU? ================
 CREATE TABLE categories( 
         id INT AUTO_INCREMENT PRIMARY KEY,
         icon VARCHAR(255) NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE child_categories(
 JOIN-1: public function categoryTable(){return $this->belongsTo(Category::class, 'category_id', 'id'); }
 JOIN-2: public function subCategoryTable(){ return $this->belongsTo(SubCategory::class, 'sub_category_id', 'id'); }
 
-=============================== 02. BLADE-FRONTEND(show in nav-bar): ============================
+=============================== 02. How to show the dynamic menu in FRONTEND(BLADE)? ============================
 @php
     $categories = \App\Models\Category::where('status', 1)
     ->with(['subCategoryTable' => function($query){
@@ -85,7 +85,7 @@ JOIN-2: public function subCategoryTable(){ return $this->belongsTo(SubCategory:
 </ul>
 </nav>
 
-================================ 03. BACKEND INSERT-FORM with JQUERY: ===========================================
+================================ 03. How to create a menu BACKEND with FORM with JQUERY code? ===========================================
 
 <div class='row'>
 <div class="col-md-4">
@@ -148,7 +148,7 @@ JOIN-2: public function subCategoryTable(){ return $this->belongsTo(SubCategory:
 @endpush
 
 
-=============================== 04. ADD PRODUCT to MENU =========================================
+=============================== 04. How to ADD PRODUCT to a MENU/Sub Menu/Child Menu? =========================================
 <div class='row'>
 
 <div class="col-md-4">
@@ -241,7 +241,7 @@ JOIN-2: public function subCategoryTable(){ return $this->belongsTo(SubCategory:
                 });
         </script>
 @endpush
-=============================================== 05. ACTIVE/INACTIVE MENU===================================================
+=============================================== 05. How to ACTIVE/INACTIVE any MENU? ===================================================
 
 ROUTE(RESOURCE): 
 Route::put('child-change-status', [ChildCategoryController::class, 'childChangeStatus'])->name('childcategory.change-status');
@@ -315,7 +315,7 @@ $(document).ready(function(){
 </script>
 @endpush
 
-===================================== 06. MAIN MENU (Category) CONTROLLER =====================================
+===================================== 06. MAIN MENU (Category) CONTROLLER? =====================================
 <?php
 
 namespace App\Http\Controllers\Backend;

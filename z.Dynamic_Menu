@@ -1,7 +1,9 @@
 01. What are the TABLES with JOIN that are used to create dynamic MENU, SUB_MENU and CHILD_MENU?
 02. How to show the dynamic menu in FRONTEND(BLADE)?
-03. How to create a menu BACKEND with FORM with JQUERY code?
+
+03. How to create a CHILD MENU with FORM with JQUERY code in Backend
 04. How to ADD PRODUCT to a Menu/Sub Menu/Child Menu?
+
 05. How to ACTIVE/INACTIVE any MENU?
 06. MAIN MENU (Category) CONTROLLER?
 
@@ -85,7 +87,7 @@ JOIN-2: public function subCategoryTable(){ return $this->belongsTo(SubCategory:
 </ul>
 </nav>
 
-================================ 03. How to create a menu BACKEND with FORM with JQUERY code? ===========================================
+================================ 03. How to create a CHILD MENU with FORM with JQUERY code in Backend? ===========================================
 
 <div class='row'>
 <div class="col-md-4">

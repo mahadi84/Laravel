@@ -244,7 +244,9 @@ JOIN-2: public function subCategoryTable(){ return $this->belongsTo(SubCategory:
 =============================================== 05. How to ACTIVE/INACTIVE any MENU? ===================================================
 
 ROUTE(RESOURCE): 
-Route::put('child-change-status', [ChildCategoryController::class, 'childChangeStatus'])->name('childcategory.change-status');
+Route::get('get-sub-categories',  [SubCategoryController::class, 'getSubCategories'])->name('subcategory.get-sub-categories');
+Route::put('sub-change-status', [SubCategoryController::class, 'subChangeStatus'])->name('subcategory.change-status');
+Route::resource('sub-category', SubCategoryController::class);
 
 CONTROLLER(RESOURCE):
 public function childChangeStatus(Request $request){

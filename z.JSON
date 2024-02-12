@@ -1,3 +1,14 @@
+JSON= Javascript Object Notation.
+=================SHOW JSON DATA TO FRONEND:=================
+CONTROLLER: 
+ $homepage_secion_banner_two = Advertisement::where('key', 'homepage_secion_banner_two')->first();
+ $homepage_secion_banner_two = json_decode($homepage_secion_banner_two?->value);
+
+BLADE:
+{{@$homepage_secion_banner_two->banner_one->status == 1 ? 'checked':''}}
+{{@$homepage_secion_banner_two->banner_one->image}}
+{{$homepage_secion_banner_two->banner_two->banner_image}}
+
 
 
 

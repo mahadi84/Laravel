@@ -307,3 +307,137 @@ $(document).ready(function(){
       });
 </script>
 @endpush
+
+===================================== MAIN MENU (Category) CONTROLLER =====================================
+<?php
+
+namespace App\Http\Controllers\Backend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+use App\DataTables\CategoryDataTable;
+
+use App\Models\Category;
+use App\Models\SubCategory;
+
+use Str;
+
+
+class CategoryController extends Controller{
+  
+    
+//------------------Index DATATABLE ---------------------
+    
+    public function index(CategoryDataTable $dataTable){  //**check DataTable Name
+        $data['title']  = 'Category';
+        return $dataTable->render('admin.category.index', $data);
+    }
+
+    
+//---------------------create method -----------------------
+    
+    public function create(){
+            $data['title'] = 'Add';
+            return view('admin.category.create', $data);
+    }
+    
+    
+//---------------------store method -----------------------
+    
+    public function store(Request $request){
+       $category=  new Category;
+       $request->validate([
+                          'icon'   =>  ['required'],
+                          'name'   =>  ['required', 'unique:categories'],
+                          'status' =>  ['required'],
+                         // 'email'  => ['required',email,unique:category,id,'.$category->id], ***check_table_name
+                        ]);
+    
+    
+         $category->icon = trim($request->icon);
+         $category->name = trim($request->name);
+         $category->slug = Str::slug($request->name);
+         $category->status = trim($request->status);
+    
+         if ($category->save()) {
+            return redirect()->back()->with('success', 'Data Insert successfull.');  
+         }else{
+            return redirect()->back()->with('error', 'Faild...!!');
+              }
+    }
+    
+    
+//---------Display the specified resource.
+
+    public function show(string $id){       
+    }
+    
+//----------------------edit method-------------------
+    
+    
+    public function edit(Request $request, string $id){
+            $data['title'] = 'Edit';
+            $data['category'] = Category::findOrFail($id);
+            return view('admin.category.edit', $data);
+        }
+    
+    
+//----------------------update method-------------------
+    
+    
+    public function update(Request $request, string $id){
+       $category= Category::findOrFail($id);
+       $request->validate([
+                    'icon'   => ['required'],
+                    'name'   => ['required', 'unique:categories,name,'.$category->id.''],
+                    'status' => ['required'],
+                    ]); 
+
+         $category->icon = trim($request->icon);
+         $category->name = trim($request->name);
+         $category->slug = Str::slug($request->name);
+         $category->status = trim($request->status);
+    
+         if ($category->save()) {
+            return redirect()->route('admin.category.index')->with('success', 'Update successfull.');  
+         }else{
+            return redirect()->route('admin.category.index')->with('error', 'Faild...!!');
+        }
+    }
+    
+    
+//---------------------delete method---------------------------
+    
+    
+    public function destroy(string $id){ 
+    
+                $category    = Category::findOrFail($id);
+                $subCategory = SubCategory::where('category_id', $category->id)->count();
+
+                if( $subCategory > 0){                            
+                    return response(["status"=> "error", "message" => "Delete the Sub Category first"]);            
+                }else{
+                    $category->delete();  
+                    return response(["status"=> "success", "message" => "Deleted Successfully"]);           
+                }
+                
+    }
+
+
+
+// ------------------acive/inactive------------------
+    
+    public function changeStatus(Request $request){
+        $category= Category::findOrfail($request->id);
+        $category->status= $request->status == 'true' ? 1: 0;
+        if ($category->save()) {
+            return response(['status'=> 'success', 'message' => 'Status Changed Successfully']); 
+         }else{
+            return response(['status'=> 'error', 'message' => 'Faild...!']);  
+        }
+        
+    }
+
+
+}

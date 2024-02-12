@@ -34,15 +34,15 @@ CONTROLLER:---------
        $imagePathTwo = $this->updateImage($request, 'banner_two_image', '640,275', 'advertisement', $request->banner_two_image);
 
         $value = [
-            'banner_one' => [
-                'banner_url' => $request->banner_one_url,
-                'status' => $request->banner_one_status == 'on' ? 1 : 0
-            ],
-            'banner_two' => [
-                'banner_url' => $request->banner_two_url,
-                'status' => $request->banner_two_status == 'on' ? 1 : 0
-            ]
-        ];
+                     'banner_one' => [
+                         'banner_url' => $request->banner_one_url,
+                         'status' => $request->banner_one_status == 'on' ? 1 : 0
+                     ],
+                     'banner_two' => [
+                         'banner_url' => $request->banner_two_url,
+                         'status' => $request->banner_two_status == 'on' ? 1 : 0
+                     ]
+                ];
         if(!empty($imagePath)){
             $value['banner_one']['banner_image'] = $imagePath;
         }else {
@@ -69,9 +69,7 @@ CONTROLLER:---------
 ----------JSON_ARRAY in TABLE:-----
 [
 {"category":"15","sub_category":null,"child_category":null},
-{"category":"1","sub_category":"1","child_category":null},
-{"category":"8","sub_category":null,"child_category":null},
-{"category":"14","sub_category":null,"child_category":null}
+{"category":"1","sub_category":"1","child_category":null}
 ]
 
 -----------------ROUTE:---------------------------------------
@@ -86,7 +84,7 @@ CONTROLLER:---------
         @php
         $products = [];
         @endphp
-            
+         \\two times foreach why?   
         @foreach($popularCategories as $popularCategory)
                 @php
                  $lastKey= [];
@@ -98,7 +96,6 @@ CONTROLLER:---------
                         $lastKey = [$key => $item];                 
                     }
 
-               
                   if(array_keys($lastKey)[0] == 'category'){
                     $category= \App\Models\Category::find($lastKey['category']);
                     $products[]= \App\Models\Product::where(['category_id'=>$category->id, 'status'=>1])->take(12)->get();

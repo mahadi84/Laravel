@@ -2,7 +2,6 @@ MENU->SUB_MENU->CHILD_MENU
 ***If No child-menu, stop to sub_menu ***If No sub-menu, stop to menu
 
 ================ MENU(CATEGORIES) ================
-
 CREATE TABLE categories( 
         id INT AUTO_INCREMENT PRIMARY KEY,
         icon VARCHAR(255) NOT NULL,
@@ -12,7 +11,8 @@ CREATE TABLE categories(
   	      created_at timestamp NULL DEFAULT NULL,
 	      updated_at timestamp NULL DEFAULT NULL
         );
-
+JOIN: public function subCategoryTable(){ return $this->hasMany(SubCategory::class); }
+-------
 CREATE TABLE sub_categories( 
         id INT AUTO_INCREMENT PRIMARY KEY,
         category_id INT NOT NULL,
@@ -22,6 +22,9 @@ CREATE TABLE sub_categories(
   	      created_at timestamp NULL DEFAULT NULL,
 	      updated_at timestamp NULL DEFAULT NULL
         );
+JOIN-1: public function categoryTable(){return $this->belongsTo(Category::class, 'category_id', 'id'); }
+JOIN-2: public function subCategoryTable(){ return $this->belongsTo(SubCategory::class, 'sub_category_id', 'id'); }
+------
 
 CREATE TABLE child_categories( 
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -33,7 +36,8 @@ CREATE TABLE child_categories(
   	      created_at timestamp NULL DEFAULT NULL,
 	      updated_at timestamp NULL DEFAULT NULL
         );
-
+JOIN-1: public function categoryTable(){return $this->belongsTo(Category::class, 'category_id', 'id'); }
+JOIN-2: public function childCategoryTable(){ return $this->hasMany(ChildCategory::class);  }
 
 
 =============================== BLADE-FRONTEND(show in nav-bar): ============================

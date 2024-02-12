@@ -65,16 +65,21 @@ CONTROLLER:---------
 
 
 
-======================================= ARRAY JSON DATA SHOW =====================================
+======================================= SHOW ARRAY JSON DATA  =====================================
 ----------JSON_ARRAY in TABLE:-----
-[{"category":"15","sub_category":null,"child_category":null},{"category":"1","sub_category":"1","child_category":null},
-{"category":"8","sub_category":null,"child_category":null},{"category":"14","sub_category":null,"child_category":null}]
+[
+{"category":"15","sub_category":null,"child_category":null},
+{"category":"1","sub_category":"1","child_category":null},
+{"category":"8","sub_category":null,"child_category":null},
+{"category":"14","sub_category":null,"child_category":null}
+]
 
 -----------------ROUTE:---------------------------------------
  $data['popularCategorySection']= HomePageSetting::where('key', 'popular_category_section')->first();
 
 ---------------- BLADE ---------------------------
  @php
+\\'true' for array print
    $popularCategories = json_decode($popularCategorySection->value, true);
  @endphp
 
@@ -128,9 +133,7 @@ CONTROLLER:---------
                         'category'       => $request->category_02,
                         'sub_category'   => $request->sub_category_02,
                         'child_category' => $request->child_category_02,
-                    ],
-
-                  
+                    ]
                ];
 
        $ok = HomePageSetting::UpdateOrCreate(

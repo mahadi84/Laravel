@@ -123,7 +123,7 @@ that's it.
 
 
 ==========================  08. How to insert Bulk (let's say 1000) data into a table? =======================
-01. Create a Factory  and add row info Like: 'email' => fake()->unique()->safeEmail(), 'phone' => '0171'.mt_rand(1000000, 9999999) then
+01. Create a Factory (php artisan make:factory PostFactory)  and add row info Like: 'email' => fake()->unique()->safeEmail(), 'phone' => '0171'.mt_rand(1000000, 9999999) then
 02. php artisan tinker
     > User::factory(1000)->create()
 

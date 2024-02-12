@@ -1,7 +1,7 @@
 JSON= Javascript Object Notation.
 
 
-=================SHOW JSON DATA TO FRONEND:=================
+=================SHOW (NON-ARRAY) JSON DATA TO FRONEND:=================
 CONTROLLER: 
  $homepage_secion_banner_two = Advertisement::where('key', 'homepage_secion_banner_two')->first();
  $homepage_secion_banner_two = json_decode($homepage_secion_banner_two?->value);

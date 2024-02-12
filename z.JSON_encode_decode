@@ -1,7 +1,8 @@
 JSON= Javascript Object Notation.
 
+Q: JSON vs ARRAY JSON.
 
-=================SHOW (NON-ARRAY) JSON DATA TO FRONEND:=================
+==================SHOW (NON-ARRAY) JSON DATA TO FRONTEND:=========================================
 CONTROLLER: 
  $homepage_secion_banner_two = Advertisement::where('key', 'homepage_secion_banner_two')->first();
  $homepage_secion_banner_two = json_decode($homepage_secion_banner_two?->value);
@@ -12,8 +13,7 @@ BLADE:
 {{$homepage_secion_banner_two->banner_two->banner_image}}
 
 
-DATA RECEIVE, ENCODE to JSON and INSERT TO A TABLE :
-===================================================
+==================== DATA RECEIVE, ENCODE to JSON and INSERT TO A TABLE :=========================
 TABLE DATA LOOKS LIKE THIS:-------
 {
 "banner_one":{"banner_url":"url 01","status":1,"banner_image":"5fhg4h84MIVftI4WbR6QXrsb7Zhndv.jpg"},

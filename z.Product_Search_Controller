@@ -24,6 +24,10 @@ CATEGORY-WISE-SEARCH:------
     No Category Available
     @endforelse
 SEARCH-BOX-SEARCH:----
+   <form action="{{url()->current()}}">
+     <input type="text" name="search" value="{{request()->search}}" placeholder="Search...">
+     <button type="submit"><i class="far fa-search"></i></button>
+  </form>
 
 
 

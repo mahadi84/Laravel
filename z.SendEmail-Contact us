@@ -54,7 +54,7 @@ class MailHelper{
 
 
 }
------------------Contact Class (php artisan make:mail Contact)---------------------
+-----------------Contact Class (php artisan make:mail Contact) located in Mail Folder---------------------
  public $mailSubject;
     public $mailMessage;
     public $mailFrom;

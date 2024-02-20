@@ -11,12 +11,15 @@ A Traits:-- provide a set of methods that can be mixed into multiple classes to 
 
 namespace App\Traits;
 use Illuminate\Http\Request;
-use Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 use File;
 use Str;
 
 
 trait ImageUploadTrait{
+
+    $manager = new ImageManager(new Driver());  
                                                  //'logo','500,600','uploads/logo'
     public function uploadImage(Request $request, $inputName, $imgSize, $path){
         if($request->hasFile($inputName)){
@@ -31,8 +34,15 @@ trait ImageUploadTrait{
                 $imgWidth = $img[0];
                 $imgHeight = $img[1];
   
-            Image::make($image)->resize($imgWidth, $imgHeight)
+           // Image::make($image)->resize($imgWidth, $imgHeight)
                                   ->save(public_path('uploads/'.$path.'/'.$imageName));
+
+            
+
+$img = $manager->read($image);
+$img->resize($imgWidth, $imgHeight);
+$img->to'.ucfirst($ext).'()->save(public_path('uploads/'.$path.'/'.$imageName));
+
 
            return $imageName;
         }

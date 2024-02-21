@@ -1,5 +1,30 @@
 
+==============Configuration========================================
+-----------------MailHelper(I create it manually inside helpers folder, to overwrite email config info for .env file)---------
+<?php
+namespace App\Helpers;
+use App\Models\EmailConfiguration;
 
+class MailHelper{
+        public static function setEmailConfig(){
+            $emailconfig= EmailConfiguration::first();
+                $config=[    
+                    'transport' => 'smtp',
+                    'url'       => env('MAIL_URL'),
+                    'host'      => $emailconfig->host,
+                    'port'      => $emailconfig->port,
+                    'encryption'=> $emailconfig->encryption,
+                    'username'  => $emailconfig->username,
+                    'password'  => $emailconfig->password,
+                    'timeout'   => null,
+                    'local_domain' => env('MAIL_EHLO_DOMAIN')
+                ];
+            config(['mail.mailers.smtp'=>$config]);
+            config(['mail.from.address'=> $emailconfig->email]);
+        }
+
+
+}
 
 ========================= ROUTE, CONTROLLER AND SETTINGS ============================
 ROUTE: Route::post('handle-contact-form', [PageController::class, 'handleContactForm'])->name('handle-contact-form');
@@ -29,31 +54,7 @@ use Illuminate\Support\Facades\Mail;
     }
 
 
------------------MailHelper(I create it manually inside helpers folder, to overwrite email config info for .env file)---------
-<?php
-namespace App\Helpers;
-use App\Models\EmailConfiguration;
 
-class MailHelper{
-        public static function setEmailConfig(){
-            $emailconfig= EmailConfiguration::first();
-                $config=[    
-                    'transport' => 'smtp',
-                    'url'       => env('MAIL_URL'),
-                    'host'      => $emailconfig->host,
-                    'port'      => $emailconfig->port,
-                    'encryption'=> $emailconfig->encryption,
-                    'username'  => $emailconfig->username,
-                    'password'  => $emailconfig->password,
-                    'timeout'   => null,
-                    'local_domain' => env('MAIL_EHLO_DOMAIN')
-                ];
-            config(['mail.mailers.smtp'=>$config]);
-            config(['mail.from.address'=> $emailconfig->email]);
-        }
-
-
-}
 -----------------Contact Class (php artisan make:mail Contact) located in Mail Folder---------------------
  public $mailSubject;
     public $mailMessage;

@@ -91,7 +91,7 @@ use Illuminate\Support\Facades\Mail;
         );
     }
 
-====================BLADE WITH AJAX-JQUERY===========================
+====================Contact-Form (BLADE) WITH AJAX-JQUERY===========================
 <h5>Send Us a Message</h5>
         <form id="contact-form">
             <div class="row">

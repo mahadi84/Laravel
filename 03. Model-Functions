@@ -1,14 +1,27 @@
 Date: 31-Aug-2023
 
-01. What needs to be added to the newly created model?
+01. How to declare and use CONSTANT, FUNCTIONS All data insert with Small Characters and show Capital in the Model?
 02. How to search (Query) value and return it to?
 03. Why and How do join tables? Ex: Employee Name to Designation and Salary
 
 04. How to change data formate Y-m-d to d-m-Y or 1 minute before or 12 Months before like that? 
 
-=========01. What needs to be added to the newly created model?=================
+=========01.  CONSTANT, FUNCTIONS All data insert with Small Characters and show Capital in the Model?=================
+const VERIFIED_USER = '1';
+const UNVERIFIED_USER = '0';
+const ADMIN_USER= 'true';
+const REGULAR_USER= 'false';
+
 protected $table = '';
 protected $guarded = [];
+protected $fillable = ['name', 'email', 'password', 'verified', 'verified_token', 'admin',];
+
+public function setNameAttribute($name){ $this->attributes['name'] = strtolower($name);  }
+public function getNameAttribute($name){ return ucwords($name);}
+public function setEmailAttribute($email){ $this->attributes['email'] = strtolower($email); }
+public function isAdmin(){ return $this->admin == User::ADMIN_USER;  }
+public function isVerified(){ return $this->verified== User::VERIFIED_USER; }
+public static function generateVerificationCode(){ return Str::random(40); }
 
 
 ==============02. How to search (Query) value and return it to? ==================

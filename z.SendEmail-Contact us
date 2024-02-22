@@ -163,6 +163,7 @@ use Illuminate\Support\Facades\Mail;
 ================================================USER REGISTRATION/EMAIL UPDATE==============================================
 ROUTE:
         Route::get('user/verify/{token}', [UserController::class, 'verifyUser'])->name('verify');
+        Route::get('users/{user}/resend', [UserController::class, 'resendVerifyToken'])->name('resend');
 
 VERIFY-BUTTON:--
         <a href="{{route('verify', [ 'token' => $user->verification_token])}}">   Verify</a>
@@ -175,6 +176,17 @@ CONTROLLER:
                 $user->save();
                 return $this->successResponse('User verified successfully, 422);
             }
+
+        public function resendVerifyToken(User $user){
+                if ($user->isVerified()) {
+                    return $this->successResponse('User already verified', 422);  
+                }
+                retry(5, function() use ($user){
+                    Mail::to($user->email)->send(new UserCreated($user));
+                   } , 100); 
+                return $this->showMessage('An email sent to '.$user->email.' for verificaiton');
+                }
+
 
 UPDATE:
         if($request->has('email') && $user->email != $request->email){
@@ -190,12 +202,19 @@ use App\Mail\UserCreated;
 use App\Mail\UserEmailUpdated;
 use Illuminate\Support\Facades\Mail;
 
+       
         User::created(function($user){
+           retry(5, function() use ($user){
             Mail::to($user->email)->send(new UserCreated($user));
+           } , 100); 
+
         });
 
         User::updated(function($user){
             if ($user->isDirty('email')) {
-                Mail::to($user->email)->send(new UserEmailUpdated($user));
+                retry(5, function() use ($user){
+                    Mail::to($user->email)->send(new UserEmailUpdated($user));
+                }, 100);
             }
+
         });

@@ -1,0 +1,65 @@
+==================Migrate File with Foreign key=======================
+CREATE-CMD:    
+ $table->increments('id');
+    $table->integer('category_id')->unsigned();
+    $table->integer('product_id')->unsigned();
+    $table->string('description', 1000);
+    $table->string('email')->primary();
+    $table->string('status')->default(Product::UNAVAILABLE_PRODUCT);
+    $table->string('token', 64)->unique();
+    $table->text('abilities')->nullable();
+    $table->longText('payload');
+    $table->timestamp('last_used_at')->nullable();
+    $table->timestamp('expires_at')->nullable();
+    $table->timestamps();
+
+    $table->foreign('category_id')->references('id')->on('categories');
+    $table->foreign('product_id')->references('id')->on('products');
+
+
+=========================FACKER ========================================
+CREATE-CMD:
+'name' => fake()->name,
+            'email' => fake()->unique()->safeEmail,
+            'password' => static::$password ??= Hash::make('password'),
+            'remember_token' => Str::random(10),
+            'verified' => $verified = fake()->randomElement([User::VERIFIED_USER, User::UNVERIFIED_USER]),
+            'verification_token' => $verified == User::VERIFIED_USER ? null : User::generateVerificationCode(),
+            'admin' => $verified = fake()->randomElement([User::ADMIN_USER, User::REGULAR_USER]),
+ 'product_id' => $seller->products->random()->id,
+ 'quantity' => fake()->numberBetween(1, 10),
+            'status' => fake()->randomElement([Product::AVAILABLE_PRODUCT, Product::UNAVAILABLE_PRODUCT]),
+            'image' => fake()->randomElement(['1.jpg', '2.jpg', '3.jpg']),
+            'seller_id' => User::all()->random()->id,
+
+
+====================== SEEDER ===============================================
+CMD:
+
+ User::truncate();
+        Category::truncate();
+        Product::truncate();
+        DB::table('category_product')->truncate();
+
+        User::flushEventListeners();
+        Category::flushEventListeners();
+        Product::flushEventListeners();
+
+        $usersQuantity = 1000;
+        $categoriesQuantity = 30;
+        $productsQuantity = 1000;
+        $transactionsQuantity = 800;
+
+        User::factory()->count($usersQuantity)->create();
+        Category::factory()->count($categoriesQuantity)->create();
+        
+        // insert data to both Products table and Product_Category PIVOT Table
+        Product::factory()->count($productsQuantity)->create()->each(
+            function ($product) {
+                $categories = Category::all()->random(mt_rand(1, 5))->pluck('id');                
+                $product->categories()->attach($categories);
+            });
+
+
+
+--------------

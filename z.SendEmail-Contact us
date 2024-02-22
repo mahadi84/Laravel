@@ -158,3 +158,44 @@ use Illuminate\Support\Facades\Mail;
         })
     </script>
 @endpush
+
+
+================================================USER REGISTRATION/EMAIL UPDATE==============================================
+ROUTE:
+        Route::get('user/verify/{token}', [UserController::class, 'verifyUser'])->name('verify');
+
+VERIFY-BUTTON:--
+        <a href="{{route('verify', [ 'token' => $user->verification_token])}}">   Verify</a>
+
+CONTROLLER:
+        public function verifyUser(string $token){
+                $user=User::where('verification_token', $token)->firstOrFail();
+                $user->verified = User::VERIFIED_USER;
+                $user->verification_token = null;
+                $user->save();
+                return $this->successResponse('User verified successfully, 422);
+            }
+
+UPDATE:
+        if($request->has('email') && $user->email != $request->email){
+            $user->verified           = User::UNVERIFIED_USER;
+            $user->verification_token = User::generateVerificationCode();
+            $user->email              = $request->email;
+        }
+
+----------APP-SERVICE-PROVIDER:-------------
+
+use App\Models\User;
+use App\Mail\UserCreated;
+use App\Mail\UserEmailUpdated;
+use Illuminate\Support\Facades\Mail;
+
+        User::created(function($user){
+            Mail::to($user->email)->send(new UserCreated($user));
+        });
+
+        User::updated(function($user){
+            if ($user->isDirty('email')) {
+                Mail::to($user->email)->send(new UserEmailUpdated($user));
+            }
+        });

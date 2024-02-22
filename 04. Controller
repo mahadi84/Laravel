@@ -3,7 +3,7 @@ Date: 31-Aug-2023
 00. Functions: 
             FIRST(),WHERE, LIKE, ORDER BY, INSERT ALL FIELDs except ONE, GET ONLY TWO FIELDs FROM A TABLE,
 01. How to VALIDATE input fields, CUSTOMIZE validation message, REDIRECT if the validation fails and Laravel, Ajax/Javascript Redirect?
-02. How to Minus Multiple Data from Another Table? Ex: From Stock to Order-Done table
+02. How to Minus Multiple Data from Another/SAME Table? Ex: From Stock to Order-Done table
 03. How to insert MULTIPLE data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table
 
 04. How to use CreateOrUpdate(), what's the advantage of using it, the simple exception to using it?
@@ -17,6 +17,13 @@ WHERE('product_id', $request->product_id)->get()->orderBy('created_at');
 
 Employee::get(['emp_id','name']); 
 Employee::create($request->except('_token'));
+
+ $transaction = Transaction::create([
+                'quantity' => $request->quantity,
+                'buyer_id' => $buyer->id,
+                'product_id' => $product->id,
+            ]);
+
 
 
 ========================= 01.How to VALIDATE input fields, CUSTOMIZE validation message, REDIRECT if the validation fails and Laravel, Ajax/Javascript Redirect?======================
@@ -72,6 +79,18 @@ $OrderDetails = $this->OrderDetailsModel->where('order_tbl_id', $id)->get();
                 // $update  = $product->save();
              }
 
+SAME-TABLE:
+return DB::transaction(function () use ($request, $product, $buyer) {
+            $product->quantity -= $request->quantity;
+            $product->save();
+
+ APPSERVICEPROVIDER:          
+Product::updated( function($product){
+            if ($product->quantity == 0 && $product->isAvailable()) {
+                $product->status= Product::UNAVAILABLE_PRODUCT;
+                $product->save();
+            }
+        });
 
 ======================== 03. How to insert data into the second table collecting the Other table's last inserted ID? Ex: Order and Order Details table ==========
 

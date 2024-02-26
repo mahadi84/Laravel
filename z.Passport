@@ -1,8 +1,9 @@
 
-
-
 1.Install Passport
 composer require laravel/passport
+
+Check with php artisan cmd
+whether passport:client, passport:install, passport:keys shows or not
 
 If time out error comes then run the bellow command
 COMPOSER_MEMORY_LIMIT=-1 composer require laravel/passport
@@ -15,15 +16,49 @@ php artisan passport:install
 
 4.User Model
 use Laravel\Passport\HasApiTokens;
+User Class{
 use HasApiTokens, HasFactory, Notifiable;
+}
 
-5. Update App\Providers\AuthServiceProvider
+5. Update config/auth.php like below api driver to passport
+
+    'guards' => [
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
+    ],
+
+6. Update App\Providers\AuthServiceProvider
+
 use Laravel\Passport\Passport;
 
-In boot function add  
-Passport::routes();
+In boot function add:
+        Passport::tokensExpireIn(now()->addDays(15));
+    	Passport::refreshTokensExpireIn(now()->addDays(30));
+    	Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 
-6. Update config/auth.php
-     follow video
-7. create route and function in controller
+
+
+
+
+7. **THIS STEP IS FOR OLD VERTION, DEPRICATED NOW, create route and function in API controller
+Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
+
+8. Protect Route for Unauthorize Access:
+   Add line to kernel.php
+	protected $middlewareAliases = [
+          'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
+	]
+
+9. Add below lines to the controller I want to control (VID_180)
+ Into UserController 
+	public function __construct(){
+        $this->middleware('client.credentials')->only(['store', 'resend']);
+    	}
+
+Into Other conroller	
+ public function __construct(){
+        $this->middleware('client.credentials')->only(['index', 'show']);
+    }
 

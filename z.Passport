@@ -45,13 +45,13 @@ In boot function add:
 7. **THIS STEP IS FOR OLD VERTION, DEPRICATED NOW, create route and function in API controller
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 
-8. Protect Route for Unauthorize Access:
+8. Middleware to Protect Route for Unauthorize Access:
    Add line to kernel.php
 	protected $middlewareAliases = [
           'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
 	]
 
-9. Add below lines to the controller I want to control (VID_180)
+9. Add to Protect Route for Unauthorize Access: (VID_180)
  Into UserController 
 	public function __construct(){
         $this->middleware('client.credentials')->only(['store', 'resend']);

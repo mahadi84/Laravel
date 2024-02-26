@@ -102,6 +102,8 @@ public $transformer = UserTransformer::class;
 	}
    
 ==========================#06 To Insert FORM DATA AND VALIDATION(Create Below Middleware)=========================
+CREATE: php artisan make:middleware TransformInput
+REGISTER IT TO kernel.php: 'transform.input' => \App\Http\Middleware\TransformInput::class,
 
 <?php
 

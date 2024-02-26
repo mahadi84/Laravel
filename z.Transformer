@@ -103,8 +103,10 @@ public $transformer = UserTransformer::class;
    
 ==========================#06 To Insert FORM DATA AND VALIDATION(Create Below Middleware)=========================
 CREATE: php artisan make:middleware TransformInput
-REGISTER IT TO kernel.php: 'transform.input' => \App\Http\Middleware\TransformInput::class,
-
+REGISTER IT TO kernel.php: 
+protected $routeMiddleware = [
+	'transform.input' => \App\Http\Middleware\TransformInput::class,
+	]
 <?php
 
 namespace App\Http\Middleware;
@@ -147,4 +149,15 @@ class TransformInput
 }
 
 
-----
+=============================#07 Add below constructor to choosing the crud operation for UserController.php as example================
+
+Note: add black construct() to apiController.php:   public function __construct() {  }
+
+
+use App\Transformers\UserTransformer;
+
+public function __construct()
+    {
+        parent::__construct();
+       $this->middleware('transform.input:' . UserTransformer::class)->only(['store','update']);
+    }

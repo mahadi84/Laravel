@@ -77,7 +77,20 @@ use App\Transformers\UserTransformer;
 public $transformer = UserTransformer::class;
 
 
------------#05 SHOW TRANSFORM DATA (Add to Below Codes to App\Traits\ApiResponser.php)----------------
+=============================#05 Add below constructor to choosing the crud operation for UserController.php as example================
+
+Note: add black construct() to apiController.php:   public function __construct() {  }
+
+
+use App\Transformers\UserTransformer;
+
+public function __construct()
+    {
+        parent::__construct();
+       $this->middleware('transform.input:' . UserTransformer::class)->only(['store','update']);
+    }
+
+-----------#06 SHOW TRANSFORM DATA (Add to Below Codes to App\Traits\ApiResponser.php)----------------
 
 
 	protected function showAll(Collection $collection, $code = 200){
@@ -103,7 +116,7 @@ public $transformer = UserTransformer::class;
 		return $transformation->toArray();
 	}
    
-==========================#06 To Insert FORM DATA AND VALIDATION(Create Below Middleware)=========================
+==========================#07 To Insert FORM DATA AND VALIDATION(Create Below Middleware)=========================
 CREATE: php artisan make:middleware TransformInput
 REGISTER IT TO kernel.php: 
 protected $middlewareAliases = [
@@ -150,16 +163,3 @@ class TransformInput
     }
 }
 
-
-=============================#07 Add below constructor to choosing the crud operation for UserController.php as example================
-
-Note: add black construct() to apiController.php:   public function __construct() {  }
-
-
-use App\Transformers\UserTransformer;
-
-public function __construct()
-    {
-        parent::__construct();
-       $this->middleware('transform.input:' . UserTransformer::class)->only(['store','update']);
-    }

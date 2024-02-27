@@ -81,17 +81,13 @@ public $transformer = UserTransformer::class;
 
 Note: add black construct() to apiController.php:   public function __construct() {  }
 
-
 use App\Transformers\UserTransformer;
-
-public function __construct()
-    {
+public function __construct(){
         parent::__construct();
        $this->middleware('transform.input:' . UserTransformer::class)->only(['store','update']);
     }
 
 -----------#06 SHOW TRANSFORM DATA (Add to Below Codes to App\Traits\ApiResponser.php)----------------
-
 
 	protected function showAll(Collection $collection, $code = 200){
 		if ($collection->isEmpty()) {

@@ -1,6 +1,6 @@
 Date: 20 Feb 2024
 
-1.Install Passport
+01.Install Passport
 	composer require laravel/passport
 
 	Check with php artisan cmd
@@ -13,17 +13,17 @@ Date: 20 Feb 2024
 If time out error comes then run the bellow command
 COMPOSER_MEMORY_LIMIT=-1 composer require laravel/passport
 
-2. Migration
+02. Migration
 	php artisan migrate
 
 
-3.User Model
+03.User Model
 	use Laravel\Passport\HasApiTokens;
 	User Class{
 		use HasApiTokens, HasFactory, Notifiable;
 	}
 
-4. Update config/auth.php like below api driver to passport
+04. Update config/auth.php like below api driver to passport
 
     'guards' => [
         'api' => [
@@ -32,7 +32,7 @@ COMPOSER_MEMORY_LIMIT=-1 composer require laravel/passport
         ],
     ],
 
-5. Update App\Providers\AuthServiceProvider
+05. Update App\Providers\AuthServiceProvider
 
 use Laravel\Passport\Passport;
 
@@ -42,17 +42,16 @@ In boot function add:
     	Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 
 
-
-6. **THIS STEP IS FOR OLD VERTION, DEPRICATED NOW, create route and function in API controller
+06. **THIS STEP IS FOR OLD VERTION, DEPRICATED NOW, create route and function in API controller
 	Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 
-7. Protect Route for Unauthorize Access:
+07. Protect Route for Unauthorize Access:
    Add line to kernel.php
 	protected $middlewareAliases = [
           'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
 	]
 
-8. Add below lines to the controller with FUNCTIONS NAME I want to control (VID_180)
+08. Add below lines to the controller with FUNCTIONS NAME I want to control (VID_180)
  Into UserController 
 	public function __construct(){
         $this->middleware('client.credentials')->only(['store', 'resend']);
@@ -63,7 +62,7 @@ Into Other conroller
         $this->middleware('client.credentials')->only(['index', 'show']);
     }
 
-9. Creat a client(php artisan passport:client) and test it (VID_181)
+09. Creat a client(php artisan passport:client) and test it (VID_181)
 
  	Which User ID should the client be assigned to?
 	 0 (Press Enter)

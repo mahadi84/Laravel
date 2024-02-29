@@ -35,8 +35,8 @@ CREATE-CMD:
 
 ====================== SEEDER ===============================================
 CMD:
-
- User::truncate();
+    Schema::disableForeignKeyConstraints();
+        User::truncate();
         Category::truncate();
         Product::truncate();
         DB::table('category_product')->truncate();

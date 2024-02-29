@@ -16,16 +16,14 @@ COMPOSER_MEMORY_LIMIT=-1 composer require laravel/passport
 2. Migration
 	php artisan migrate
 
-3.Key Generate
-	php artisan passport:install
 
-4.User Model
+3.User Model
 	use Laravel\Passport\HasApiTokens;
 	User Class{
 		use HasApiTokens, HasFactory, Notifiable;
 	}
 
-5. Update config/auth.php like below api driver to passport
+4. Update config/auth.php like below api driver to passport
 
     'guards' => [
         'api' => [
@@ -34,7 +32,7 @@ COMPOSER_MEMORY_LIMIT=-1 composer require laravel/passport
         ],
     ],
 
-6. Update App\Providers\AuthServiceProvider
+5. Update App\Providers\AuthServiceProvider
 
 use Laravel\Passport\Passport;
 
@@ -45,16 +43,16 @@ In boot function add:
 
 
 
-7. **THIS STEP IS FOR OLD VERTION, DEPRICATED NOW, create route and function in API controller
+6. **THIS STEP IS FOR OLD VERTION, DEPRICATED NOW, create route and function in API controller
 	Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 
-8. Protect Route for Unauthorize Access:
+7. Protect Route for Unauthorize Access:
    Add line to kernel.php
 	protected $middlewareAliases = [
           'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
 	]
 
-9. Add below lines to the controller with FUNCTIONS NAME I want to control (VID_180)
+8. Add below lines to the controller with FUNCTIONS NAME I want to control (VID_180)
  Into UserController 
 	public function __construct(){
         $this->middleware('client.credentials')->only(['store', 'resend']);
@@ -65,7 +63,7 @@ Into Other conroller
         $this->middleware('client.credentials')->only(['index', 'show']);
     }
 
-10. Creat a client(php artisan passport:client) and test it (VID_181)
+9. Creat a client(php artisan passport:client) and test it (VID_181)
 
  	Which User ID should the client be assigned to?
 	 0 (Press Enter)
@@ -77,14 +75,14 @@ Into Other conroller
 **Copy the Client ID and Client Secret for use.
 
 
-11. Open (Postman)  http://localhost:8000/oauth/token
+10. Open (Postman)  http://localhost:8000/oauth/token
  	/Body>form-data
  	grant_type client_credentials
  	client_id 
  	client_secret
 AND send a post request, It will generate access_token with cpires time
 
-12. Copy the access_token and go to protected url http://localhost:8000/products for example
+11. Copy the access_token and go to protected url http://localhost:8000/products for example
     -Select auth type Oauth.2, Bearer and past the code
 
 IRCqMBKFJIRQt5a6atC7JP4WP0im1tJa8fqly42H

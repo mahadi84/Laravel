@@ -1,5 +1,15 @@
 Date: 24-Aug-2023 
 
+Auth::user(), attempt(), check(), logout()
+
+request()->url()
+request()->has('sort_by')
+request()->sort_by
+request()->query
+request()->query()
+
+$collection->where($attribute, $value);
+$collection->sortBy->{$attribute};
 
 @if(Auth::user()->can('permission.menu'))
 @endif
@@ -38,12 +48,9 @@ file(), hasFile(), exists(), move()
 
 orderBy(), paginate()
 
-redirect(), back(), intended(), with(), to(),
+intended(), to(),
 
-Hash::make(123);
-Str::random(50);
 
-Auth::user(), attempt(), check(), logout()
 
 
 

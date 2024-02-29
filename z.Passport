@@ -1,24 +1,29 @@
+Date: 20 Feb 2024
 
 1.Install Passport
-composer require laravel/passport
+	composer require laravel/passport
 
-Check with php artisan cmd
-whether passport:client, passport:install, passport:keys shows or not
+	Check with php artisan cmd
+	whether passport:client, passport:install, passport:keys shows or not
+
+	passport:client  | Create a client for issuing access tokens
+	passport:install | Run the commands neccessary to prepare Passport for use
+	passport:keys    | Create the encryption keys for Api Authentication
 
 If time out error comes then run the bellow command
 COMPOSER_MEMORY_LIMIT=-1 composer require laravel/passport
 
 2. Migration
-php artisan migrate
+	php artisan migrate
 
 3.Key Generate
-php artisan passport:install
+	php artisan passport:install
 
 4.User Model
-use Laravel\Passport\HasApiTokens;
-User Class{
-use HasApiTokens, HasFactory, Notifiable;
-}
+	use Laravel\Passport\HasApiTokens;
+	User Class{
+		use HasApiTokens, HasFactory, Notifiable;
+	}
 
 5. Update config/auth.php like below api driver to passport
 
@@ -40,18 +45,16 @@ In boot function add:
 
 
 
-
-
 7. **THIS STEP IS FOR OLD VERTION, DEPRICATED NOW, create route and function in API controller
-Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
+	Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 
-8. Middleware to Protect Route for Unauthorize Access:
+8. Protect Route for Unauthorize Access:
    Add line to kernel.php
 	protected $middlewareAliases = [
           'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
 	]
 
-9. Add to Protect Route for Unauthorize Access: (VID_180)
+9. Add below lines to the controller with FUNCTIONS NAME I want to control (VID_180)
  Into UserController 
 	public function __construct(){
         $this->middleware('client.credentials')->only(['store', 'resend']);
@@ -62,3 +65,28 @@ Into Other conroller
         $this->middleware('client.credentials')->only(['index', 'show']);
     }
 
+10. Creat a client(php artisan passport:client) and test it (VID_181)
+
+ 	Which User ID should the client be assigned to?
+	 0 (Press Enter)
+	What should we name the Client?
+	 Choose a name (Press Enter)
+	Where should we redirect the request after authorization?
+	(Press Only Enter)
+
+**Copy the Client ID and Client Secret for use.
+
+
+11. Open (Postman)  http://localhost:8000/oauth/token
+ 	/Body>form-data
+ 	grant_type client_credentials
+ 	client_id 
+ 	client_secret
+AND send a post request, It will generate access_token with cpires time
+
+12. Copy the access_token and go to protected url http://localhost:8000/products for example
+    -Select auth type Oauth.2, Bearer and past the code
+
+IRCqMBKFJIRQt5a6atC7JP4WP0im1tJa8fqly42H
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMjA0NzJkMjBhYmIxZDgzODJiNWEwYTYyYzgzYzgwYzMzMjhlY2I4ZTQ5NWIwMjQxYjUyMmI3MGM1NjEzZTg2N2NkZDQ3ZjAzOTZhZjNlZWUiLCJpYXQiOjE3MDkyMjY2MzMuNjc0MjY3LCJuYmYiOjE3MDkyMjY2MzMuNjc0MjcyLCJleHAiOjE3MTA1MjI2MzMuNTkwNTc3LCJzdWIiOiIiLCJzY29wZXMiOltdfQ.n9uiULAbadMh8TiJb6RmaSyVR9DPVC7kCSQ-C4abxS7xsr3JVyQXRH0hRcJMHw1WZW9tLZ6R3aB9MYz9IQLGoXykJ8N_2iUi1_KZqbXp70qcvTwo35a0lUOMjUQ8DGOZB1BGjItiRCM6pzDrRU9OhCl-Io3pg-nga89wyO5TPYi3s9GFTPWcuWAnCtv1vsER15oP3YcOhj0LhtsjzqcvaMyyAs6DQSXjguyLQ4JIfnV3s5WAwJe_ipWmNHWQjqrZkJhI6hzOrSdjgPLsEANVUzrpcrRfjKRNH1AA6fzDoge9YmyXTOpS6patdLgesCmh_-ky8jq4qflaCPFUfte7RWa0i_MmuWJS0QZa7AQmuYHTOqmUBTLDq7687hkKIR_jY9FUMLWWax9_VLR9hLwtK2pt_nKR9C8_tBrrmLjOoIOOPU6kgitHXGiOlLtR6zDGjInCFmvkRY5XXjfk_ihENNmS3rHbgW-mgrz4jy9u_xbvIanxlLUzJ90jap72PTdOKAk6zbxz28Bi32CFybgiEHQpWNqulOUCeZYc8xAiFs_w8TczLqCEUZYK-Ukhdw0p48MsuMaHaYMiSgmh-gIST-1DrUGsR6G96dqAMYPfRXGWOMw1irdptXXenpDRqZHXPNXHMNwGKiRcdOKyOMwoz94r2FFADXxz6WNFcGZ6pys

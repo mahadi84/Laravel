@@ -76,12 +76,12 @@ Into Other conroller
 
 10. Open (Postman)  http://localhost:8000/oauth/token
  	/Body>form-data
- 	grant_type client_credentials
- 	client_id 
- 	client_secret
-AND send a post request, It will generate access_token with cpires time
+ 	grant_type: client_credentials
+ 	client_id:
+ 	client_secret:
+AND send a post request, It will generate access_token with expire-time
 
-11. Copy the access_token and go to protected url http://localhost:8000/products for example
+11. Copy the access_token and go to protected URL http://localhost:8000/products for example
     -Select auth type Oauth.2, Bearer and past the code
 
 IRCqMBKFJIRQt5a6atC7JP4WP0im1tJa8fqly42H

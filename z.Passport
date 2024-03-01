@@ -1,4 +1,3 @@
-Date: 20 Feb 2024
 
 01.Install Passport
 	composer require laravel/passport
@@ -15,7 +14,6 @@ COMPOSER_MEMORY_LIMIT=-1 composer require laravel/passport
 
 02. Migration
 	php artisan migrate
-
 
 03.User Model
 	use Laravel\Passport\HasApiTokens;
@@ -42,16 +40,15 @@ In boot function add:
     	Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 
 
-06. **THIS STEP IS FOR OLD VERTION, DEPRICATED NOW, create route and function in API controller
-	Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 
-07. Protect Route for Unauthorize Access:
+06. Protect Route for Unauthorize Access:
    Add line to kernel.php
 	protected $middlewareAliases = [
           'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
 	]
+--------------------------------GRAND TYPE: CLIENT--------------------------------------------
 
-08. Add below lines to the controller with FUNCTIONS NAME I want to control (VID_180)
+07. Add below lines to the controller with FUNCTIONS NAME I want to control (VID_180)
  Into UserController 
 	public function __construct(){
         $this->middleware('client.credentials')->only(['store', 'resend']);
@@ -62,7 +59,7 @@ Into Other conroller
         $this->middleware('client.credentials')->only(['index', 'show']);
     }
 
-09. Creat a client(php artisan passport:client) and test it (VID_181)
+08. Creat a client(php artisan passport:client) and test it (VID_181)
 
  	Which User ID should the client be assigned to?
 	 0 (Press Enter)
@@ -74,16 +71,68 @@ Into Other conroller
 **Copy the Client ID and Client Secret for use.
 
 
-10. Open (Postman)  http://localhost:8000/oauth/token
+09. Open (Postman)  http://localhost:8000/oauth/token
  	/Body>form-data
  	grant_type: client_credentials
- 	client_id:
+ 	client_id: 
  	client_secret:
-AND send a post request, It will generate access_token with expire-time
+    AND send a POST request, It will generate 
+	 token_type: 
+	 expire-time: 
+         access_token: 
 
-11. Copy the access_token and go to protected URL http://localhost:8000/products for example
+10. Copy the access_token and go to protected url http://localhost:8000/products for example
     -Select auth type Oauth.2, Bearer and past the code
 
-IRCqMBKFJIRQt5a6atC7JP4WP0im1tJa8fqly42H
+------------------------ GRAD TYPE : Both CLIENT and PASSWORD role in same user ------------------------
+11. Go to Api controller and add:
+      --Into ApiController.php
+ 	Public funtion __construct(){
+	  $this->middleware('auth:api')
+	}
+	
+      --To use only GRAND-TYPE: PASSWORD
+	public function __construct(){
+           parent::__construct();    
+    	}
+      
+      --Here INDEX method only can CLIENT role user Where OTHER method(like store,update or destroy) need one user with both role:
+	public function __construct(){
+        	$this->middleware('auth:api')->except(['index']);
+        	$this->middleware('client.credentials')->only(['index']);
+         }
 
-eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMjA0NzJkMjBhYmIxZDgzODJiNWEwYTYyYzgzYzgwYzMzMjhlY2I4ZTQ5NWIwMjQxYjUyMmI3MGM1NjEzZTg2N2NkZDQ3ZjAzOTZhZjNlZWUiLCJpYXQiOjE3MDkyMjY2MzMuNjc0MjY3LCJuYmYiOjE3MDkyMjY2MzMuNjc0MjcyLCJleHAiOjE3MTA1MjI2MzMuNTkwNTc3LCJzdWIiOiIiLCJzY29wZXMiOltdfQ.n9uiULAbadMh8TiJb6RmaSyVR9DPVC7kCSQ-C4abxS7xsr3JVyQXRH0hRcJMHw1WZW9tLZ6R3aB9MYz9IQLGoXykJ8N_2iUi1_KZqbXp70qcvTwo35a0lUOMjUQ8DGOZB1BGjItiRCM6pzDrRU9OhCl-Io3pg-nga89wyO5TPYi3s9GFTPWcuWAnCtv1vsER15oP3YcOhj0LhtsjzqcvaMyyAs6DQSXjguyLQ4JIfnV3s5WAwJe_ipWmNHWQjqrZkJhI6hzOrSdjgPLsEANVUzrpcrRfjKRNH1AA6fzDoge9YmyXTOpS6patdLgesCmh_-ky8jq4qflaCPFUfte7RWa0i_MmuWJS0QZa7AQmuYHTOqmUBTLDq7687hkKIR_jY9FUMLWWax9_VLR9hLwtK2pt_nKR9C8_tBrrmLjOoIOOPU6kgitHXGiOlLtR6zDGjInCFmvkRY5XXjfk_ihENNmS3rHbgW-mgrz4jy9u_xbvIanxlLUzJ90jap72PTdOKAk6zbxz28Bi32CFybgiEHQpWNqulOUCeZYc8xAiFs_w8TczLqCEUZYK-Ukhdw0p48MsuMaHaYMiSgmh-gIST-1DrUGsR6G96dqAMYPfRXGWOMw1irdptXXenpDRqZHXPNXHMNwGKiRcdOKyOMwoz94r2FFADXxz6WNFcGZ6pys
+12. Create Password Account
+	--php artisan passport:client --password
+	
+	What should we name the password grant client?[projectName Password Grant Client]
+	>Choose and write and remember the name.mahadi for exmaple.
+	Which user provider should this client use to retrive users?[users][0] users
+	> Press Enter
+	Password grant client created successfully.
+	Client ID: 2
+	Client secret: ReSO8Lu4ce1qY8itLC0uNgmnr5RUtyUKHcMXDsfR
+
+13. Open (Postman)  http://localhost:8000/oauth/token
+ 	/Body>form-data
+ 	grant_type: password
+ 	client_id: 
+ 	client_secret:
+	username:
+	password:
+    AND send a POST request, It will generate;
+	 token_type: 
+	 expire-time: 
+         access_token: 
+         refresh_token:
+
+14. Copy the access_token and go to protected url http://localhost:8000/products for example
+    -Select auth type Oauth.2, Bearer and PAST the access_token
+
+-----------------------Frontend to create TOKEN--------------------
+
+15. 
+php artisan vendor:publish --tag=passport-config
+php artisan vendor:publish --tag=passport-migrations
+php artisan vendor:publish --tag=passport-views
+    --It will published authorized.blade.php in resources/views/vendor/passport 

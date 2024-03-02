@@ -184,7 +184,7 @@ STEP:03: add scope middleware in the controller like below, ProductCategoryContr
         	$this->middleware('can:delete-category,product')->only('destroy');
         }
 
------------------------------19. Create User with Scope---------------------------
+-----------------------------19. Create Access_token for PASSWORD User with Scope---------------------------
 
 	Open (Postman)  http://localhost:8000/oauth/token
  	/Body>form-data

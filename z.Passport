@@ -85,10 +85,10 @@ Into Other controller
 10. Copy the access_token and go to protected url http://localhost:8000/products for example
     -Select auth type Oauth.2, Bearer and past the code
 
------------------------- GRAD TYPE : Both CLIENT and PASSWORD role in same user ------------------------
-11. Go to Api controller and add:
+------------------------ GRAT TYPE: PASSWORD CLIENT------------------------
+11. Go to API controller and add:
       --Into ApiController.php
- 	Public funtion __construct(){
+ 	Public function __construct(){
 	  $this->middleware('auth:api')
 	}
 	

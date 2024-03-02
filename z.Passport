@@ -1,5 +1,5 @@
 
-01.Install Passport
+01. Install Passport
 	composer require laravel/passport
 
 	Check with php artisan cmd
@@ -9,19 +9,19 @@
 	passport:install | Run the commands neccessary to prepare Passport for use
 	passport:keys    | Create the encryption keys for Api Authentication
 
-If time out error comes then run the bellow command
+If time out error comes then run the below command
 COMPOSER_MEMORY_LIMIT=-1 composer require laravel/passport
 
 02. Migration
 	php artisan migrate
 
-03.User Model
+03. User Model
 	use Laravel\Passport\HasApiTokens;
 	User Class{
 		use HasApiTokens, HasFactory, Notifiable;
 	}
 
-04. Update config/auth.php like below api driver to passport
+04. Update config/auth.php like the below api driver to passport
 
     'guards' => [
         'api' => [
@@ -34,32 +34,33 @@ COMPOSER_MEMORY_LIMIT=-1 composer require laravel/passport
 
 use Laravel\Passport\Passport;
 
-In boot function add:
+In the boot function add:
         Passport::tokensExpireIn(now()->addDays(15));
     	Passport::refreshTokensExpireIn(now()->addDays(30));
     	Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+	Passport::enableImplicitGrant(); // For Implicit Grant
 
 
 
 06. Protect Route for Unauthorize Access:
-   Add line to kernel.php
+   Add a line to kernel.php
 	protected $middlewareAliases = [
           'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
 	]
 --------------------------------GRAND TYPE: CLIENT--------------------------------------------
 
-07. Add below lines to the controller with FUNCTIONS NAME I want to control (VID_180)
+07. Add the below lines to the controller with the FUNCTIONS NAME I want to control (VID_180)
  Into UserController 
 	public function __construct(){
         $this->middleware('client.credentials')->only(['store', 'resend']);
     	}
 
-Into Other conroller	
+Into Other controller	
  public function __construct(){
         $this->middleware('client.credentials')->only(['index', 'show']);
     }
 
-08. Creat a client(php artisan passport:client) and test it (VID_181)
+08. Create a client(php artisan passport:client) and test it (VID_181)
 
  	Which User ID should the client be assigned to?
 	 0 (Press Enter)
@@ -106,7 +107,7 @@ Into Other conroller
 	--php artisan passport:client --password
 	
 	What should we name the password grant client?[projectName Password Grant Client]
-	>Choose and write and remember the name.mahadi for exmaple.
+	>Choose and write and remember the name.mahadi for example.
 	Which user provider should this client use to retrive users?[users][0] users
 	> Press Enter
 	Password grant client created successfully.
@@ -115,24 +116,81 @@ Into Other conroller
 
 13. Open (Postman)  http://localhost:8000/oauth/token
  	/Body>form-data
+	client_id:
+	client_secret:
  	grant_type: password
- 	client_id: 
- 	client_secret:
 	username:
 	password:
+
     AND send a POST request, It will generate;
 	 token_type: 
 	 expire-time: 
          access_token: 
          refresh_token:
 
-14. Copy the access_token and go to protected url http://localhost:8000/products for example
+14. Copy the access_token and go to protected URL http://localhost:8000/products for example
     -Select auth type Oauth.2, Bearer and PAST the access_token
 
 -----------------------Frontend to create TOKEN--------------------
-
+NO VIEW AVAILABLE IN PASSPORT-RECENT-VERSION
 15. 
 php artisan vendor:publish --tag=passport-config
 php artisan vendor:publish --tag=passport-migrations
 php artisan vendor:publish --tag=passport-views
     --It will published authorized.blade.php in resources/views/vendor/passport 
+
+------------------------------CREATE PERSONAL CLIENT with TOKEN-------------------------------
+INCOMPLETE TOPIC
+16. Create a Password Account
+	--php artisan passport:client --personal
+	
+	What should we name the personal access client?
+	>Press Enter
+	
+	Personal access client created successfully.
+	Client ID: 4
+	Client secret: K6rNkv0KBfSLTHXf1HHBPdGPB14lTouG4IrkInlN
+    Note: Personal token has no expiration time. this is created only for test perpose.
+
+------------------------------CREATE AUTHORIZATION GRANT_TYPE-------------------------------
+17.
+http://localhost:8000/oauth/authorize?client_id=4&redirect_uri=http://localhost&response_type=code
+
+------------------------------18. What is Scope? How to Create, Name, and Register Scope in Middleware ---------------------------
+
+SCOPE: is the role of a user 
+
+STEP:01: Add these lines to AuthServiceProvider.php in boot()
+
+	 Passport::tokensCan([
+            'purchase-product' => 'Create a new transaction for a specific product',
+            'manage-products' => 'Create, read, update, and delete products (CRUD)',
+            'manage-account' => 'Read your account data, id, name, email, if verified, and if admin (cannot read password). Modify your account data (email, and password). Cannot delete your account',
+            'read-general' => 'Read general information like purchasing categories, purchased products, selling products, selling categories, your transactions (purchases and sales)',
+        ]);
+
+
+STEP:02: Add these lines to kernel.php
+	protected $middlewareAliases = [
+		'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+        	'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+	];
+
+
+STEP:03: add scope middleware in the controller like below, ProductCategoryController for example:
+	public function __construct(){
+        	$this->middleware('scope:manage-products')->except('index');
+        	$this->middleware('can:add-category,product')->only('update');
+        	$this->middleware('can:delete-category,product')->only('destroy');
+        }
+
+-----------------------------19. Create User with Scope---------------------------
+
+	Open (Postman)  http://localhost:8000/oauth/token
+ 	/Body>form-data
+	client_id:
+	client_secret:
+ 	grant_type: password
+	username:
+	password:
+	scope: manage-products,manage-account Or only * for All Scope

@@ -151,8 +151,60 @@ STEP:05:-
     Note: Personal token has no expiration time. this is created only for test perpose.
 
 ===================================CREATE AUTHORIZATION GRANT_TYPE=========================
+Tutorial: https://www.youtube.com/watch?v=PTFPMAX_88s
 
-http://localhost:8000/oauth/authorize?client_id=4&redirect_uri=http://localhost&response_type=code
+-----------Step:01 Create a user with below Blade (It supports Bootstrap) and route INSIDE BREEZ--------------
+	WEB-ROUTE:
+	
+	use Illuminate\Http\Request;
+	Route::get('/dashboard/clients', function(Request $request){
+	        return view('clients',['clients'=>$request->user()->clients]);
+	    })->middleware(['auth'])->name('dashboard.clients');
+
+	BLADE:
+		 <a href="{{route('dashboard.clients')}}">Clients</a>
+	-------List of Created Clients-------
+                    @forelse ($clients as $client)
+                    <p> <b>Client Id:</b>  {{$client->id}}</p>
+                    <p><b>Client Redirect:</b>   {{$client->redirect}}</p>
+                    <p><b>Client Secret:</b>  {{$client->secret}}</p>
+                    @empty
+                    <p>No Client Found</p>                       
+                    @endforelse
+	------------Create Client Form-------
+		<form action="/oauth/clients" method="post">
+                        <div class="mt-3">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Client Name">
+                        </div>
+                        <div class="mt-3">
+                            <label for="redirect">Redirect Url</label>
+                            <input type="text" id="redirect" name="redirect" placeholder="Redirect URL">
+                        </div>
+                        @csrf
+                        <div class="mt-1">
+                            <button type="submit" >ClientCreate</button>
+                        </div>
+                    </form>
+
+
+------------STEP:02: Generate Code and Authentication Token-----------------
+State parameters requires 40string
+http://localhost:8000/oauth/authorize?client_id=7&redirect_uri=https://localhost.com&response_type=code&scope&state=asdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+Copy the code from browser
+
+Go to Postman:
+
+Open (Postman)  http://localhost:8000/oauth/token
+ 	/Body>form-data
+	client_id:
+	client_secret:
+ 	grant_type: authoriztion_code
+	redirect_uri:
+	code: That I got from browser
+	
+	**Send POST method in POSTMAN
+	It will generate access token for future use.
 
 ========================What is SCOPE? How to Create, Name, and Register Scope in Middleware=======================================
 

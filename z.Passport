@@ -44,24 +44,23 @@ In the boot function add:
 
 =====================GRAND TYPE: CLIENT (Add and Create)==================================
 
-06. Protect Route for Unauthorize Access:
-   Add a line to kernel.php
-	protected $middlewareAliases = [
-          'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
-	]
+STEP:01:-   Add a line to kernel.php
+		protected $middlewareAliases = [
+	          'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
+		]
 
-07. Add the below lines to the controller with the FUNCTIONS NAME I want to control (VID_180)
- Into UserController:-------- 
-	public function __construct(){
-        $this->middleware('client.credentials')->only(['store', 'resend']);
-    	}
+STEP:02:-  Add the below lines to the controller with the FUNCTIONS NAME I want to control (VID_180)
+ 	Into UserController:-------- 
+		public function __construct(){
+	        $this->middleware('client.credentials')->only(['store', 'resend']);
+	    	}
 
-Into Other controllers:------	
- public function __construct(){
-        $this->middleware('client.credentials')->only(['index', 'show']);
-    }
+	Into Other controllers:------	
+	 	public function __construct(){
+	        $this->middleware('client.credentials')->only(['index', 'show']);
+	    	}
 
-08. Create a client(php artisan passport:client) and test it (VID_181)
+STEP:03:-  Create a client(php artisan passport:client) and test it (VID_181)
 
  	Which User ID should the client be assigned to?
 	 --Choose any user ID from users_table (Press Enter)
@@ -73,7 +72,7 @@ Into Other controllers:------
 ***Copy the Client ID and Client Secret for use.
 
 
-09. Open (Postman)  http://localhost:8000/oauth/token
+STEP:04:-  Open (Postman)  http://localhost:8000/oauth/token
  	/Body>form-data
  	grant_type: client_credentials
  	client_id: 
@@ -83,11 +82,13 @@ Into Other controllers:------
 	 expire-time: 
          access_token: 
 
-10. Copy the access_token and go to protected url http://localhost:8000/products for example
-    -Select auth type Oauth.2, Bearer and past the code
+STEP:05:-
+	Copy the access_token and go to protected url http://localhost:8000/products for example
+    	-Select auth type Oauth.2, Bearer and past the code
 
 ============================ GRANT TYPE: PASSWORD CLIENT (Add and Create)======================================
-11. Go to API controller and add:
+STEP:01:- 
+	Go to API controller and add:
       --Into ApiController.php
  	Public function __construct(){
 	  $this->middleware('auth:api')
@@ -98,13 +99,14 @@ Into Other controllers:------
            parent::__construct();    
     	}
       
-      --Here INDEX method only can CLIENT role user Where OTHER method(like store,update or destroy) need one user with both role:
+STEP:02:-       
+	--Here INDEX method only can CLIENT role user Where OTHER method(like store,update or destroy) need one user with both role:
 	public function __construct(){
         	$this->middleware('auth:api')->except(['index']);
         	$this->middleware('client.credentials')->only(['index']);
          }
 
-12. Create Password Account
+STEP:03:- . Create Password Account
 	--php artisan passport:client --password
 	
 	What should we name the password grant client?[projectName Password Grant Client]
@@ -115,7 +117,8 @@ Into Other controllers:------
 	Client ID: 2
 	Client secret: ReSO8Lu4ce1qY8itLC0uNgmnr5RUtyUKHcMXDsfR
 
-13. Open (Postman)  http://localhost:8000/oauth/token
+STEP:04:-  
+	Open (Postman)  http://localhost:8000/oauth/token
  	/Body>form-data
 	client_id:
 	client_secret:
@@ -129,8 +132,9 @@ Into Other controllers:------
          access_token: 
          refresh_token:
 
-14. Copy the access_token and go to protected URL http://localhost:8000/products for example
-    -Select auth type Oauth.2, Bearer and PAST the access_token
+STEP:05:-  
+	Copy the access_token and go to protected URL http://localhost:8000/products for example
+    	-Select auth type Oauth.2, Bearer and PAST the access_token
 
 -----------------------15.Frontend to create TOKEN--------------------
 ***NO VIEW AVAILABLE IN PASSPORT-RECENT-VERSION

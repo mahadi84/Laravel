@@ -189,9 +189,10 @@ Tutorial: https://www.youtube.com/watch?v=PTFPMAX_88s
 
 
 ------------STEP:02: Generate Code and Authentication Token-----------------
-State parameters requires 40string
+**State parameters require 40string
+**To add more than one scope parameter separated by %20 example: scope=manage-account%20manage-products
 http://localhost:8000/oauth/authorize?client_id=7&redirect_uri=https://localhost.com&response_type=code&scope&state=asdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-Copy the code from browser
+Copy the code just generated into  the browser
 
 Open (Postman)  http://localhost:8000/oauth/token
  	/Body>form-data

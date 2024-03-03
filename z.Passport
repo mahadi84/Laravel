@@ -64,11 +64,11 @@ Into Other controller
 08. Create a client(php artisan passport:client) and test it (VID_181)
 
  	Which User ID should the client be assigned to?
-	 0 (Press Enter)
+	 --Choose any user ID from users_table (Press Enter)
 	What should we name the Client?
-	 Choose a name (Press Enter)
+	 --Choose a name (Press Enter)
 	Where should we redirect the request after authorization?
-	(Press Only Enter)
+	--(Press Only Enter)
 
 **Copy the Client ID and Client Secret for use.
 

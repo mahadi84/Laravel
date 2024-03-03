@@ -1,5 +1,5 @@
 
-01. Install Passport
+=======================01. Install Passport =====================
 	composer require laravel/passport
 
 	Check with php artisan cmd
@@ -42,7 +42,7 @@ In the boot function add:
 
 
 
---------------------------------GRAND TYPE: CLIENT (Add and Create)--------------------------------------------
+=====================GRAND TYPE: CLIENT (Add and Create)==================================
 
 06. Protect Route for Unauthorize Access:
    Add a line to kernel.php
@@ -51,12 +51,12 @@ In the boot function add:
 	]
 
 07. Add the below lines to the controller with the FUNCTIONS NAME I want to control (VID_180)
- Into UserController 
+ Into UserController:-------- 
 	public function __construct(){
         $this->middleware('client.credentials')->only(['store', 'resend']);
     	}
 
-Into Other controller	
+Into Other controllers:------	
  public function __construct(){
         $this->middleware('client.credentials')->only(['index', 'show']);
     }
@@ -70,7 +70,7 @@ Into Other controller
 	Where should we redirect the request after authorization?
 	--(Press Only Enter)
 
-**Copy the Client ID and Client Secret for use.
+***Copy the Client ID and Client Secret for use.
 
 
 09. Open (Postman)  http://localhost:8000/oauth/token
@@ -86,7 +86,7 @@ Into Other controller
 10. Copy the access_token and go to protected url http://localhost:8000/products for example
     -Select auth type Oauth.2, Bearer and past the code
 
------------------------- GRANT TYPE: PASSWORD CLIENT (Add and Create)------------------------
+============================ GRANT TYPE: PASSWORD CLIENT (Add and Create)======================================
 11. Go to API controller and add:
       --Into ApiController.php
  	Public function __construct(){
@@ -185,7 +185,7 @@ STEP:03: add scope middleware in the controller like below, ProductCategoryContr
         	$this->middleware('can:delete-category,product')->only('destroy');
         }
 
------------------------------19. Create Access_token for PASSWORD User with Scope---------------------------
+STEP:04: Create Access_token for PASSWORD User with Scope
 
 	Open (Postman)  http://localhost:8000/oauth/token
  	/Body>form-data
@@ -195,3 +195,10 @@ STEP:03: add scope middleware in the controller like below, ProductCategoryContr
 	username:
 	password:
 	scope: manage-products,manage-account Or only * for All Scope
+
+======================= 19. Check User Scope========================
+ In any controller write and check:
+	if (request()->user()->tokenCan('manage-accountt')){
+             return $this->showOne(request()->user());
+        }
+

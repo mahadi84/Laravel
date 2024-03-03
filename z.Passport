@@ -197,7 +197,7 @@ STEP:04: Create Access_token for PASSWORD User with Scope
 
 ======================= Check User Scope========================
  In any controller write and check:
-	if (request()->user()->tokenCan('manage-accountt')){
+	if (request()->user()->tokenCan('manage-account')){
              return $this->showOne(request()->user());
         }
 

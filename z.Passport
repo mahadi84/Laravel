@@ -136,15 +136,8 @@ STEP:05:-
 	Copy the access_token and go to protected URL http://localhost:8000/products for example
     	-Select auth type Oauth.2, Bearer and PAST the access_token
 
------------------------15.Frontend to create TOKEN--------------------
-***NO VIEW AVAILABLE IN PASSPORT-RECENT-VERSION
 
-php artisan vendor:publish --tag=passport-config
-php artisan vendor:publish --tag=passport-migrations
-php artisan vendor:publish --tag=passport-views
-    --It will published authorized.blade.php in resources/views/vendor/passport 
-
-------------------------------16. CREATE PERSONAL CLIENT with TOKEN-------------------------------
+=====================================CREATE PERSONAL CLIENT with TOKEN===============================
 ***INCOMPLETE TOPIC
   Create a Password Account
 	--php artisan passport:client --personal
@@ -157,11 +150,11 @@ php artisan vendor:publish --tag=passport-views
 	Client secret: K6rNkv0KBfSLTHXf1HHBPdGPB14lTouG4IrkInlN
     Note: Personal token has no expiration time. this is created only for test perpose.
 
-------------------------------17. CREATE AUTHORIZATION GRANT_TYPE-------------------------------
+===================================CREATE AUTHORIZATION GRANT_TYPE=========================
 
 http://localhost:8000/oauth/authorize?client_id=4&redirect_uri=http://localhost&response_type=code
 
-------------------------------18. What is Scope? How to Create, Name, and Register Scope in Middleware ---------------------------
+========================What is SCOPE? How to Create, Name, and Register Scope in Middleware=======================================
 
 SCOPE: is the role of a user 
 
@@ -200,7 +193,9 @@ STEP:04: Create Access_token for PASSWORD User with Scope
 	password:
 	scope: manage-products,manage-account Or only * for All Scope
 
-======================= 19. Check User Scope========================
+	**Send POST method in POSTMAN
+
+======================= Check User Scope========================
  In any controller write and check:
 	if (request()->user()->tokenCan('manage-accountt')){
              return $this->showOne(request()->user());

@@ -42,12 +42,13 @@ In the boot function add:
 
 
 
+--------------------------------GRAND TYPE: CLIENT (Add and Create)--------------------------------------------
+
 06. Protect Route for Unauthorize Access:
    Add a line to kernel.php
 	protected $middlewareAliases = [
           'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
 	]
---------------------------------GRAND TYPE: CLIENT--------------------------------------------
 
 07. Add the below lines to the controller with the FUNCTIONS NAME I want to control (VID_180)
  Into UserController 
@@ -85,7 +86,7 @@ Into Other controller
 10. Copy the access_token and go to protected url http://localhost:8000/products for example
     -Select auth type Oauth.2, Bearer and past the code
 
------------------------- GRAT TYPE: PASSWORD CLIENT------------------------
+------------------------ GRANT TYPE: PASSWORD CLIENT (Add and Create)------------------------
 11. Go to API controller and add:
       --Into ApiController.php
  	Public function __construct(){
@@ -131,17 +132,17 @@ Into Other controller
 14. Copy the access_token and go to protected URL http://localhost:8000/products for example
     -Select auth type Oauth.2, Bearer and PAST the access_token
 
------------------------Frontend to create TOKEN--------------------
-NO VIEW AVAILABLE IN PASSPORT-RECENT-VERSION
-15. 
+-----------------------15.Frontend to create TOKEN--------------------
+***NO VIEW AVAILABLE IN PASSPORT-RECENT-VERSION
+
 php artisan vendor:publish --tag=passport-config
 php artisan vendor:publish --tag=passport-migrations
 php artisan vendor:publish --tag=passport-views
     --It will published authorized.blade.php in resources/views/vendor/passport 
 
-------------------------------CREATE PERSONAL CLIENT with TOKEN-------------------------------
-INCOMPLETE TOPIC
-16. Create a Password Account
+------------------------------16. CREATE PERSONAL CLIENT with TOKEN-------------------------------
+***INCOMPLETE TOPIC
+  Create a Password Account
 	--php artisan passport:client --personal
 	
 	What should we name the personal access client?
@@ -152,8 +153,8 @@ INCOMPLETE TOPIC
 	Client secret: K6rNkv0KBfSLTHXf1HHBPdGPB14lTouG4IrkInlN
     Note: Personal token has no expiration time. this is created only for test perpose.
 
-------------------------------CREATE AUTHORIZATION GRANT_TYPE-------------------------------
-17.
+------------------------------17. CREATE AUTHORIZATION GRANT_TYPE-------------------------------
+
 http://localhost:8000/oauth/authorize?client_id=4&redirect_uri=http://localhost&response_type=code
 
 ------------------------------18. What is Scope? How to Create, Name, and Register Scope in Middleware ---------------------------

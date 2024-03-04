@@ -198,7 +198,7 @@ Open (Postman)  http://localhost:8000/oauth/token
  	/Body>form-data
 	client_id:
 	client_secret:
- 	grant_type: authoriztion_code
+ 	grant_type: authorization_code
 	redirect_uri:
 	code: That I got from the browser
 	

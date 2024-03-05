@@ -86,11 +86,13 @@ LOGOUT-BUTTON:--
 
 LOGIN BLADE:--
     <form  action="{{ route('login') }}" method="POST">
+     @csrf
     <input name="email"     type="email" value="{{old('email')}}">
     <input name="password"  type="password">
 
 REGISTER BLADE:--
     <form method="POST" action="{{ route('register') }}">
+     @csrf
     <input name="name"  type="name" value="{{old('name')}}">
     <input name="email"  type="email" value="{{old('email')}}">
     <input name="password"  type="password">
@@ -98,6 +100,7 @@ REGISTER BLADE:--
 
 RESET PASSWORD (Link received through Email):--
     <form method="POST" action="{{ route('password.store') }}">
+     @csrf
     <input type="hidden" name="token" value="{{ $request->route('token') }}">
     <input name="email"  type="email" value="{{old('email', $request->email)}}">
     <input name="password"  type="password">
@@ -108,11 +111,13 @@ RESET PASSWORD (Link received through Email):--
 
 FORGOT PASSWORD (Email Request Form):--
     <form method="POST" action="{{ route('password.email') }}">
+     @csrf
     <input name="email"  type="email" value="{{old('email')}}">
 
 
 CONFIRM PASSWORD:---
     <form method="POST" action="{{ route('password.confirm') }}">
+     @csrf
     <input type="password" name="password" autocomplete="current-password" />
 
 

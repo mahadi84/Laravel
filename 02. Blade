@@ -37,20 +37,34 @@ Date: 31-Aug-2023
 
 
 ================= 02. Functions used in Blade =============================
+
 {{ Str::limit($news->description, 100) }}
 {!! $products->links() !!}
 
-@extends('layouts.app')
-
-
+------layouts.master---
+html-page-start
 @yield('content')
+html-page-end
+
+---child page---
+@extends('layouts.master')
 @section('content')
 @endsection()
+
+------Login menu show and hide after login-----
+@auth
+    dashboard-menus
+@else
+    login-menu
+@endauth
+
 
 
 @forelse()
 @empty
 @endforelse
+
+
 
 ============================ 03. CHECKED-BOX Filled by  ARRAY data from Database =====================
 

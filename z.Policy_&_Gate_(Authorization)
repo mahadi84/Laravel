@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Gate;
 
 02. To use multiple places I can create a trait or in ApiController.
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\AuthorizationException;
     protected function allowedAdminAction(){
         if (!Gate::allows('admin-action')) {

@@ -1,7 +1,7 @@
 Date: 31-Aug-2023
 
 01. DYNAMIC SELECT OPTION (ADD+EDIT)
-02. Functions used in Blade
+02. How to extend Blade Layout?
 03. CHECKED-BOX Filled by  ARRAY data from Database
 
 04. Breez Authentication form
@@ -27,7 +27,6 @@ Date: 31-Aug-2023
     </select>
 
 
-
 01:----
     <select class="form-control" name="status">
         <option selected disabled>Select Status</option> 
@@ -36,7 +35,7 @@ Date: 31-Aug-2023
     </select>
 
 
-================= 02. Functions used in Blade =============================
+================= 02. How to extend Blade Layout? =============================
 
 {{ Str::limit($news->description, 100) }}
 {!! $products->links() !!}
@@ -58,8 +57,7 @@ html-page-end
     login-menu
 @endauth
 
-
-
+---
 @forelse()
 @empty
 @endforelse

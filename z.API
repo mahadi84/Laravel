@@ -30,8 +30,8 @@ Date: 06-March-2024
                 }
 
 
-07. What's the solution for the belwo scenario for API:
-    A) Admin User with scope:manage-account: will be able to function INDEX,SHOW, UPDATE and DELETE
+07. What's the solution for the below scenario for API:
+    A) Admin User with scope:manage-account: will be able to function INDEX, SHOW, UPDATE and DELETE
     B) Admin User but without scope:manage-account: will be able to function INDEX all, SHOW and UPDATE his info only.
     C) General User without scope:manage-account: will be able to function SHOW and UPDATE his info only.
 

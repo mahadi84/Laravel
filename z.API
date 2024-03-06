@@ -18,6 +18,7 @@ Date: 06-March-2024
         $this->middleware('client.credentials')->only(['resend']);
         $this->middleware('auth:api')->except(['showRegisterForm', 'store', 'verify', 'resend']);        
         $this->middleware('scope:manage-account')->only(['show', 'update']);
+        $this->middleware(['auth:api', 'scopes:edit,create,delete'])->except(['index', 'show']);
         $this->middleware('can:view-user,user')->only('show');
         $this->middleware('can:delete-user,user')->only('destroy');
                public function index(){

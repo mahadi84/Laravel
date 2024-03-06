@@ -14,11 +14,12 @@ Date: 06-March-2024
 06. What's the difference between Gate and Policy?
     
     WHY ARE THESE USED FOR?
-           $this->middleware('client.credentials')->only('show');
-           $this->middleware('auth:api')->only('show');
-           $this->middleware('scope:manage-product')->only(['show', 'update']);
-           $this->middleware('scopes:manage-products,read-general')->only('show');
-           $this->middleware('can:update-user,user')->only('update');
+        $this->middleware('transform.input:' . UserTransformer::class)->only(['update']);
+        $this->middleware('client.credentials')->only(['resend']);
+        $this->middleware('auth:api')->except(['showRegisterForm', 'store', 'verify', 'resend']);        
+        $this->middleware('scope:manage-account')->only(['show', 'update']);
+        $this->middleware('can:view-user,user')->only('show');
+        $this->middleware('can:delete-user,user')->only('destroy');
                public function index(){
                     if (!Gate::allows('admin-action')) {
                         throw new AuthorizationException('This action is unauthorized');

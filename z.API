@@ -1,4 +1,4 @@
-00. Why API? What is advantage of it?
+00. Why API? What is the advantage of it?
 01. If I write all API Routes to the web, what is the problem?
 02. How to implement like:
     a) All admin can see all users, buyers, etc But only selected admin can UPDATE/DELETE  all users' info.

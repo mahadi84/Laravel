@@ -1,0 +1,14 @@
+00. Why API? What is advantage of it?
+01. If I write all API Routes to the web, what is the problem?
+02. How to implement like:
+    a) All admin can see all users, buyers, etc But only selected admin can UPDATE/DELETE  all users' info.
+    b) Normal users see only his info?
+    c) Seller must have a Product and Buyer(User) must have a transaction.
+
+03. Why Authentication in API? Why session is not enough?
+04. Difference among Passport Clients, Personal Clients, Password Clients, and Authorization Clients.
+05. Why Passport is not enough to protect/Authorize?
+06. What's the difference between Gate and Policy?
+
+07. How to get a user ID from an Access Token?
+08. How to hide the original table's field's name while showing, updating, and deleting to the other name as per my choice?

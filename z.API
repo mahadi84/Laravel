@@ -12,6 +12,7 @@ Date: 06-March-2024
 04. Difference among Passport Clients, Personal Clients, Password Clients, and Authorization Clients.
 05. Why Passport is not enough to protect/Authorize?
 06. What's the difference between Gate and Policy?
+    
     WHY ARE THESE USED FOR?
            $this->middleware('client.credentials')->only('show');
            $this->middleware('auth:api')->only('show');

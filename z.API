@@ -1,3 +1,6 @@
+Date: 06-March-2024
+
+
 00. Why API? What is the advantage of it?
 01. If I write all API Routes to the web, what is the problem?
 02. How to implement like:
@@ -9,6 +12,25 @@
 04. Difference among Passport Clients, Personal Clients, Password Clients, and Authorization Clients.
 05. Why Passport is not enough to protect/Authorize?
 06. What's the difference between Gate and Policy?
+    WHY ARE THESE USED FOR?
+           $this->middleware('client.credentials')->only('show');
+           $this->middleware('auth:api')->only('show');
+           $this->middleware('scope:manage-product')->only(['show', 'update']);
+           $this->middleware('scopes:manage-products,read-general')->only('show');
+           $this->middleware('can:update-user,user')->only('update');
+               public function index(){
+                    if (!Gate::allows('admin-action')) {
+                        throw new AuthorizationException('This action is unauthorized');
+                    }
+                    $users = User::all();
+                    return $this->showAll($users);
+                }
+
 
 07. How to get a user ID from an Access Token?
 08. How to hide the original table's field's name while showing, updating, and deleting to the other name as per my choice?
+
+
+
+
+-

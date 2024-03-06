@@ -30,8 +30,14 @@ Date: 06-March-2024
                 }
 
 
-07. How to get a user ID from an Access Token?
-08. How to hide the original table's field's name while showing, updating, and deleting to the other name as per my choice?
+07. What's the solution for the belwo scenario for API:
+    A) Admin User with scope:manage-account: will be able to function INDEX,SHOW, UPDATE and DELETE
+    B) Admin User but without scope:manage-account: will be able to function INDEX all, SHOW and UPDATE his info only.
+    C) General User without scope:manage-account: will be able to function SHOW and UPDATE his info only.
+
+
+08. How to get a user ID from an Access Token?
+09. How to hide the original table's field's name while showing, updating, and deleting to the other name as per my choice?
 
 
 

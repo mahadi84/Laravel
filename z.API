@@ -13,7 +13,7 @@ Date: 06-March-2024
 05. Why Passport is not enough to protect/Authorize?
 06. What's the difference between Gate and Policy?
     
-    WHY ARE THESE USED FOR?
+    WHY ARE THESE USED FOR and HOW?
         $this->middleware('transform.input:' . UserTransformer::class)->only(['update']); //** hide real table field name while updating data.
         $this->middleware('client.credentials')->only(['resend']); //**Any passport-client with Only access_token.
         $this->middleware('auth:api')->except(['showRegisterForm', 'store', 'verify', 'resend']); //** Passport Client with grant_type password, associated with Username and Password.      

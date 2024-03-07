@@ -14,12 +14,12 @@ Date: 06-March-2024
 06. What's the difference between Gate and Policy?
     
     WHY ARE THESE USED FOR?
-        $this->middleware('transform.input:' . UserTransformer::class)->only(['update']); //** hide real table field name while updating data
-        $this->middleware('client.credentials')->only(['resend']); //**Any passport-client with access_token
-        $this->middleware('auth:api')->except(['showRegisterForm', 'store', 'verify', 'resend']); //** Passport Client with grant_type password, associated with Username and Password        
-        $this->middleware('scope:manage-account')->only(['show', 'update']); //** Passport Client with grant_type password, associated with Username and Password and SCOPE
-        $this->middleware(['auth:api', 'scopes:edit,create,delete'])->except(['index', 'show']); //** Passport Client with grant_type password, associated with Username and Password and SCOPES
-        $this->middleware('can:view-user,user')->only('show'); //** Passport Client with grant_type password, associated with Username and Password and POLICY
+        $this->middleware('transform.input:' . UserTransformer::class)->only(['update']); //** hide real table field name while updating data.
+        $this->middleware('client.credentials')->only(['resend']); //**Any passport-client with Only access_token.
+        $this->middleware('auth:api')->except(['showRegisterForm', 'store', 'verify', 'resend']); //** Passport Client with grant_type password, associated with Username and Password.      
+        $this->middleware('scope:manage-account')->only(['show', 'update']); //** Passport Client with grant_type password, associated with Username and Password and SCOPE.
+        $this->middleware(['auth:api', 'scopes:edit,create,delete'])->except(['index', 'show']); //** Passport Client with grant_type password, associated with Username and Password and SCOPES.
+        $this->middleware('can:view-user,user')->only('show'); //** Passport Client with grant_type password, associated with Username and Password and POLICY.
                public function index(){
                     if (!Gate::allows('admin-action')) {  //** Passport Client with grant_type password, associated with Username and Password and GATE
                         throw new AuthorizationException('This action is unauthorized');

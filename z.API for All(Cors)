@@ -1,0 +1,9 @@
+
+How to allow others vue.js or any javascript website to access my API?
+--For this laravel-cors packages needed.
+
+--First, Go to http://www.test-cors.org/ (Remember to go to with http not https )
+--Put my localhost site and check if any result returns for  get request from my website.
+
+Install : laravel-cors package
+Tutorial: https://packagist.org/packages/barryvdh/laravel-cors

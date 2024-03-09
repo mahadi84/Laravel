@@ -38,7 +38,39 @@ Date: 06-March-2024
 08. How to get a user ID from an Access Token?
 09. How to hide the original table's field's name while showing, updating, and deleting to the other name as per my choice?
 
+===============Build a RESTful API for a market system using Laravel and dominate the most challenging features of APIs with Laravel============================
+By JuanD MeGon At Udemy.com --I've completed at 9-Feb-2024
 
+--You will learn this about the development of a RESTful API with Laravel:
+--Using the Laravel PHP artisan for code and components generation
+--Usage and creation of middleware on Laravel
+--The Laravel Resource routes and controllers (ideal for RESTful APIs)
+
+--Fully supported JSON format responses for a JSON RESTful API
+--Validation of requests directly from the Laravel Controllers
+--Handling all types of exceptions and errors from Laravel handler
+--Complex operations involving up to three resources/models for a specific operation
+
+--Usage of Laravel dependency injection and model binding
+--Generation of the database structure using Laravel migrations
+--Automatic insertion of fake data into the database through "faker," using Laravel factories, and seeders
+--Laravel Sessions and access_token authentication for the RESTful API. Yes, Both!
+
+--Using Laravel Passport to protect the RESTful API with OAuth2
+--Pagination of results using Laravel collections
+--Using URL parameters to execute actions (the RESTful approach)
+--Sorting results based on URL parameters with a RESTful approach
+
+--Filtering results using URL parameters
+--Caching responses using Laravel Cache System
+--Limitation of requests using the Laravel middleware
+--Implementing HATEOAS on Laravel (a pure RESTful API must use HATEOAS)
+
+--Using PHP Fractal for transforming responses
+--Usage of CORS on the API responses to allow JavaScript-based clients and web browsers.
+--Use the Laravel Policies and Gates to handle the user's authorization layer.
+
+Much more!!
 
 
 -

@@ -38,6 +38,9 @@ Date: 06-March-2024
 08. How to get a user ID from an Access Token?
 09. How to hide the original table's field's name while showing, updating, and deleting to the other name as per my choice?
 
+
+
+
 =============== 01. Build a RESTful API for a market system using Laravel and dominate the most challenging features of APIs with Laravel============================
 By JuanD MeGon At Udemy.com --I've completed at 9-Feb-2024
 
@@ -79,7 +82,6 @@ By JuanD MeGon At Udemy.com
 During the course, you will learn this...
 
 For the HTTP Client:
-
 How to consume a service or API through HTTP requests from Laravel
 How to authenticate and create user sessions in your HTTP Client with information from other services
 How to automate the process of obtaining an access token to authorize the requests of your HTTP Client
@@ -96,7 +98,6 @@ Handling and preparing to resolve exceptions and errors when consuming external 
 
 
 For any Laravel project:
-
 How to install Laravel in your development environment for professional projects
 Configure Laravel, in your environment for an agile and simple development
 Build of a professional, modular and, a scalable project with Laravel

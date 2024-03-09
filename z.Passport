@@ -86,6 +86,26 @@ STEP:05:-
 	Copy the access_token and go to protected url http://localhost:8000/products for example
     	-Select auth type Oauth.2, Bearer and past the code
 
+=====================================CREATE PERSONAL CLIENT with TOKEN===============================
+***INCOMPLETE TOPIC
+  Create a Password Account
+	--php artisan passport:client --personal
+	
+	What should we name the personal access client?
+	>Press Enter
+	
+	Personal access client created successfully.
+	Client ID: 4
+	Client secret: K6rNkv0KBfSLTHXf1HHBPdGPB14lTouG4IrkInlN
+    Note: Personal token has no expiration time. this is created only for test perpose.
+
+	CREATE: ACCESS_TOKEN:-----
+	Route::get('dashboard/personal-access-token', function(){
+	$user = User::find(6); 
+	return $token = $user->createToken('Token Name')->accessToken;
+	});
+
+
 ============================ GRANT TYPE: PASSWORD CLIENT (Add and Create)======================================
 STEP:01:- 
 	Go to API controller and add:
@@ -136,19 +156,6 @@ STEP:05:-
 	Copy the access_token and go to protected URL http://localhost:8000/products for example
     	-Select auth type Oauth.2, Bearer and PAST the access_token
 
-
-=====================================CREATE PERSONAL CLIENT with TOKEN===============================
-***INCOMPLETE TOPIC
-  Create a Password Account
-	--php artisan passport:client --personal
-	
-	What should we name the personal access client?
-	>Press Enter
-	
-	Personal access client created successfully.
-	Client ID: 4
-	Client secret: K6rNkv0KBfSLTHXf1HHBPdGPB14lTouG4IrkInlN
-    Note: Personal token has no expiration time. this is created only for test perpose.
 
 ===================================CREATE AUTHORIZATION GRANT_TYPE=========================
 Tutorial: https://www.youtube.com/watch?v=PTFPMAX_88s

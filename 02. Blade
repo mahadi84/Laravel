@@ -173,7 +173,7 @@ UPDATE PROFILE:
 @endif   
 
 <!-- To show multiple validation errors -->
-<!-- @if ($errors->any())
+    @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Error!</strong> <br>
                 <ul>
@@ -182,7 +182,7 @@ UPDATE PROFILE:
                 @endforeach
                 </ul>
         </div>
-@endif      -->
+    @endif    
 
 ======================== 07. Profile Image/Name Show ====================
 <img  src="{{ (!empty(Auth::user()->image)) ? url('public/upload/user_images/'.Auth::user()->image):url('public/default_image.jpg') }}">

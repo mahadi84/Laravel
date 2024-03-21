@@ -300,7 +300,8 @@ UPDATE PROFILE:
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="submit" class="btn btn-outline-secondary">Login </button>
+                                <a href="{{url('/')}}" class="btn btn-outline-secondary">Back </a>
+                                <button type="submit" class="btn btn-secondary">Login </button>
                             </div>
                             
                         </form>

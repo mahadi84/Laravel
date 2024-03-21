@@ -214,7 +214,7 @@ UPDATE PROFILE:
     <div class="d-flex flex-grow-1">
         <span class="w-100 d-lg-none d-block">
             <!-- hidden spacer to center brand on mobile --></span>
-        <a class="navbar-brand d-none d-lg-inline-block" href="{{route('home')}}"> Consume API </a>
+        <a class="navbar-brand d-none d-lg-inline-block" href="{{url('/')}}"> Consume API </a>
         {{-- <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="#">
             Consume API
             <img src="//placehold.it/40?text=LOGO" alt="logo">
@@ -228,15 +228,8 @@ UPDATE PROFILE:
     <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
         <ul class="navbar-nav ms-auto flex-nowrap">
             <li class="nav-item">
-                <a href="{{route('products')}}" class="nav-link m-2 menu-item nav-active">Products</a>
+                <a href="" class="nav-link m-2 menu-item nav-active">Products</a>
             </li>
-            <li class="nav-item">
-                <a href="{{route('product.create')}}" class="nav-link m-2 menu-item nav-active">Add Product</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link m-2 menu-item">Contact</a>
-            </li>
-
         @if (Route::has('login'))
             @auth
                 <li class="nav-item">

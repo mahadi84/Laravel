@@ -12,7 +12,8 @@ Date: 31-Aug-2023
 06. Show Validation and CRUD Message
 07. Image/Name Show
 
-08. Navigation Menu
+08. Navigation Menu 
+09. Login Form in the middle of page-body
 
 ===================00 Login Page-MIDDLE-Position======================
 <div class="max-w-7xl mx-auto p-6 lg:p-8">
@@ -21,7 +22,13 @@ Date: 31-Aug-2023
     </div>
 </div>  
 
-
+****Login Button
+@if (Route::has('login'))
+    @auth                        
+    @else               
+        <a href="{{ route('login') }}" class="btn btn-outline-secondary">Log in</a>
+    @endauth
+  @endif
 
 ==============  01.  DYNAMIC SELECT OPTION (ADD+EDIT):  ===================
 
@@ -255,10 +262,61 @@ UPDATE PROFILE:
 
 
 
+===========================09. Login page in the Middle ========================
+
+
+<div class="max-w-7xl mx-auto p-6 lg:p-8">
+    <div class="flex justify-center" style="margin-top: 220px">
+        
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+
+                <div class="card">
+                    <div class="card-header bg-secondary text-center text-light"> Login Form </div>
+                    <div class="card-body">
+
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input name="email" type="text" id="email"  class="form-control" placeholder=""  aria-describedby="helpId"/>
+                                <div class="text-danger">{{$errors->first('email')}}</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input name="password" type="text" id="password"  class="form-control" placeholder=""  aria-describedby="helpId"/>
+                                <div class="text-danger">{{$errors->first('password')}}</div>
+                            </div>
+
+                            <!-- Remember Me -->
+                            <div class="block mt-4">
+                                <label for="remember_me" class="inline-flex items-center">
+                                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                                    <span class="ms-2 text-sm text-gray-600">Remember me</span>
+                                </label>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="submit" class="btn btn-outline-secondary">Login </button>
+                            </div>
+                            
+                        </form>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</div>  
 
 
 
-
+=====================
 
 
 

@@ -47,7 +47,14 @@ Website: https://www.educative.io/answers/how-to-install-a-breeze-laravel-authen
 CMD: > composer require laravel/breeze
      > php artisan breeze:install
      > php artisan migrate
-     > npm install  **If does not work search 'edit environment variables for your account' And Add Node.js link here
+     > npm install  
+               01."Error: Cannot find module 'PROJECT_FOLDER_LOCAITON\node_modules\vite\bin\vite.js'"
+               Solution: Delete node_modules directory and then re-run "npm i" without quotation mark.
+               
+               02.If does not work
+               --Copy nodejs folder location from C: Ex: C:\Program Files\nodejs 
+               --Search In Windows "Edit the system Environment Variables"
+               --Select 'Path' and Edit and Add the link
      > npm run dev
 
 

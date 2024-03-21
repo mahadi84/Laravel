@@ -1,5 +1,6 @@
 Date: 31-Aug-2023
 
+00 Login Page-MIDDLE-Position 
 01. DYNAMIC SELECT OPTION (ADD+EDIT)
 02. How to extend Blade Layout?
 03. CHECKED-BOX Filled by  ARRAY data from Database
@@ -11,6 +12,12 @@ Date: 31-Aug-2023
 06. Show Validation and CRUD Message
 07. Image/Name Show
 
+===================00 Login Page-MIDDLE-Position======================
+<div class="max-w-7xl mx-auto p-6 lg:p-8">
+    <div class="flex justify-center text-center" style="margin-top: 220px">
+        <h1>Text Goes here</h1>
+    </div>
+</div>  
 
 
 

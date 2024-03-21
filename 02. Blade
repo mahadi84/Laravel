@@ -12,6 +12,8 @@ Date: 31-Aug-2023
 06. Show Validation and CRUD Message
 07. Image/Name Show
 
+08. Navigation Menu
+
 ===================00 Login Page-MIDDLE-Position======================
 <div class="max-w-7xl mx-auto p-6 lg:p-8">
     <div class="flex justify-center text-center" style="margin-top: 220px">
@@ -198,9 +200,57 @@ UPDATE PROFILE:
 
 
 
+====================== 08. Navigation Menu ===============
 
+<!-- NAVIGATION -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="d-flex flex-grow-1">
+        <span class="w-100 d-lg-none d-block">
+            <!-- hidden spacer to center brand on mobile --></span>
+        <a class="navbar-brand d-none d-lg-inline-block" href="{{route('home')}}"> Consume API </a>
+        {{-- <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="#">
+            Consume API
+            <img src="//placehold.it/40?text=LOGO" alt="logo">
+        </a> --}}
+        <div class="w-100 text-right">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+    <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
+        <ul class="navbar-nav ms-auto flex-nowrap">
+            <li class="nav-item">
+                <a href="{{route('products')}}" class="nav-link m-2 menu-item nav-active">Products</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('product.create')}}" class="nav-link m-2 menu-item nav-active">Add Product</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link m-2 menu-item">Contact</a>
+            </li>
 
-
+        @if (Route::has('login'))
+            @auth
+                <li class="nav-item">
+                    <a href="{{ url('/dashboard') }}" class="nav-link m-2 menu-item">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <form method="POST" action="{{ route('logout')}}">
+                        @csrf
+                        <a class="nav-link m-2 menu-item" href='#' onclick="event.preventDefault();  this.closest('form').submit();"> Log Out    </a>
+                    </form>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a href="{{ route('login') }}" class="nav-link m-2 menu-item">Log in</a>
+                </li>
+            @endauth
+        @endif
+        </ul>
+    </div>
+</nav>
+<!-- END OF NAVIGATION -->
 
 
 

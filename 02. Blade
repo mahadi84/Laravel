@@ -1,5 +1,6 @@
 Date: 31-Aug-2023
 
+0. Show all type of error in blade
 00 Login Page-MIDDLE-Position 
 01. DYNAMIC SELECT OPTION (ADD+EDIT)
 02. How to extend Blade Layout?
@@ -14,6 +15,16 @@ Date: 31-Aug-2023
 
 08. Navigation Menu 
 09. Login Form in the middle of page-body
+
+
+========== 0. Show all type of error in blade =============
+---Show All
+@if($errors->any())
+    {!! implode('', $errors->all('<div class="text-danger text-center">:message</div>')) !!}
+@endif
+
+--Show Single
+ <div class="text-danger">{{ $errors->first('name') }}</div>
 
 ===================00 Login Page-MIDDLE-Position======================
 <div class="max-w-7xl mx-auto p-6 lg:p-8">

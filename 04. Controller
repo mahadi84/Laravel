@@ -18,12 +18,16 @@ WHERE('product_id', $request->product_id)->get()->orderBy('created_at');
 Employee::get(['emp_id','name']); 
 Employee::create($request->except('_token'));
 
- $transaction = Transaction::create([
+ $product = Product::create([
+                'name' => $product->name,
+                'description' => $product->descripton,
                 'quantity' => $request->quantity,
-                'buyer_id' => $buyer->id,
-                'product_id' => $product->id,
             ]);
 
+Update If below any/all fields data requested.
+ $product->fill($request->only([
+         'name','description', 'quantity'
+      ]));
 
 
 ========================= 01.How to VALIDATE input fields, CUSTOMIZE validation message, REDIRECT if the validation fails and Laravel, Ajax/Javascript Redirect?======================

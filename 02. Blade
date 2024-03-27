@@ -222,48 +222,53 @@ UPDATE PROFILE:
 ====================== 08. Navigation Menu ===============
 
 <!-- NAVIGATION -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="d-flex flex-grow-1">
-        <span class="w-100 d-lg-none d-block">
-            <!-- hidden spacer to center brand on mobile --></span>
-        <a class="navbar-brand d-none d-lg-inline-block" href="{{url('/')}}"> Consume API </a>
-        {{-- <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="#">
-            Consume API
-            <img src="//placehold.it/40?text=LOGO" alt="logo">
-        </a> --}}
-        <div class="w-100 text-right">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </div>
-    <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{url('/')}}">Logo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        
         <ul class="navbar-nav ms-auto flex-nowrap">
             <li class="nav-item">
-                <a href="" class="nav-link m-2 menu-item nav-active">Products</a>
+                <a href="#" class="nav-link m-2 menu-item nav-active">Menu</a>
             </li>
-        @if (Route::has('login'))
-            @auth
-                <li class="nav-item">
-                    <a href="{{ url('/dashboard') }}" class="nav-link m-2 menu-item">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <form method="POST" action="{{ route('logout')}}">
-                        @csrf
-                        <a class="nav-link m-2 menu-item" href='#' onclick="event.preventDefault();  this.closest('form').submit();"> Log Out    </a>
-                    </form>
-                </li>
-            @else
-                <li class="nav-item">
-                    <a href="{{ route('login') }}" class="nav-link m-2 menu-item">Log in</a>
-                </li>
-            @endauth
-        @endif
+            @if (Route::has('login'))
+                @auth
+                    <li class="nav-item">
+                        <a href="{{ url('/dashboard') }}" class="nav-link m-2 menu-item">Dashboard</a>
+                    </li>
+                    
+                    {{-- dropdown menu --}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link m-2 menu-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">User Name</a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <form method="POST" action="{{ route('logout')}}">
+                                    @csrf
+                                    <a class="dropdown-item" href='#' onclick="event.preventDefault();  this.closest('form').submit();"> Log Out    </a>
+                                </form>
+                            </li>
+            
+                        <li><a class="dropdown-item" href="#">Link</a></li>
+                        </ul>
+                    </li>
+                    {{-- ./dropdown menu --}}
+                    
+                @else                
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link m-2 menu-item">Log in</a>
+                    </li>
+                @endauth
+            @endif
         </ul>
-    </div>
-</nav>
-<!-- END OF NAVIGATION -->
 
+      </div>
+    </div>
+  </nav>
+
+  <!-- END OF NAVIGATION -->
 
 
 

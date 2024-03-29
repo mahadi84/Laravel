@@ -44,19 +44,22 @@ use App\Helpers\MailHelper;
 use Illuminate\Support\Facades\Mail;
 
  public function handleContactForm(Request $request){
-        $request->validate([
+        $data= $request->validate([
             'name' => ['required', 'max:200'],
             'email' => ['required', 'email'],
             'subject' => ['required', 'max:200'],
             'message' => ['required', 'max:1000']
         ]);
 
+
+       $mailInfo = ContactUs::Create($data);
+
         // Assigned my MAILTRAP email connection info like smtp info, username, password.
         MailHelper::setEmailConfig(); 
         //get my email address from where mail will sent(this model directly store MAILTRAP email connection info like smtp info, username, password, etc and COMPANY EMAIL ADDRESS).
         $setting = EmailConfiguration::first(); 
         //Contact Class (php artisan make:mail Contact) in Mail Folder
-        Mail::to($request->email)->send(new Contact($request->subject, $request->message, $request->email)); 
+        Mail::to($mailInfo->email)->send(new Contact($mailInfo); 
 
         return response(['status' => 'success', 'message' => 'Mail sent successfully!']);
 
@@ -66,22 +69,19 @@ use Illuminate\Support\Facades\Mail;
 
 -----------------Contact Class (php artisan make:mail Contact) located in Mail Folder--------------------- 
 ****** DO NOT USE ANY VARIABLE NAME $message, IT WILL CONFLICT WITH OTHERS. ****
-    public $mailSubject;
-    public $mailMessage;
-    public $mailFrom;
+    
+        public $mailInfo;
 
     // Create a new message instance
-    public function __construct($subject, $message, $from){
-        $this->mailSubject=$subject;
-        $this->mailMessage=$message;
-        $this->mailFrom=$from;
+    public function __construct($mailMessage){
+        $this->mailInfo=$mailInfo;
     }
 
     // Get the message envelope
     public function envelope(): Envelope{
         return new Envelope(
-            from: $this->mailFrom,
-            subject: $this->mailSubject,
+            //from: $this->mailFrom,
+            subject: $this->mailInfo->subject,
         );
     }
 
@@ -95,7 +95,10 @@ use Illuminate\Support\Facades\Mail;
 =================== Mail/contact.blade.php============================
 <a href="{{route('home')}}">Home</a>
     <p>        
-        {{$mailMessage}}
+        {{$this->mailInfo->name}}
+        {{$this->mailInfo->email}}
+        {{$this->mailInfo->subject}}
+        {{$this->mailInfo->message}}
     </p>
 
 ====================Contact-Form (BLADE) WITH AJAX-JQUERY===========================

@@ -56,7 +56,7 @@ use Illuminate\Support\Facades\Mail;
         //get my email address from where mail will sent(this model directly store MAILTRAP email connection info like smtp info, username, password, etc and COMPANY EMAIL ADDRESS).
         $setting = EmailConfiguration::first(); 
         //Contact Class (php artisan make:mail Contact) in Mail Folder
-        Mail::to($setting->email)->send(new Contact($request->subject, $request->message, $request->email)); 
+        Mail::to($request->email)->send(new Contact($request->subject, $request->message, $request->email)); 
 
         return response(['status' => 'success', 'message' => 'Mail sent successfully!']);
 

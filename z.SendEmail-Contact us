@@ -1,5 +1,14 @@
 
 ==============Configuration========================================
+
+--- add into .env(for testing) -------------
+
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=16aa8ca8949985
+MAIL_PASSWORD=6b2fc1a93d5eb9
+
 -----------------MailHelper(I create it manually inside helpers folder, to overwrite email config info for .env file)---------
 <?php
 namespace App\Helpers;

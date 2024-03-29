@@ -108,6 +108,8 @@ use Illuminate\Support\Facades\Mail;
             
 
 ====================Contact-Form (BLADE) WITH AJAX-JQUERY===========================
+master blade: <meta name="csrf-token" content="{{ csrf_token() }}" />
+
 <h5>Send Us a Message</h5>
 <form id="contact-form">                    
     <div class="mb-3">        
@@ -127,11 +129,15 @@ use Illuminate\Support\Facades\Mail;
     </div>
 </form>
 
-
+CONTROLLER RESPONSE:  return response(['status'=> 'success', 'message' => 'We have received your query and will be get back to you.']);
 
 @push('scripts')
     <script>
-        $(document).ready(function(){
+       $(document).ready(function(){ 
+         $.ajaxSetup({
+         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+         })
+
             $('#contact-form').on('submit', function(e){
                 e.preventDefault();
                 let data = $(this).serialize();

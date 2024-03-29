@@ -93,13 +93,20 @@ use Illuminate\Support\Facades\Mail;
     }
 
 =================== Mail/contact.blade.php============================
-<a href="{{route('home')}}">Home</a>
-    <p>        
-        {{$this->mailInfo->name}}
-        {{$this->mailInfo->email}}
-        {{$this->mailInfo->subject}}
-        {{$this->mailInfo->message}}
-    </p>
+
+            Hello {{$mailInfo->name}},<br>
+            We have received your query and will get back to you soon to {{$mailInfo->email}}. <br><br>
+            
+            Thanks,<br><br>
+            
+            Web Development Team, <br>
+            Dhaka, Bangladesh<br>
+            <a href="{{url('/')}}">www.company.com</a><br><br><br>
+
+            ========= Your Query/Message  =========<br><br>
+            "{{$mailInfo->message}}"
+            
+            
 
 ====================Contact-Form (BLADE) WITH AJAX-JQUERY===========================
 <h5>Send Us a Message</h5>

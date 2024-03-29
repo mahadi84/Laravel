@@ -65,6 +65,7 @@ use Illuminate\Support\Facades\Mail;
 
 
 -----------------Contact Class (php artisan make:mail Contact) located in Mail Folder--------------------- 
+****** DO NOT USE ANY VARIABLE NAME $message, IT WILL CONFLICT WITH OTHERS. ****
     public $mailSubject;
     public $mailMessage;
     public $mailFrom;
@@ -91,7 +92,7 @@ use Illuminate\Support\Facades\Mail;
         );
     }
 
-=================Resource/Views/Mail/contact.blade.php=================
+=================== Mail/contact.blade.php============================
 <a href="{{route('home')}}">Home</a>
     <p>        
         {{$mailMessage}}

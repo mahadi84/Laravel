@@ -64,41 +64,38 @@ use Illuminate\Support\Facades\Mail;
 
 
 
------------------Contact Class (php artisan make:mail Contact) located in Mail Folder---------------------
- public $mailSubject;
+-----------------Contact Class (php artisan make:mail Contact) located in Mail Folder--------------------- 
+    public $mailSubject;
     public $mailMessage;
     public $mailFrom;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct($subject, $message, $from)
-    {
+    // Create a new message instance
+    public function __construct($subject, $message, $from){
         $this->mailSubject=$subject;
         $this->mailMessage=$message;
         $this->mailFrom=$from;
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
-    {
+    // Get the message envelope
+    public function envelope(): Envelope{
         return new Envelope(
             from: $this->mailFrom,
             subject: $this->mailSubject,
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
+    // Get the message content definition.
+    public function content(): Content{
         return new Content(
             view: 'Mail.contact',
         );
     }
+
+=================Resource/Views/Mail/contact.blade.php=================
+<a href="{{route('home')}}">Home</a>
+    <p>        
+        {{$mailMessage}}
+    </p>
 
 ====================Contact-Form (BLADE) WITH AJAX-JQUERY===========================
 <h5>Send Us a Message</h5>

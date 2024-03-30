@@ -189,16 +189,12 @@ UPDATE PROFILE:
 
 ================= 06. Show Validation and CRUD Message =====================================
 @if ($message = Session::get('success'))
-<div class="text-center">
-     <h5  class="text-success">{{ $message }}</h5>  
-</div>
+        <div class="text-center text-success h5">{{ $message }}</div>
 @endif
 
 @if ($message = Session::get('error'))
-  <div class="text-center">
-    <h5  class="text-danger">{{ $message }}</h5>   
-</div>
-@endif   
+        <div class="text-center text-danger h5">{{ $message }}</div>
+@endif
 
 <!-- To show multiple validation errors -->
     @if ($errors->any())

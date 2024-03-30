@@ -293,7 +293,7 @@ UPDATE PROFILE:
                             
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input name="password" type="text" id="password"  class="form-control" placeholder=""  aria-describedby="helpId"/>
+                                <input name="password" type="password" id="password"  class="form-control" placeholder=""  aria-describedby="helpId"/>
                                 <div class="text-danger">{{$errors->first('password')}}</div>
                             </div>
 

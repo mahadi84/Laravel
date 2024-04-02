@@ -1,4 +1,6 @@
 ==================Migrate File with Foreign key=======================
+More Comples: https://github.com/mahadi84/Laravel-RESTful-API/blob/main/01.%20Models_%26_Migrations%20(All)
+
 CREATE-CMD:    
  $table->increments('id');
     $table->integer('category_id')->unsigned();

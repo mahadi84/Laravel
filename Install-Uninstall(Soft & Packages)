@@ -14,7 +14,7 @@ Date: 10-Aug-2023
 07. How to install spatie/laravel-permission Package?
 08. How to install spatie/laravel-backup Package?
 
-09. How to install Shopping Cart (anayarojo/shoppingcart) Package?
+09. How to install Shopping Cart (gloudemans/shoppingcart) Package?
 10. How to install DOMpdf package?
 
 ---------------------------- Answer ---------------------
@@ -68,13 +68,10 @@ Open Folder and ADD:- config/app.php
 
 
 ====================== 05. Ans: How to install Image Intervention?====================
-Website: https://image.intervention.io/v2/introduction/installation
+Website: https://image.intervention.io/v3
 
 CMD1: > composer require intervention/image
-App/config/app.php:
-'providers' => [ Intervention\Image\ImageServiceProvider::class ]
-'aliases' => ['Image' => Intervention\Image\Facades\Image::class ]
-CMD2: > php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
+       that's it.
 
 
 =================== 06. How to install Harun IdGenerator?========================
@@ -101,10 +98,15 @@ CMD:
 
 
 ========================== 09. Shopping Cart====================================
-Website:https://packagist.org/packages/anayarojo/shoppingcart
+Website:https://packagist.org/packages/gloudemans/shoppingcart
 
 INSTALL:-- 
->composer require anayarojo/shoppingcart
+>composer require gloudemans/shoppingcart
+
+Add a new line to the providers array:
+Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class
+And optionally add a new line to the aliases array:
+'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
 >php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="config"
 
 

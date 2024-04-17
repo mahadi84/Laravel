@@ -1,5 +1,6 @@
 Date: 10-Aug-2023
 
+composer require laravel/breeze intervention/image gloudemans/shoppingcart spatie/laravel-backup barryvdh/laravel-dompdf realrashid/sweet-alert maatwebsite/excel 
 
 --------------
 00. How to install Laravel 10 to any directory?
@@ -19,10 +20,10 @@ Date: 10-Aug-2023
 
 ---------------------------- Answer ---------------------
 
-=========================== 00 Ans:  How to install Laravel 10 to any directory===================
+=========================== 00 Ans:  How to install Laravel to any directory===================
 Prerequisites: PHP VERSION: 8.1 (minimum) and INSTALL: Composer, NPM.
 
-CMD:- composer create-project laravel/laravel="10.10.*" Project_Folder_Name
+CMD:- composer create-project laravel/laravel Project_Folder_Name
 TO RUN: php artisan serve
 
 ***Copy index.php and .htaccess files to First Folder

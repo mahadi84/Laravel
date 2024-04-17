@@ -1,6 +1,6 @@
 Date: 10-Aug-2023
 
-composer require laravel/breeze intervention/image gloudemans/shoppingcart spatie/laravel-backup barryvdh/laravel-dompdf realrashid/sweet-alert maatwebsite/excel 
+composer require laravel/breeze intervention/image gloudemans/shoppingcart
 
 --------------
 00. How to install Laravel 10 to any directory?

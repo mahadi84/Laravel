@@ -22,14 +22,23 @@ composer require laravel/breeze intervention/image gloudemans/shoppingcart
 
 =========================== 00 Ans:  How to install Laravel to any directory===================
 Prerequisites: PHP VERSION for the LARAVEL version is going to be installed.
+                    >php -v
+                    >mysql --version
 
 INSTALL: 
           01. Xampp, 
           02. Composer (will ask for php.exe from Xampp while installing it), Download_link: https://getcomposer.org/
+                    >composer -v                    
           03. NPM. Download_link: https://nodejs.org/en    -LTS version and next..next
+                    >node -v  >npm -v
 
 CMD:- composer create-project laravel/laravel Project_Folder_Name
-TO RUN: php artisan serve
+            **Problem: If there is any error like: "....Failed to download laravel/laravel from dist: The zip extension and unzip/7z commands are both missing, skipping.
+                      The php.ini used by your command-line PHP is: D:\XaMpP\php\php.ini
+            Solution: update ;extension=zip to extension=zip into php.ini file of Xampp server
+ 
+TO RUN:-
+Go to the installed Folder: php artisan serve
 
 ***Copy index.php and .htaccess files to First Folder FROM Public Folder
 

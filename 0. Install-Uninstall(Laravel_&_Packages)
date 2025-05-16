@@ -40,7 +40,10 @@ CMD:- composer create-project laravel/laravel Project_Folder_Name
 TO RUN:-
 Go to the installed Folder: php artisan serve
 
-To OPEN Project on VS Code: 
+TO CHECK VERSION just INSTALLED : 
+php artisan --version
+
+To OPENthe  Project on VS Code: 
 Open CMD into the folder >code . Enter
 
 ***Copy index.php and .htaccess files to First Folder FROM Public Folder

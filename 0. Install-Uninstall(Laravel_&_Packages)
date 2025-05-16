@@ -21,7 +21,12 @@ composer require laravel/breeze intervention/image gloudemans/shoppingcart
 ---------------------------- Answer ---------------------
 
 =========================== 00 Ans:  How to install Laravel to any directory===================
-Prerequisites: PHP VERSION: 8.2 (minimum) and INSTALL: Composer, NPM.
+Prerequisites: PHP VERSION for the LARAVEL version is going to be installed.
+
+INSTALL: 
+          01. Xampp, 
+          02. Composer (will ask for php.exe from Xampp while installing it), Download_link: https://getcomposer.org/
+          03. NPM. Download_link: https://nodejs.org/en    -LTS version and next..next
 
 CMD:- composer create-project laravel/laravel Project_Folder_Name
 TO RUN: php artisan serve
